@@ -1,0 +1,186 @@
+body {
+    background-color: var(--darkBlue);
+}
+
+/* for title */
+.title{
+    /* text styles */
+    color: var(--white);
+    font-size: 150px;
+    font-weight: 900;
+    letter-spacing: -5px;
+    word-spacing: -55px;
+    line-height: 85%;
+
+    /* container styles */
+    margin-top: 4%;
+    margin-left: 8%;
+}
+
+.rotate {
+    display: inline-block;
+}
+
+.rotate:hover{
+    animation: animRotate 1s ease-in-out alternate infinite;
+}
+
+@keyframes animRotate {
+    0% {
+    transform: scaleX(1); /* Normal position */
+    }
+    100% {
+    transform: scaleX(-1); /* Reflected horizontally */
+    }
+}
+
+/* for line */
+.line {
+    margin-left: 8%;
+    margin-right: 59%; /* FIXME: it's not properly aligning with title when zoomed in */
+    animation: animLineColor 2s ease-in-out alternate infinite;
+}
+
+@keyframes animLineColor {
+    0% {
+        border-top: 5px solid var(--white);
+    }
+    100% {
+        border-top: 5px solid var(--orange);
+    }
+}
+
+/* for metrics */
+.metrics{
+    color: var(--white);
+    margin-top: .5%;
+    margin-left: 8%;
+    font-size: 22px;
+}
+
+.metrics div {
+    /* spacing for the divs inside the metric div */
+    margin-bottom: 10px;
+}
+
+.metrics div span{
+    color: var(--orange);
+}
+
+/* for subtext */
+.subtext{
+    color: var(--white);
+    margin-top: 8%;
+    margin-left: 8%;
+    font-size: 12px;
+}
+
+.subtext p{
+    /* reduce the spacing between the p inside the subtext div */
+    margin-bottom: -10px;
+}
+
+.emph{
+    color: var(--orange);
+}
+
+.emph:hover{
+    color: var(--white);
+}
+
+/* for album photos */
+.albums img{
+    width: 200px;
+    height: 200px;
+}
+
+/* for album_1 */
+.album_1{
+    position: absolute;
+    top: 5%;
+    right: 10%;
+}
+
+.album_2{
+    position: absolute;
+    top: 5%;
+    right: 24%;
+}
+
+.album_3{
+    position: absolute;
+    top: 5%;
+    right: 38%;
+}
+
+.album_4{
+    position: absolute;
+    top: 36%;
+    right: 10%;
+}
+
+.album_5{
+    position: absolute;
+    top: 36%;
+    right: 24%;
+}
+
+.album_6{
+    position: absolute;
+    top: 36%;
+    right: 38%;
+}
+
+.album_7{
+    position: absolute;
+    top: 67%;
+    right: 10%;
+}
+
+.album_8{
+    position: absolute;
+    top: 67%;
+    right: 24%;
+}
+
+.album_9{
+    position: absolute;
+    top: 67%;
+    right: 38%;
+}
+
+/* buttons */
+.buttons button{
+    position: absolute;
+    color: var(--white);
+    font-size: 28px;
+    font-weight: 900;
+    cursor: pointer;
+    border: none;
+    background-color: var(--orange);
+    padding: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.buttons button:hover{
+    font-style: italic;
+    transform: scale(1.1);
+
+    background-color: var(--cyan);
+}
+
+.register{
+    /* FIXME:   idk how to make this top and right position adaptive
+                so that no matter the position of the images
+                it will stay in the middle
+
+                this fixme is also for the .login{} style
+    */
+    top: 31.5%; 
+    right: 19%;
+}
+
+.login{
+    top: 62.5%;
+    right: 19%;
+}

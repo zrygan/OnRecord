@@ -1,0 +1,68 @@
+/*
+    OnRecord color palatte
+    
+    available via: https://color.adobe.com/OnRecord-color-theme-18cf1cae-de32-4dcd-8fa9-74f4b7ed0d83/
+
+    this theme is color blind safe
+*/
+
+:root {
+  --yellow: #FCE732;
+  --cyan: #0D8F9D;
+  --orange: #F77A0D;
+  --royalBlue: #1B286B;
+  --darkBlue: #191E38;
+
+  --black: #000000;
+  --white: #F5F5F5;
+
+  /* RGBA values */
+  --onRecord-1-rgba: rgba(252, 231, 50, 1);
+  --onRecord-2-rgba: rgba(13, 143, 157, 1);
+  --onRecord-3-rgba: rgba(247, 122, 13, 1);
+  --onRecord-4-rgba: rgba(27, 40, 107, 1);
+  --onRecord-5-rgba: rgba(25, 30, 56, 1);
+
+  --black-rgba: rgba(0, 0, 0, 1);
+  --white-rgba: rgb(245, 245, 245);
+
+  /* HSLA values */
+  --onRecord-1-hsla: hsla(53, 97%, 59%, 1);
+  --onRecord-2-hsla: hsla(185, 84%, 33%, 1);
+  --onRecord-3-hsla: hsla(27, 93%, 50%, 1);
+  --onRecord-4-hsla: hsla(230, 59%, 26%, 1);
+  --onRecord-5-hsla: hsla(230, 38%, 15%, 1);
+
+  --black-hsla: hsla(0, 0%, 0%, 1);
+  --white-hsla: hsla(0, 0%, 96%, 1);
+}
+
+/* Color Theme Swatches in Hex */
+.OnRecord-1-hex { color: var(--onRecord-1-hex); }
+.OnRecord-2-hex { color: var(--onRecord-2-hex); }
+.OnRecord-3-hex { color: var(--onRecord-3-hex); }
+.OnRecord-4-hex { color: var(--onRecord-4-hex); }
+.OnRecord-5-hex { color: var(--onRecord-5-hex); }
+
+.black { color: var(--black); }
+.white { color: var(--white); }
+
+/* Color Theme Swatches in RGBA */
+.OnRecord-1-rgba { color: var(--onRecord-1-rgba); }
+.OnRecord-2-rgba { color: var(--onRecord-2-rgba); }
+.OnRecord-3-rgba { color: var(--onRecord-3-rgba); }
+.OnRecord-4-rgba { color: var(--onRecord-4-rgba); }
+.OnRecord-5-rgba { color: var(--onRecord-5-rgba); }
+
+.black-rgba { color: var(--black-rgba); }
+.white-rgba { color: var(--white-rgba); }
+
+/* Color Theme Swatches in HSLA */
+.OnRecord-1-hsla { color: var(--onRecord-1-hsla); }
+.OnRecord-2-hsla { color: var(--onRecord-2-hsla); }
+.OnRecord-3-hsla { color: var(--onRecord-3-hsla); }
+.OnRecord-4-hsla { color: var(--onRecord-4-hsla); }
+.OnRecord-5-hsla { color: var(--onRecord-5-hsla); }
+
+.black-hsla { color: var(--black-hsla); }
+.white-hsla { color: var(--white-hsla); }

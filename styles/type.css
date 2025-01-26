@@ -1,0 +1,14 @@
+/*
+    Space Grotesk
+    https://fonts.google.com/specimen/Space+Grotesk
+
+    this font is Open Source and free of use
+*/
+
+:root{
+    --space: 'Space Grotesk', sans-serif;
+}
+
+.space-grotesk {
+  font-family: "Space Grotesk";
+}

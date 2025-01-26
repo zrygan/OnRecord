@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles/style-index.css" />
+    <link rel="stylesheet" href="styles/colors.css" />
+    <link rel="stylesheet" href="styles/type.css" />
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <title>You are now On the Record!</title>
+  </head>
+  <body>
+    <div class="title space-grotesk">
+      <!-- Title -->
+      <span class="rotate">O</span>
+      <span class="rotate">n</span>
+      <br />
+      <span class="rotate">R</span>
+      <span class="rotate">e</span>
+      <span class="rotate">c</span>
+      <span class="rotate">o</span>
+      <span class="rotate">r</span>
+      <span class="rotate">d</span>
+    </div>
+
+    <div class="line">
+      <!-- Line separator -->
+    </div>
+
+    <div class="metrics space-grotesk">
+      <!-- Metrics -->
+      <div>People on the record: <span id="num_users"></span></div>
+      <div>Artists on the record: <span id="num_artists"></span></div>
+      <div>Tracks on the record: <span id="num_tracks"></span></div>
+      <div>Albums on the record: <span id="num_albums"></span></div>
+    </div>
+
+    <div class="subtext space-grotesk">
+      <p>
+        Join the people <span class="emph">On</span> the
+        <span class="emph">Record</span>
+      </p>
+      <p>Discover the music people are listening to</p>
+      <p>Discover the music <i>you</i> will listen to</p>
+    </div>
+
+    <div class="albums">
+      <!-- Images -->
+      <!-- FIXME: when the database is finished, make these albums randomly 
+                  selected from the database of album covers -->
+      <img src="/img/index/1.png" id="album_1" class="album_1" />
+      <img src="/img/index/2.jpg" id="album_2" class="album_2" />
+      <img src="/img/index/3.jpg" id="album_3" class="album_3" />
+      <img src="/img/index/4.jpg" id="album_4" class="album_4" />
+      <img src="/img/index/5.jpg" id="album_5" class="album_5" />
+      <img src="/img/index/6.jpg" id="album_6" class="album_6" />
+      <img src="/img/index/7.png" id="album_7" class="album_7" />
+      <img src="/img/index/8.png" id="album_8" class="album_8" />
+      <img src="/img/index/9.png" id="album_9" class="album_9" />
+    </div>
+
+    <div class="buttons space-grotesk">
+      <button class="register">I wanna be on the record!</button>
+      <button class="login">I'm already on the record!</button>
+    </div>
+
+    <script src="js/index.js"></script>
+  </body>
+</html>
