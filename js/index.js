@@ -33,13 +33,14 @@ register_close.onclick = function() {
     register_modal.style.display = "none";
 }
 
-// Close the modal if the user clicks anywhere outside of it
+/* closes modal when clicked outside of bounds */
 window.onclick = function(event) {
     if (event.target == register_modal) {
         register_modal.style.display = "none";
     }
 }
 
+/* form for registering a new user */
 const register_form = document.getElementById("register-form");
 register_form.addEventListener('submit', function(event) {
     event.preventDefault();
@@ -50,7 +51,8 @@ register_form.addEventListener('submit', function(event) {
         user_object[key] = value;
     });
 
-    // Validate birthday (user must be at least 12 years old)
+    // birthday validation
+    // (user must be at least 12 years old)
     const today = new Date();
     const birthDate = new Date(user_object.birthday);
     let age = today.getFullYear() - birthDate.getFullYear();
@@ -63,11 +65,12 @@ register_form.addEventListener('submit', function(event) {
         return;
     }
 
+    // splitting fullname -> firstname/s + surname
     const nameParts = user_object.fullname.trim().split(/\s+/);
     const surname = nameParts.pop();
     const firstname = nameParts.join(' ');
 
-    // Store the user data in local storage
+    // store the user data in local storage
     const user_info = {
         surname: surname,
         firstname: firstname,
@@ -78,9 +81,26 @@ register_form.addEventListener('submit', function(event) {
     };
     localStorage.setItem('user_data', JSON.stringify(user_info));
 
-    // Optionally, you can log the user data to the console
     console.log('User data stored:', user_info);
 
-    // Close the modal after submission
     register_modal.style.display = "none";
 });
+
+// LOGIN MODAL
+var login_modal = document.getElementById("login-modal");
+var login_button = document.getElementById("login-button");
+var login_close = document.getElementById("close-login-modal");
+
+login_button.onclick = function() {
+    login_modal.style.display = "block";
+}
+
+login_close.onclick = function() {
+    login_modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+    if (event.target == login_modal) {
+        login_modal.style.display = "none";
+    }
+}

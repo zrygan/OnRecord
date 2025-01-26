@@ -228,7 +228,7 @@ body {
 }
 
 .close-register-modal,
-close-login-modal {
+.close-login-modal {
   position: absolute;
   top: 8%;
   right: 8%;
@@ -259,7 +259,8 @@ close-login-modal {
   transform: translate(-50%, -50%);
 }
 
-.register-modal-content form input {
+.register-modal-content form input,
+.login-modal-content form input {
   font-family: "Space Grotesk";
   font-weight: 900;
   width: 50%;
@@ -271,7 +272,8 @@ close-login-modal {
   color: orange;
 }
 
-.register-modal-content form button {
+.register-modal-content form button,
+.login-modal-content form button {
   position: absolute;
   color: var(--white);
   font-size: 16px;
@@ -288,7 +290,8 @@ close-login-modal {
   transform: translate(-50%, -50%);
 }
 
-.register-modal-content form button:hover {
+.register-modal-content form button:hover,
+.login-modal-content form button:hover {
   font-style: italic;
   background-color: var(--cyan);
 }

@@ -151,6 +151,46 @@
       </div>
     </div>
 
+    <div id="login-modal" class="modal">
+      <span id="close-login-modal" class="close-login-modal space-grotesk">
+        &times;
+      </span>
+      <div class="login-modal-content space-grotesk">
+        <form id="login-form">
+          <h3>
+            Why hello there young traveller! <br />
+            Oh! I kind of recognize you?
+          </h3>
+          <label for="username">
+            Hmm... I recall your face, but I don't remember your name...
+          </label>
+          <br />
+          <input
+            type="text"
+            id="username"
+            name="username"
+            required
+            placeholder="enter your username"
+          /><br />
+
+          <label for="password">
+            Hmm... I kind of recognize that name, what secret word do we share
+            each other?
+          </label>
+          <br />
+          <input
+            type="password"
+            name="password"
+            id="password"
+            required
+            placeholder="enter your password"
+          />
+          <br />
+          <button type="submit">Put me on the record!</button>
+        </form>
+      </div>
+    </div>
+
     <script src="js/index.js"></script>
   </body>
 </html>
