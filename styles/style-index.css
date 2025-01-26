@@ -211,20 +211,39 @@ body {
   display: none;
   position: absolute;
   overflow: auto;
-  z-index: 999; /* make this modal above EVERYTHING*/
+  z-index: 999; /* make this modal above EVERYTHING */
   backdrop-filter: blur(2px);
   background-color: hsla(0, 0%, 0%, 0.8);
   border: 2px solid var(--orange);
   box-shadow: 0 0 15px 5px var(--orange);
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 50%;
   width: 90%;
   height: 90%;
 
   /* center the modal */
-  top: 50%;
-  left: 50%;
   transform: translate(-50%, -50%);
+
+  /* breathing animation */
+  animation: breathingShadow 3s ease-in-out alternate infinite;
+}
+
+@keyframes breathingShadow {
+  0% {
+    box-shadow: 0 0 15px 5px var(--orange);
+  }
+  25% {
+    box-shadow: 0 0;
+  }
+  50% {
+    box-shadow: 0 0 15px 5px var(--white);
+  }
+  75% {
+    box-shadow: 0 0;
+  }
+  100% {
+    box-shadow: 0 0 15px 5px var(--cyan);
+  }
 }
 
 .close-register-modal,
