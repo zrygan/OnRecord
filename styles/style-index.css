@@ -1,209 +1,294 @@
 body {
-    background-color: var(--darkBlue);
+  background-color: var(--darkBlue);
 }
 
 /* for title */
-.title{
-    /* text styles */
-    color: var(--white);
-    font-size: 150px;
-    font-weight: 900;
-    letter-spacing: -5px;
-    word-spacing: -55px;
-    line-height: 85%;
+.title {
+  /* text styles */
+  color: var(--white);
+  font-size: 150px;
+  font-weight: 900;
+  letter-spacing: -5px;
+  word-spacing: -55px;
+  line-height: 85%;
 
-    /* container styles */
-    margin-top: 4%;
-    margin-left: 8%;
+  /* container styles */
+  margin-top: 4%;
+  margin-left: 8%;
 }
 
 .rotate {
-    display: inline-block;
+  display: inline-block;
 }
 
-.rotate:hover{
-    animation: animRotate 1s ease-in-out alternate infinite;
+.rotate:hover {
+  animation: animRotate 1s ease-in-out alternate infinite;
 }
 
 @keyframes animRotate {
-    0% {
-        transform: scaleX(1); 
-    }
+  0% {
+    transform: scaleX(1);
+  }
 
-    100% {
-        transform: scaleX(-1); 
-    }
+  100% {
+    transform: scaleX(-1);
+  }
 }
 
 /* for line */
 .line {
-    margin-left: 8%;
-    margin-right: 59%; /* FIXME: it's not properly aligning with title when zoomed in */
-    animation: animLineColor 2s ease-in-out alternate infinite;
+  margin-left: 8%;
+  margin-right: 59%; /* FIXME: it's not properly aligning with title when zoomed in */
+  animation: animLineColor 2s ease-in-out alternate infinite;
 }
 
 @keyframes animLineColor {
-    0% {
-        border-top: 5px solid var(--white);
-    }
-    100% {
-        border-top: 5px solid var(--orange);
-    }
+  0% {
+    border-top: 5px solid var(--white);
+  }
+  100% {
+    border-top: 5px solid var(--orange);
+  }
 }
 
 /* for metrics */
-.metrics{
-    color: var(--white);
-    margin-top: .5%;
-    margin-left: 8%;
-    font-size: 22px;
+.metrics {
+  color: var(--white);
+  margin-top: 0.5%;
+  margin-left: 8%;
+  font-size: 22px;
 }
 
 .metrics div {
-    /* spacing for the divs inside the metric div */
-    margin-bottom: 10px;
+  /* spacing for the divs inside the metric div */
+  margin-bottom: 10px;
 }
 
-.metrics div span{
-    color: var(--orange);
+.metrics div span {
+  color: var(--orange);
 }
 
 /* for subtext */
-.subtext{
-    color: var(--white);
-    margin-top: 8%;
-    margin-left: 8%;
-    font-size: 12px;
+.subtext {
+  color: var(--white);
+  margin-top: 8%;
+  margin-left: 8%;
+  font-size: 12px;
 }
 
-.subtext p{
-    /* reduce the spacing between the p inside the subtext div */
-    margin-bottom: -10px;
+.subtext p {
+  /* reduce the spacing between the p inside the subtext div */
+  margin-bottom: -10px;
 }
 
-.emph{
-    color: var(--orange);
+.emph {
+  color: var(--orange);
 }
 
-.emph:hover{
-    color: var(--white);
+.emph:hover {
+  color: var(--white);
 }
 
 /* for album photos */
-.albums img{
-    width: 200px;
-    height: 200px;
+.albums img {
+  width: 200px;
+  height: 200px;
 }
 
 .blursquare {
-    backdrop-filter: blur(1.2px);
-    position: absolute;
-    top: 2%;
-    right: 9%; /* Adjust the right position to ensure it’s inside the page */
-    width: 42.5%;
-    height: 95.5%;
-    z-index: 1;
+  backdrop-filter: blur(1.2px);
+  position: absolute;
+  top: 2%;
+  right: 9%; /* Adjust the right position to ensure it’s inside the page */
+  width: 42.5%;
+  height: 95.5%;
+  z-index: 1;
 }
 
 /* for album_1 */
-.album_1{
-    position: absolute;
-    top: 5%;
-    right: 10%;
+.album_1 {
+  position: absolute;
+  top: 5%;
+  right: 10%;
 }
 
-.album_2{
-    position: absolute;
-    top: 5%;
-    right: 24%;
+.album_2 {
+  position: absolute;
+  top: 5%;
+  right: 24%;
 }
 
-.album_3{
-    position: absolute;
-    top: 5%;
-    right: 38%;
+.album_3 {
+  position: absolute;
+  top: 5%;
+  right: 38%;
 }
 
-.album_4{
-    position: absolute;
-    top: 36%;
-    right: 10%;
+.album_4 {
+  position: absolute;
+  top: 36%;
+  right: 10%;
 }
 
-.album_5{
-    position: absolute;
-    top: 36%;
-    right: 24%;
+.album_5 {
+  position: absolute;
+  top: 36%;
+  right: 24%;
 }
 
-.album_6{
-    position: absolute;
-    top: 36%;
-    right: 38%;
+.album_6 {
+  position: absolute;
+  top: 36%;
+  right: 38%;
 }
 
-.album_7{
-    position: absolute;
-    top: 67%;
-    right: 10%;
+.album_7 {
+  position: absolute;
+  top: 67%;
+  right: 10%;
 }
 
-.album_8{
-    position: absolute;
-    top: 67%;
-    right: 24%;
+.album_8 {
+  position: absolute;
+  top: 67%;
+  right: 24%;
 }
 
-.album_9{
-    position: absolute;
-    top: 67%;
-    right: 38%;
+.album_9 {
+  position: absolute;
+  top: 67%;
+  right: 38%;
 }
 
-/* buttons */
-.buttons button{
-    position: absolute;
-    color: var(--white);
-    font-size: 28px;
-    font-weight: 900;
-    cursor: pointer;
-    border: none;
-    background-color: var(--orange);
-    padding: 5px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    z-index: 2;
-    animation: animButton 1s ease-in-out alternate infinite;;
+/* for buttons */
+.buttons button {
+  position: absolute;
+  color: var(--white);
+  font-size: 28px;
+  font-weight: 900;
+  cursor: pointer;
+  border: none;
+  background-color: var(--orange);
+  padding: 5px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  z-index: 2;
+  animation: animButton 1s ease-in-out alternate infinite;
 }
 
 @keyframes animButton {
-    0% {
-        transform: scale(0.9); 
-    }
+  0% {
+    transform: scale(0.9);
+  }
 
-    100% {
-        transform: scale(0.8); 
-    }
+  100% {
+    transform: scale(0.8);
+  }
 }
 
-.buttons button:hover{
-    font-style: italic;
-    background-color: var(--cyan);
+.buttons button:hover {
+  font-style: italic;
+  background-color: var(--cyan);
 }
 
-
-
-.register{
-    /* FIXME:   idk how to make this top and right position adaptive
+.register-button {
+  /* FIXME:   idk how to make this top and right position adaptive
                 so that no matter the position of the images
                 it will stay in the middle
 
                 this fixme is also for the .login{} style
     */
-    top: 31.5%; 
-    right: 19%;
+  top: 31.5%;
+  right: 19%;
 }
 
-.login{
-    top: 62.5%;
-    right: 19%;
+.login-button {
+  top: 62.5%;
+  right: 19%;
+}
+
+/* for modals */
+.modal {
+  display: none;
+  position: absolute;
+  overflow: auto;
+  z-index: 999; /* make this modal above EVERYTHING*/
+  backdrop-filter: blur(2px);
+  background-color: hsla(0, 0%, 0%, 0.8);
+  border: 2px solid var(--orange);
+  box-shadow: 0 0 15px 5px var(--orange);
+  top: 0;
+  left: 0;
+  width: 90%;
+  height: 90%;
+
+  /* center the modal */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.close-register-modal,
+close-login-modal {
+  position: absolute;
+  top: 8%;
+  right: 8%;
+  color: var(--orange);
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  animation: animCloseModal 2s linear infinite;
+}
+
+@keyframes animCloseModal {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.register-modal-content,
+.login-modal-content {
+  position: absolute;
+  color: var(--white);
+
+  /* center the modal content */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.register-modal-content form input {
+  font-family: "Space Grotesk";
+  font-weight: 900;
+  width: 50%;
+  margin-bottom: 30px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #fff;
+  outline: none;
+  color: orange;
+}
+
+.register-modal-content form button {
+  position: absolute;
+  color: var(--white);
+  font-size: 16px;
+  font-weight: 900;
+  cursor: pointer;
+  border: none;
+  background-color: var(--orange);
+  padding: 5px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+
+  /* center the modal content */
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.register-modal-content form button:hover {
+  font-style: italic;
+  background-color: var(--cyan);
 }
