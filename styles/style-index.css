@@ -27,10 +27,11 @@ body {
 
 @keyframes animRotate {
     0% {
-    transform: scaleX(1); /* Normal position */
+        transform: scaleX(1); 
     }
+
     100% {
-    transform: scaleX(-1); /* Reflected horizontally */
+        transform: scaleX(-1); 
     }
 }
 
@@ -92,6 +93,16 @@ body {
 .albums img{
     width: 200px;
     height: 200px;
+}
+
+.blursquare {
+    backdrop-filter: blur(1.2px);
+    position: absolute;
+    top: 2%;
+    right: 9%; /* Adjust the right position to ensure it’s inside the page */
+    width: 42.5%;
+    height: 95.5%;
+    z-index: 1;
 }
 
 /* for album_1 */
@@ -160,14 +171,26 @@ body {
     background-color: var(--orange);
     padding: 5px;
     transition: background-color 0.3s ease, transform 0.3s ease;
+    z-index: 2;
+    animation: animButton 1s ease-in-out alternate infinite;;
+}
+
+@keyframes animButton {
+    0% {
+        transform: scale(0.9); 
+    }
+
+    100% {
+        transform: scale(0.8); 
+    }
 }
 
 .buttons button:hover{
     font-style: italic;
-    transform: scale(1.1);
-
     background-color: var(--cyan);
 }
+
+
 
 .register{
     /* FIXME:   idk how to make this top and right position adaptive
