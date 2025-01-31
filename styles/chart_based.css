@@ -89,20 +89,21 @@ html, body {
 .footer {
     position: fixed;
     bottom: 0;
+    left: 0;
     width: 100%;
     padding: 10px;
-    background-color: #eee;
+    background-color: var(--orange);
     display: center;
     align-items: center;
     justify-content: center;
     text-align: center;
     gap: 20px;
-    transition: transform 0.3s ease-in-out;
 }
 
 .footer a {
     text-decoration: none;
     font-weight: bold;
+    font-size: 20px;
     align-self: center;
     margin: 20px;
     color: black;

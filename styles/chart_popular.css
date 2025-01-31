@@ -7,12 +7,13 @@ html, body {
     justify-content: center;
     font-family: var(--space);
     text-align: center;
-    background-color: white;
+    background-color: var(--darkBlue);
 }
 
 .text {
     position: relative;
     font-size: 4rem;
+    color: var(--yellow);
     margin-top: 50px;
     font-weight: bold;
     z-index: 2;
@@ -21,6 +22,7 @@ html, body {
 .subtext {
     position: relative;
     font-size: 1.2rem;
+    color: var(--yellow);
     font-weight: 400;
     margin-top: -20px;
     margin-bottom: 50px;
@@ -46,8 +48,8 @@ html, body {
     margin: 4px;
     padding: 10px;
     border-radius: 10px;
-    border: 2px solid #ccc;
-    background: #fff;
+    border: 2px solid var(--yellow);
+    background: linear-gradient(var(--cyan), var(--royalBlue));
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -55,20 +57,21 @@ html, body {
     width: 250px;
     height: 250px;
     padding-bottom: 15px;
-    background: white;
+    background: repeat;
     border-radius: 5px;
     margin-right: 15px;
 }
 
 .popular-item h2 {
     font-size: 1.2rem;
+    color: var(--yellow);
     margin: 5px;
 }
 
 .popular-item p {
     font-size: 0.9rem;
     margin: 5px;
-    color: gray;
+    color: white;
     font-style: italic;
     text-align: center;
     max-width: 300px;
@@ -77,6 +80,7 @@ html, body {
 .popular-item button {
     display: flex;
     margin: 10px;
+    font-family: var(--space);
     align-items: center;
     padding: 5px 10px;
     border: 1px solid #888;
@@ -89,20 +93,22 @@ html, body {
 .footer {
     position: fixed;
     bottom: 0;
+    left: 0;
+    right: 0;
     width: 100%;
     padding: 10px;
-    background-color: #eee;
+    background-color: var(--orange);
     display: center;
     align-items: center;
     justify-content: center;
     text-align: center;
     gap: 20px;
-    transition: transform 0.3s ease-in-out;
 }
 
 .footer a {
     text-decoration: none;
     font-weight: bold;
+    font-size: 20px;
     align-self: center;
     margin: 20px;
     color: black;

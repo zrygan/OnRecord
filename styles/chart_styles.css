@@ -1,6 +1,17 @@
+@keyframes moveGrid {
+    from {
+        transform: translate(0, 0);
+    }
+    to {
+        /* Under any circumstance, do NOT change this*/
+        /* what happens if you do is kinda funny */
+        transform: translate(-100px, -100px);
+    }
+}
+
 @keyframes float {
     0% { transform: translateY(0); }
-    50% { transform: translateY(6px); }
+    50% { transform: translateY(10px); }
     100% { transform: translateY(0); }
 }
 
@@ -23,73 +34,72 @@ html, body {
 }
 
 .background {
+    background-color: var(--darkBlue);
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 200vw;
+    height: 200vh;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    grid-template-rows: repeat(auto-fill, minmax(100px, 1fr));
-    gap: 5px; /* Adjust as needed */
-    justify-content: center;
-    align-content: center;
+    grid-template-columns: repeat(auto-fill, 100px);
+    grid-template-rows: repeat(auto-fill, 100px);
+    gap: 0;
+    animation: moveGrid 10s linear infinite;
 }
 
 .square {
-    width: 50px;
-    height: 50px;
-    background-color: #555;
-    opacity: 35%;
+    width: 40px;
+    height: 40px;
+    background-color: var(--royalBlue);
+    opacity: 100%;
     clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-    animation: float 2s ease-in-out infinite;
 }
 
 .text {
     position: relative;
-    font-size: 4rem;
+    font-size: 8rem;
+    color: var(--yellow);
     font-weight: bold;
     z-index: 2;
 }
 
 .subtext {
     position: relative;
-    font-size: 1.2rem;
+    z-index: 2;
+    color: var(--yellow);
+    font-size: 2.4rem;
     font-weight: 400;
     margin-top: -20px;
 }
 
 .arrow {
+    z-index: 2;
     width: 50px;
     height: 50px;
     margin-top: 20px;
+    animation: float 2s ease-in-out infinite;
 }
 
 .footer {
     position: fixed;
     bottom: 0;
+    left: 0;
+    right: 0;
     width: 100%;
     padding: 10px;
-    background-color: #eee;
+    background-color: var(--orange);
     display: center;
+    align-items: center;
     justify-content: center;
+    text-align: center;
     gap: 20px;
-    transition: transform 0.3s ease-in-out;
 }
 
 .footer a {
     text-decoration: none;
     font-weight: bold;
+    font-size: 20px;
     align-self: center;
     margin: 20px;
     color: black;
-}
-
-.triangle-down {
-    width: 0;
-    height: 0;
-    border-left: 25px solid transparent;
-    border-right: 25px solid transparent;
-    border-top: 50px solid #555;
-    animation: float 3s ease-in-out infinite;
 }
