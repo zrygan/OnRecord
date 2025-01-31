@@ -1,3 +1,9 @@
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+    100% { transform: translateY(0); }
+}
+
 body {
     background-color: var(--cyan);
 }
@@ -13,14 +19,15 @@ body {
 }
 
 .bg1 {
-    width: 900.36px;
+    width: 870.36px;
     height: 370.13px;
     position: absolute;
-    left: 681.2px;
-    top: 2149.89px;
+    left: -31.2px;
+    top: 1249.89px;
     transform-origin: 0 0;
     transform: rotate(-152.745deg) scale(0.981, 1.018);
     object-fit: cover;
+    animation: float 2s ease-in-out infinite;
 }
 
 .bg2 {
@@ -32,6 +39,7 @@ body {
     transform-origin: 0 0;
     transform: rotate(5.58deg) scale(0.999, 1.001);
     object-fit: cover;
+    animation: float 2s ease-in-out infinite;
   }
 .bg3 {
     width: 900.44px;
@@ -40,6 +48,7 @@ body {
     left: -27.4px;
     top: 118px;
     object-fit: cover;
+    animation: float 2s ease-in-out infinite;
 }
 .bg4 {
     width: 510.53px;
@@ -50,6 +59,7 @@ body {
     transform-origin: 0 0;
     transform: rotate(11.616deg) scale(0.995, 1.005);
     object-fit: cover;
+    animation: float 2s ease-in-out infinite;
 }
 
 
@@ -67,6 +77,7 @@ body {
     top: 10px;
     width: 97px;
     height: 53px;
+    text-decoration: none; /* Remove underline from text link */
 }
 
 /*  Search Bar  */
@@ -102,6 +113,20 @@ body {
     top: 16px;
     transform-origin: 0 0;
     transform: rotate(90deg) scale(1, 1);
+}
+
+.text-box {
+    background: #ffffff;
+    width: 520px;
+    height: 37px;
+    position: absolute;
+    left: 620px; /* Adjust the position to the right of the gray line */
+    top: 16px;
+    padding: 3px;
+    font-size: 20px;
+    font-family: "Space Grotesk";
+    border: none; /* Ensure no border is applied */
+    outline: none; /* Remove the default focus outline */
 }
 
 /* Genre Button */
@@ -177,6 +202,7 @@ body {
     top: -47px;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     border: none;
+    text-decoration: none; /* Remove underline from text link */
 }
 
 .charts:hover {background-color: #6aa300;}
@@ -192,6 +218,7 @@ body {
     top: -35px;
     width: 64px;
     height: 30px;
+    text-decoration: none; /* Remove underline from text link */
 }
 
 .user-button {
