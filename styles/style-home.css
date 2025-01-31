@@ -1,0 +1,407 @@
+body {
+    background-color: var(--cyan);
+}
+/*  Navigation Bar  */
+.nav-bar {
+    background-color: var(--darkBlue);
+    width: 100%;
+    height: 75px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.30);
+}
+
+.bg1 {
+    width: 900.36px;
+    height: 370.13px;
+    position: absolute;
+    left: 681.2px;
+    top: 2149.89px;
+    transform-origin: 0 0;
+    transform: rotate(-152.745deg) scale(0.981, 1.018);
+    object-fit: cover;
+}
+
+.bg2 {
+    width: 800.1px;
+    height: 349.82px;
+    position: absolute;
+    left: 1117.29px;
+    top: 752px;
+    transform-origin: 0 0;
+    transform: rotate(5.58deg) scale(0.999, 1.001);
+    object-fit: cover;
+  }
+.bg3 {
+    width: 900.44px;
+    height: 700px;
+    position: absolute;
+    left: -27.4px;
+    top: 118px;
+    object-fit: cover;
+}
+.bg4 {
+    width: 510.53px;
+    height: 360.05px;
+    position: absolute;
+    left: 1372.49px;
+    top: 154.39px;
+    transform-origin: 0 0;
+    transform: rotate(11.616deg) scale(0.995, 1.005);
+    object-fit: cover;
+}
+
+
+/*  Top Logo  */
+.on-record {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Space Grotesk";
+    font-size: 30px;
+    line-height: 27px;
+    letter-spacing: -0.08em;
+    font-weight: 700;
+    position: absolute;
+    left: 413px;
+    top: 10px;
+    width: 97px;
+    height: 53px;
+}
+
+/*  Search Bar  */
+.search-bar {
+    background: #ffffff;
+    border-radius: 10px;
+    width: 689px;
+    height: 53px;
+    position: absolute;
+    left: 522px;
+    top: 10px;
+}
+
+.search-button {
+    border-radius: 10px;
+    width: 77px;
+    height: 62.26px;
+    position: absolute;
+    left: 1148px;
+    top: 10px;
+    overflow: visible;
+}
+
+.gray-line {
+    margin-top: 0px;
+    border-style: solid;
+    border-color: #b6b6b6;
+    border-width: 3px 0 0 0;
+    width: 41.56px;
+    height: 0px;
+    position: absolute;
+    left: 621px;
+    top: 16px;
+    transform-origin: 0 0;
+    transform: rotate(90deg) scale(1, 1);
+}
+
+/* Genre Button */
+.genre {
+    color: #a7a7a7;
+    text-align: left;
+    font-family: "Space Grotesk";
+    font-size: 20px;
+    font-weight: 400;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 88px;
+    height: 53px;
+    border: none;
+    background: none;
+}
+
+.genre-svg {
+    width: 50px;
+    height: 12px;
+    position: absolute;
+    right: 80px;
+    left: 50px;
+    bottom: 97.66px;
+    top: 22px;
+}
+
+.genre-button {
+    width: 88px;
+    height: 53px;
+    position: relative;
+    left: 529px;
+    top: 10px;
+    display: inline-block
+}
+
+.genre-content {
+    display: none;
+    font-family: "Space Grotesk";
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 90px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    top: 53px;
+}
+
+.genre-content a {
+    color: black;
+    padding: 13px 8px;
+    text-decoration: none;
+    display: block;
+}
+
+.genre-content a:hover {background-color: #ddd;}
+
+.genre-button:hover .genre-content {display: block;}
+
+/*  Charts Button  */
+.charts-button {
+    position: relative;
+    border: none;
+}
+.charts {
+    font-family: "Space Grotesk";
+    background-color: #7fbe00;
+    border-radius: 15px;
+    width: 102px;
+    height: 53.45px;
+    position: absolute;
+    left: 1230px;
+    top: -47px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border: none;
+}
+
+.charts:hover {background-color: #6aa300;}
+
+.charts-text {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Space Grotesk";
+    font-size: 20px;
+    font-weight: 400;
+    position: absolute;
+    left: 1249px;
+    top: -35px;
+    width: 64px;
+    height: 30px;
+}
+
+.user-button {
+    width: 192px;
+    height: 53.02px;
+    position: absolute;
+}
+
+.user-pic {
+    border-radius: 15px;
+    width: 55px;
+    height: 55px;
+    position: absolute;
+    left: 1343px;
+    top: -47px;
+    transform-origin: 0 0;
+    transform: rotate(-1.062deg) scale(1, 1);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.user:hover {background-color: rgb(151, 2, 165);}
+
+.random-title {
+    color: #ffffff;
+    text-align: center;
+    font-family: "Space Grotesk";
+    font-size: 36px;
+    line-height: 58px;
+    letter-spacing: -0.08em;
+    font-weight: 700;
+    position: absolute;
+    left: 190px;
+    top: 77px;
+    width: 629px;
+    height: 46px;
+}
+
+.yellow-bar {
+    width: 1300px; 
+    height: 170px; 
+    left: 300px; 
+    top: 130px; 
+    position: absolute; 
+    background: rgba(255, 220.89, 27.63, 0.85); 
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); 
+    border-radius: 16px; 
+    backdrop-filter: blur(4px);
+}
+
+.random-songs {
+    height: 170px;
+    width: 1290px;
+    position: absolute;
+    left: 300px;
+    top: 130px;
+    overflow-x: auto;
+    
+}
+
+.random-content {
+    height: 160px;
+    width: 1260px;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    overflow-x: auto;
+}
+
+.random-content img {
+    width: 150px;
+    height: 150px;
+    border-radius: 16px;
+    margin-right: 15px; /* Add margin to space out the images */
+}
+
+.catalog-box {
+    background: rgba(19, 19, 19, 0.86);
+    border-radius: 74px;
+    width: 1400px;
+    height: 1650px;
+    position: absolute;
+    left: 250px;
+    top: 327px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    transform-origin: 0 0;
+    transform: rotate(0deg) scale(1, 1);
+    backdrop-filter: blur(2px);
+}
+
+.catalog-title {
+    color: #ffffff;
+    text-align: center;
+    font-family: "Space Grotesk";
+    font-size: 40px;
+    line-height: 36px;
+    letter-spacing: -0.08em;
+    font-weight: 700;
+    position: absolute;
+    left: 580px;
+    top: 30.93px;
+    width: 217.04px;
+    height: 39.51px;
+}
+
+.catalog-list {
+    width: 1290px;
+    height: 1500px; /* Set a fixed height to enable vertical scrolling */
+    position: absolute;
+    left: 55px;
+    top: 100px;
+    overflow-y: auto; /* Enable vertical scrolling */
+    display: block;
+    flex-direction: column;
+}
+
+.song-box div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.song-box {
+    width: 1250px; /* Ensure the song box takes full width */
+    height: 91.73px;
+    margin-bottom: 20px; /* Add margin to space out the song boxes */
+    background: rgba(37.19, 37.19, 37.19, 0.81); 
+    border-radius: 20px;
+    display: flex; /* Ensure the content inside is flex */
+    flex-direction: row;
+    align-items: center; /* Center items vertically */
+    padding: 0 20px; /* Add padding for spacing */
+}
+
+.song-title {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Space Grotesk";
+    font-size: 24px;
+    line-height: 22px;
+    letter-spacing: -0.08em;
+    font-weight: 700;
+    width: 400px;
+    height: 30px;
+    overflow: auto; /* Add scrollbars if needed */
+    white-space: nowrap; /* Prevent text from wrapping */
+    margin-right: 20px; /* Add margin to space out the text */
+}
+
+.song-artist {
+    color: #c2bdbd;
+    text-align: left;
+    font-family: "Space Grotesk";
+    font-size: 15px;
+    font-weight: 400;
+    width: 200px;
+    height: 20px;
+}
+
+.catalog-pic {
+    width: 90px;
+    height: 90px;
+    border-radius: 20%;
+    margin-right: 20px; /* Add margin to space out the images */
+}
+
+.song-album {
+    color: #c2bdbd;
+    text-align: left;
+    font-family: "Space Grotesk";
+    font-size: 15px;
+    font-weight: 400;
+    width: 220px;
+    height: 20px;
+}
+
+.song-heart-list {
+    width: 17px;
+    height: 17px;
+    top: 37.93px;
+    margin-right: 10px;
+}
+
+.song-heart-number {
+    color: #c2bdbd;
+    text-align: left;
+    font-family: "Space Grotesk";
+    font-size: 15px;
+    font-weight: 400;
+    width: 20px;
+    height: 20px;
+    margin-right: 90px;
+}
+
+.song-review-icon {
+    width: 17px;
+    height: 17px;
+    top: 37.93px;
+    margin-right: 10px;
+}
+
+.song-review-number {
+    color: #c2bdbd;
+    text-align: left;
+    font-family: "Space Grotesk";
+    font-size: 15px;
+    font-weight: 400;
+    width: 20px;
+    height: 20px;
+    margin-right: 90px;
+}
