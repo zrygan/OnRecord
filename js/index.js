@@ -84,6 +84,27 @@ register_form.addEventListener('submit', function(event) {
     console.log('User data stored:', user_info);
 
     register_modal.style.display = "none";
+
+    window.location.replace("/pages/home.html");
+});
+
+/* form for logging in */
+const login_form = document.getElementById("login-form");
+login_form.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const user_data = new FormData(login_form);
+    let user_object = {};
+    user_data.forEach((value, key) => {
+        user_object[key] = value;
+    });
+
+    // retrieve the user data from local storage
+    // TODO when the backend is here
+
+    login_modal.style.display = "none"; 
+
+    window.location.replace("/pages/home.html");
 });
 
 // LOGIN MODAL
