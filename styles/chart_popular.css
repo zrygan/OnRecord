@@ -14,7 +14,7 @@ html, body {
     position: relative;
     font-size: 4rem;
     color: var(--yellow);
-    margin-top: 50px;
+    margin-top: 15vh;
     font-weight: bold;
     z-index: 2;
 }
