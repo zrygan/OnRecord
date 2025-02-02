@@ -7,7 +7,7 @@ html, body {
     justify-content: center;
     font-family: var(--space);
     text-align: center;
-    background-color: white;
+    background-color: var(--darkBlue);
 }
 
 .text {
@@ -15,6 +15,7 @@ html, body {
     font-size: 4rem;
     margin-top: 15vh;
     font-weight: bold;
+    color: #F00032;
     z-index: 2;
 }
 
@@ -23,6 +24,7 @@ html, body {
     font-size: 1.2rem;
     font-weight: 400;
     margin-top: -20px;
+    color: #F00032;
     margin-bottom: 50px;
 }
 
@@ -46,8 +48,8 @@ html, body {
     margin: 4px;
     padding: 10px;
     border-radius: 10px;
-    border: 2px solid #ccc;
-    background: #fff;
+    border: 2px solid #D6002D;
+    background: linear-gradient(#763241, #550012);
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -55,20 +57,21 @@ html, body {
     width: 250px;
     height: 250px;
     padding-bottom: 15px;
-    background: white;
+    background: repeat;
     border-radius: 5px;
     margin-right: 15px;
 }
 
 .critical-item h2 {
     font-size: 1.2rem;
+    color: #F00032;
     margin: 5px;
 }
 
 .critical-item p {
     font-size: 0.9rem;
     margin: 5px;
-    color: gray;
+    color: white;
     font-style: italic;
     text-align: center;
     max-width: 300px;
