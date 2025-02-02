@@ -125,3 +125,19 @@ window.onclick = function(event) {
         login_modal.style.display = "none";
     }
 }
+
+function hoverbox_on() {
+    document.getElementById("hoverbox").innerHTML = `
+        Click to learn more about the <br>
+        Developers 🤖 of OnRecord!
+    `;
+}
+
+function hoverbox_off() {
+    document.getElementById("hoverbox").innerHTML = `
+        People on the record: <span>${num_users}</span> <br />
+        Artists on the record: <span>${num_artists}</span> <br />
+        Tracks on the record: <span>${num_tracks}</span><br />
+        Albums on the record: <span>${num_albums}</span><br />
+    `;
+}
