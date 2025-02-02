@@ -21,3 +21,5 @@ document.addEventListener("DOMContentLoaded", function () {
     createSquares();
     window.addEventListener("resize", createSquares);
 });
+
+
