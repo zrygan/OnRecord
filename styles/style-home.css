@@ -239,8 +239,6 @@ body {
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-.user:hover {background-color: rgb(151, 2, 165);}
-
 .random-title {
     color: #ffffff;
     text-align: center;
@@ -363,11 +361,11 @@ body {
     line-height: 22px;
     letter-spacing: -0.08em;
     font-weight: 700;
-    width: 400px;
+    width: 350px;
     height: 30px;
     overflow: auto; /* Add scrollbars if needed */
     white-space: nowrap; /* Prevent text from wrapping */
-    margin-right: 20px; /* Add margin to space out the text */
+    margin-right: 15px; /* Add margin to space out the text */
 }
 
 .song-artist {
@@ -384,7 +382,7 @@ body {
     width: 90px;
     height: 90px;
     border-radius: 20%;
-    margin-right: 20px; /* Add margin to space out the images */
+    margin-right: 15px; /* Add margin to space out the images */
 }
 
 .song-album {
@@ -430,5 +428,13 @@ body {
     font-weight: 400;
     width: 20px;
     height: 20px;
-    margin-right: 90px;
+    margin-right: 115px;
+}
+
+.song-heart-select {
+     width: 30px; height: 30px;
+}
+
+.red-pink-heart {
+    filter: hue-rotate(-30deg) saturate(5) brightness(1.2);
 }
