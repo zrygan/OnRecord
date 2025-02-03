@@ -22,5 +22,64 @@
     <link rel="icon" href="../favicon.ico" type="image/x-icon" />
     <title>About OnRecord</title>
   </head>
-  <body></body>
+  <body>
+    <!-- HEADER -->
+    <div class="title space-grotesk">
+      <span>Dev's Private Music Room</span>
+    </div>
+
+    <div class="hoverables">
+      <div class="icons zhean">
+        <img
+          onclick="showModal('zen')"
+          src="../img/about/zen.jpg"
+          alt="Zhean's (zen) favorite album is: Disovery by Daft Punk"
+        />
+      </div>
+      <div class="icons jaztin">
+        <img
+          onclick="showModal('jaz')"
+          src="../img/about/jaz.jpeg"
+          alt="Jaztin's (jaz) favorite musical is: Hamilton by Lin-Manuel Miranda"
+        />
+      </div>
+      <div class="icons bryle">
+        <img
+          onclick="showModal('bryle')"
+          src="../img/about/bryle.jpeg"
+          alt="Kyle's favorite song is: It's Raining After All by ツユ"
+        />
+      </div>
+      <div class="icons kyle">
+        <img
+          onclick="showModal('kyle')"
+          src="../img/about/kyle.jpg"
+          alt="Kyle's favorite song is: Stay with me by Miki Matsubara"
+        />
+      </div>
+      <div class="icons yesha">
+        <img
+          onclick="showModal('mentosberi')"
+          src="../img/about/mentosberi.jpg"
+          alt="Yesha's (mentosberi) favorite album is: Weezer (Blue Album) by Weezer"
+        />
+      </div>
+
+      <div class="modal" id="modal">
+        <span
+          onclick="modal_close()"
+          id="modal-close"
+          class="modal-close space-grotesk"
+        >
+          &times;
+        </span>
+        <div class="modal-content space-grotesk" id="modal-content"></div>
+      </div>
+    </div>
+  </body>
+  <script src="../js/about.js"></script>
+  <audio id="background-music" preload="auto">
+    <source src="../audio/youLikeJazz.mp3" type="audio/mp3" />
+    Your browser does not support audio content.
+  </audio>
 </html>

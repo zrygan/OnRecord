@@ -1,0 +1,166 @@
+body {
+  background-color: var(--darkBlue);
+}
+
+.title {
+  color: var(--orange);
+  font-weight: 900;
+  font-size: 32pt;
+  text-align: center;
+  margin-top: 8vh;
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  animation: float 2s ease-in-out alternate infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    color: white;
+  }
+  33% {
+    transform: translateY(10px) rotate(3deg);
+  }
+  66% {
+    transform: translateY(0) rotate(-3deg);
+    color: var(--cyan);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+    color: var(--orange);
+  }
+}
+
+.subtitle {
+  color: var(--white);
+  font-size: 24pt;
+  text-align: center;
+  margin-top: 3vh;
+  margin-bottom: 3vh;
+}
+
+.content {
+  color: var(--white);
+  font-size: 18px;
+  margin-top: 6vh;
+  margin-left: 12vw;
+  margin-right: 12vw;
+}
+
+.content p {
+  margin-top: 4px;
+}
+
+.icons {
+  max-width: 20vw;
+  aspect-ratio: 1/1;
+  position: fixed;
+}
+
+.icons img {
+  width: 20vw;
+  aspect-ratio: 1/1;
+  position: relative;
+}
+
+.zhean:hover,
+.jaztin:hover,
+.bryle:hover,
+.kyle:hover,
+.yesha:hover {
+  transform: perspective(100px) rotateX(5deg) scale(1.5) translateY(20px);
+  z-index: 999; /* make it the VERY font */
+  cursor: pointer;
+  transition: transform 0.5s ease-in-out;
+}
+
+.zhean {
+  position: absolute;
+  top: 25vh;
+  left: 10vw;
+  z-index: 1;
+}
+
+.jaztin {
+  position: absolute;
+  top: 25vh;
+  left: 25vw;
+  z-index: 2;
+}
+
+.bryle {
+  position: absolute;
+  top: 25vh;
+  left: 40vw;
+  z-index: 3;
+}
+
+.kyle {
+  position: absolute;
+  top: 25vh;
+  left: 55vw;
+  z-index: 4;
+}
+
+.yesha {
+  position: absolute;
+  top: 25vh;
+  left: 70vw;
+  z-index: 5;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2.5px);
+  z-index: 1000;
+  color: #fff;
+}
+
+.modal-title {
+  color: var(--orange);
+  font-size: 65px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.modal-content {
+  position: relative;
+  font-size: 24px;
+  padding-bottom: 12px;
+  width: 50%;
+  margin-top: 4.5%;
+  margin-bottom: 30px;
+  left: 10%;
+  background-color: transparent;
+  border: none;
+  color: var(--white);
+}
+
+.modal-close {
+  position: absolute;
+  top: 8%;
+  right: 8%;
+  color: var(--white);
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  animation: animCloseModal 2s linear infinite;
+}
+
+@keyframes animCloseModal {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
