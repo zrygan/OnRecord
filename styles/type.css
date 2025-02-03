@@ -5,10 +5,15 @@
     this font is Open Source and free of use
 */
 
-:root{
-    --space: 'Space Grotesk', sans-serif;
+:root {
+  --space: "Space Grotesk", sans-serif;
 }
 
 .space-grotesk {
   font-family: "Space Grotesk";
+}
+
+.nabla {
+  font-family: "Nabla", serif;
+  font-optical-sizing: auto;
 }

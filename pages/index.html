@@ -14,34 +14,42 @@
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nabla&display=swap"
+      rel="stylesheet"
+    />
     <!-- Favicon -->
     <link rel="icon" href="../favicon.ico" type="image/x-icon" />
     <title>You are now On the Record!</title>
   </head>
   <body>
-    <div class="title space-grotesk">
+    <div
+      class="title space-grotesk"
+      onmouseover="hoverbox_on()"
+      onmouseout="hoverbox_off()"
+    >
       <!-- Title -->
-      <span class="rotate">O</span>
-      <span class="rotate">n</span>
+      <a href="../pages/about.html" class="rotate">O</a>
+      <a href="../pages/about.html" class="rotate">n</a>
       <br />
-      <span class="rotate">R</span>
-      <span class="rotate">e</span>
-      <span class="rotate">c</span>
-      <span class="rotate">o</span>
-      <span class="rotate">r</span>
-      <span class="rotate">d</span>
+      <a href="../pages/about.html" class="rotate">R</a>
+      <a href="../pages/about.html" class="rotate">e</a>
+      <a href="../pages/about.html" class="rotate">c</a>
+      <a href="../pages/about.html" class="rotate">o</a>
+      <a href="../pages/about.html" class="rotate">r</a>
+      <a href="../pages/about.html" class="rotate">d</a>
     </div>
 
     <div class="line">
       <!-- Line separator -->
     </div>
 
-    <div class="metrics space-grotesk">
+    <div class="metrics space-grotesk" id="hoverbox">
       <!-- Metrics -->
-      <div>People on the record: <span id="num_users"></span></div>
-      <div>Artists on the record: <span id="num_artists"></span></div>
-      <div>Tracks on the record: <span id="num_tracks"></span></div>
-      <div>Albums on the record: <span id="num_albums"></span></div>
+      People on the record: <span id="num_users"></span> <br />
+      Artists on the record: <span id="num_artists"></span> <br />
+      Tracks on the record: <span id="num_tracks"></span><br />
+      Albums on the record: <span id="num_albums"></span><br />
     </div>
 
     <div class="subtext space-grotesk">

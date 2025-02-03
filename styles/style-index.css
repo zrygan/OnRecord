@@ -5,7 +5,6 @@ body {
 /* for title */
 .title {
   /* text styles */
-  color: var(--white);
   font-size: 150px;
   font-weight: 900;
   letter-spacing: -5px;
@@ -15,6 +14,11 @@ body {
   /* container styles */
   margin-top: 4%;
   margin-left: 8%;
+}
+
+.title a {
+  text-decoration: none;
+  color: var(--white);
 }
 
 .rotate {
@@ -28,10 +32,12 @@ body {
 @keyframes animRotate {
   0% {
     transform: scaleX(1);
+    color: var(--orange);
   }
 
   100% {
     transform: scaleX(-1);
+    color: var(--cyan);
   }
 }
 
@@ -57,21 +63,17 @@ body {
   margin-top: 0.5%;
   margin-left: 8%;
   font-size: 22px;
+  min-height: 112px;
 }
 
-.metrics div {
-  /* spacing for the divs inside the metric div */
-  margin-bottom: 10px;
-}
-
-.metrics div span {
+.metrics span {
   color: var(--orange);
 }
 
 /* for subtext */
 .subtext {
   color: var(--white);
-  margin-top: 8%;
+  margin-top: 12%;
   margin-left: 8%;
   font-size: 12px;
 }
