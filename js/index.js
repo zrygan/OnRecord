@@ -85,7 +85,7 @@ register_form.addEventListener('submit', function(event) {
 
     register_modal.style.display = "none";
 
-    window.location.replace("../pages/home.html");
+    window.location.replace("pages/home.html");
 
 });
 
@@ -105,7 +105,8 @@ login_form.addEventListener('submit', function(event) {
 
     login_modal.style.display = "none"; 
 
-    window.location.replace("../pages/home.html");
+    //
+    window.location.replace("pages/home.html");
 });
 
 // LOGIN MODAL
