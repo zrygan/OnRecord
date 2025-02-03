@@ -1,0 +1,356 @@
+body {
+    font-family: "Space Grotesk";
+    /* margin: 0;
+    padding: 0; */
+    background-color: var(--cyan);
+}
+
+/*  Navigation Bar  */
+.nav-bar {
+    background-color: var(--darkBlue);
+    width: 100%;
+    height: 75px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.30);
+}
+
+/*  Top Logo  */
+.on-record {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Space Grotesk";
+    font-size: 30px;
+    line-height: 27px;
+    letter-spacing: -0.08em;
+    font-weight: 700;
+    position: absolute;
+    left: 7%;
+    top: 10px;
+    width: 97px;
+    height: 53px;
+    text-decoration: none; /* Remove underline from text link */
+}
+
+/*  Search Bar  */
+.search-bar {
+    background: #ffffff;
+    border-radius: 10px;
+    width: 689px;
+    height: 53px;
+    position: absolute;
+    left: 23%;
+    top: 10px;
+  }
+  
+.search-button {
+    border-radius: 10px;
+    width: 77px;
+    height: 62.26px;
+    position: absolute;
+    left: 65%;
+    top: 10px;
+    overflow: visible;
+}
+
+.gray-line {
+    margin-top: 0px;
+    border-style: solid;
+    border-color: #b6b6b6;
+    border-width: 3px 0 0 0;
+    width: 41.56px;
+    height: 0px;
+    position: absolute;
+    left: 29.75%;
+    top: 16px;
+    transform-origin: 0 0;
+    transform: rotate(90deg) scale(1, 1);
+    z-index: 1;
+}
+
+.text-box {
+    background: #ffffff;
+    width: 520px;
+    height: 37px;
+    position: absolute;
+    left: 30.5%;
+    top: 16px;
+    padding: 3px;
+    font-size: 20px;
+    font-family: "Space Grotesk";
+    border: none;
+    outline: none;
+}
+
+/* Genre Button */
+.genre {
+    color: #a7a7a7;
+    text-align: left;
+    font-family: "Space Grotesk";
+    font-size: 20px;
+    font-weight: 400;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 88px;
+    height: 53px;
+    border: none;
+    background: none;
+}
+
+.genre-svg {
+    width: 50px;
+    height: 12px;
+    position: absolute;
+    right: 80px;
+    left: 50px;
+    bottom: 97.66px;
+    top: 22px;
+}
+
+.genre-button {
+    width: 88px;
+    height: 53px;
+    position: relative;
+    left: 23.5%;
+    top: 10px;
+    display: inline-block;
+}
+
+.genre-content {
+    display: none;
+    font-family: "Space Grotesk";
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 90px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    top: 53px;
+}
+
+.genre-content a {
+    color: black;
+    padding: 13px 8px;
+    text-decoration: none;
+    display: block;
+}
+
+.genre-content a:hover {
+background-color: #ddd;
+}
+
+.genre-button:hover .genre-content {
+display: block;
+}
+
+/*  Charts Button  */
+.charts-button {
+    position: relative;
+    border: none;
+}
+.charts {
+    font-family: "Space Grotesk";
+    background-color: #7fbe00;
+    border-radius: 15px;
+    width: 102px;
+    height: 53.45px;
+    position: absolute;
+    left: 70%;
+    top: -47px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border: none;
+    text-decoration: none; /* Remove underline from text link */
+}
+
+.charts:hover {
+    background-color: #6aa300;
+}
+
+.charts-text {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Space Grotesk";
+    font-size: 20px;
+    font-weight: 400;
+    position: absolute;
+    left: 71.25%;
+    top: -35px;
+    width: 64px;
+    height: 30px;
+    text-decoration: none; /* Remove underline from text link */
+}
+
+.user-button {
+    width: 192px;
+    height: 53.02px;
+    position: absolute;
+}
+  
+.user-pic {
+    border-radius: 15px;
+    width: 55px;
+    height: 55px;
+    position: absolute;
+    left: 1343px;
+    top: -47px;
+    transform-origin: 0 0;
+    transform: rotate(-1.062deg) scale(1, 1);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+
+/* review section */
+.review {
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 100px auto 0;
+    font-size: 1.1rem; /* Adjusting base font size */
+    color: #ffffff;
+    background: rgba(19, 19, 19, 0.95); /* Slightly darker background */
+    backdrop-filter: blur(2px);
+    border-radius: 20px;
+}
+
+.review-header {
+    display: flex;
+    align-items: center;
+}
+
+.review-header img {
+    max-width: 270px;
+    margin-right: 20px;
+}
+
+.review-details {
+    flex: 1;
+}
+
+.review-details p {
+    margin: 5px 0;
+}
+
+#song-title {
+    font-size: 2.2rem; 
+}
+
+#artist-name {
+    font-size: 1.3rem; 
+}
+
+/* Genre Links */
+.genre-links {
+    font-size: 1rem; 
+    margin-right: 10px;
+}
+
+.genre-links a {
+    color: #00bcd4; 
+    text-decoration: none;
+}
+
+.genre-links a:hover {
+    text-decoration: underline;
+}
+
+/* Comment Box */
+.comment-box {
+    margin-top: 2rem;
+    background-color: #2c2c2c; 
+    padding: 1rem;
+    border: 1px solid #444; 
+    border-radius: 5px;
+}
+
+.comment-box h3 {
+    margin-top: 0;
+}
+
+.comment-box textarea {
+    width: 98.5%;
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid #555; 
+    font-size: 1rem; 
+    resize: vertical;
+}
+
+.comment-box button {
+    margin-top: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: #00bcd4;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.comment-box button:hover {
+    background-color: #0288a9; /* Darker hover color */
+}
+
+/* User Reviews */
+.user-reviews {
+    margin-top: 2rem;
+}
+
+.user-review {
+    display: flex;
+    align-items: center;
+    background-color: #3c3c3c; /* Adjusting background color */
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+}
+
+.user-review img {
+    max-width: 100px;
+    margin-right: 20px;
+    border-radius: 50%;
+}
+
+.user-review-details {
+    flex: 1;
+}
+
+/* Review Actions */
+.review-actions {
+    margin-top: 0.5rem;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+.edit-button,
+.delete-button {
+    padding: 0.3rem 0.6rem;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    margin-right: 0.5rem;
+    /* display: flex; */
+    align-items: right;
+    justify-content: right;
+}
+
+.edit-button {
+    background-color: #00bcd4; 
+}
+
+.edit-button:hover {
+    background-color: #0288a9; 
+}
+
+.delete-button {
+    background-color: #00bcd4;
+}
+
+.delete-button:hover {
+    background-color: #0288a9; 
+}
+.edit-button img {
+    width: 20px; /* Adjust the width as needed */
+    height: 20px; /* Adjust the height as needed */
+}
