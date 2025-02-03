@@ -46,7 +46,7 @@ function modal_close() {
     document.getElementById('modal').style.display = 'none';
 }
 
-window.onload = function() {
-    var music = document.getElementById("background-music");
-    music.play();
-};
+// window.onload = function() {
+//     var music = document.getElementById("background-music");
+//     music.play();
+// };
