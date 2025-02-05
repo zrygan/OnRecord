@@ -160,7 +160,7 @@ body > * {
 
 .catalog-list {
   width: 68vw;
-  height: 155vh;
+  height: 156vh;
   margin-top: 6vh;
   position: relative;
   overflow-y: auto; /* Enable vertical scrolling */
@@ -186,6 +186,7 @@ body > * {
   align-items: center; /* Center items vertically */
   padding: 0 20px; /* Add padding for spacing */
   position: relative;
+  margin-top: 10px;
 }
 
 .song-title {
@@ -246,8 +247,8 @@ body > * {
 }
 
 .song-review-icon {
-  width: 17px;
-  height: 17px;
+  width: 15px;
+  height: 15px;
   margin-right: 10px;
 }
 
