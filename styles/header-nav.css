@@ -1,13 +1,35 @@
+html, body {
+    height: 100%;
+    text-align: center;
+}
+
 /*  Navigation Bar  */
 .nav-bar {
     background-color: var(--darkBlue);
     width: 100%;
     height: 75px;
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.30);
-    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+/* Centering nav-bar-elements and placing it on top */
+.nav-bar-elements {
+    width: 70%;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2; /* Ensure it is on top of nav-bar */
 }
 
 /*  Top Logo  */
@@ -15,67 +37,53 @@
     color: #ffffff;
     text-align: left;
     font-family: "Space Grotesk";
-    font-size: 30px;
+    font-size: 2rem;
     line-height: 27px;
     letter-spacing: -0.08em;
     font-weight: 700;
-    position: absolute;
-    left: 413px;
-    top: 10px;
-    width: 97px;
-    height: 53px;
+    position: relative;
     text-decoration: none; /* Remove underline from text link */
+    margin-right: 20px; /* Add some space between the logo and the search bar */
 }
 
 /*  Search Bar  */
 .search-bar {
     background: #ffffff;
     border-radius: 10px;
-    width: 689px;
+    width: 50%; /* Make the search bar responsive */
     height: 53px;
-    position: absolute;
-    left: 522px;
-    top: 10px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    overflow: hidden; /* Ensure elements do not overflow */
+    margin-right: 20px;
 }
 
 .search-button {
     border-radius: 10px;
     width: 77px;
-    height: 62.26px;
-    position: absolute;
-    left: 1148px;
-    top: 10px;
-    overflow: visible;
-}
-
-.gray-line {
-    margin-top: 0px;
-    border-style: solid;
-    border-color: #b6b6b6;
-    border-width: 3px 0 0 0;
-    width: 41.56px;
-    height: 0px;
-    position: absolute;
-    left: 621px;
-    top: 16px;
-    transform-origin: 0 0;
-    transform: rotate(90deg) scale(1, 1);
+    height: 60px; /* Match the height of the search bar */
+    position: relative;
+    top: 5px; /* Align to the top of the search bar */
+    margin-left: auto;
+    z-index: 2;
 }
 
 .text-box {
     background: #ffffff;
-    width: 520px;
+    width: 95%;
     height: 37px;
-    position: absolute;
-    left: 620px; /* Adjust the position to the right of the gray line */
-    top: 16px;
     padding: 3px;
     font-size: 20px;
     font-family: "Space Grotesk";
     border: none; /* Ensure no border is applied */
     outline: none; /* Remove the default focus outline */
+    position: relative;
+    left: 0px;
+    z-index: 1;
 }
-
+    
 /* Genre Button */
 .genre {
     color: #a7a7a7;
@@ -83,32 +91,30 @@
     font-family: "Space Grotesk";
     font-size: 20px;
     font-weight: 400;
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    width: 88px;
-    height: 53px;
     border: none;
     background: none;
+    position: relative;
+    right: 30px;
+    top: 12px;
+    z-index: 3;
+    margin-right: 20px;
 }
 
 .genre-svg {
     width: 50px;
     height: 12px;
-    position: absolute;
-    right: 80px;
-    left: 50px;
-    bottom: 97.66px;
-    top: 22px;
+    position: relative;
+    bottom: 8px;
+    z-index: 3;
 }
 
 .genre-button {
-    width: 88px;
+    width: 80px;
     height: 53px;
+    display: inline-block;
     position: relative;
-    left: 529px;
-    top: 10px;
-    display: inline-block
+    z-index: 3; /* Ensure this is on top */
+    left: 20px;
 }
 
 .genre-content {
@@ -116,72 +122,84 @@
     font-family: "Space Grotesk";
     position: absolute;
     background-color: #f1f1f1;
-    min-width: 90px;
+    min-width: 80px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    top: 53px;
+    z-index: 4; /* Ensure this is on top of .genre-button */
+    top: 50px;
+    border-radius: 3px;
+    text-align: left;
+    right: 15px;
 }
 
 .genre-content a {
-    color: black;
-    padding: 13px 8px;
-    text-decoration: none;
+  color: black;
+  padding: 13px 8px;
+  text-decoration: none;
+  display: block;
+}
+
+.genre-content a:hover {
+    background-color: #ddd;
+}
+
+.genre-button:hover .genre-content {
     display: block;
 }
 
-.genre-content a:hover {background-color: #ddd;}
-
-.genre-button:hover .genre-content {display: block;}
-
-/*  Charts Button  */
+/* Charts Button */
 .charts-button {
     position: relative;
     border: none;
+    z-index: 3;
+    width: 5vw;
+    height: 5vh; /* Adjust height to match .charts */
+    border-radius: 15px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); /* Fix typo: argba to rgba */
+    margin-right: 20px;
 }
+
 .charts {
     font-family: "Space Grotesk";
     background-color: #7fbe00;
     border-radius: 15px;
-    width: 102px;
-    height: 53.45px;
-    position: absolute;
-    left: 1230px;
-    top: -47px;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    width: 100%; /* Make it fill the parent .charts-button */
+    height: 100%; /* Make it fill the parent .charts-button */
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); /* Fix typo: argba to rgba */
     border: none;
     text-decoration: none; /* Remove underline from text link */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 }
 
-.charts:hover {background-color: #6aa300;}
+.charts:hover {
+  background-color: #6aa300;
+}
 
 .charts-text {
     color: #ffffff;
-    text-align: left;
+    text-align: center;
     font-family: "Space Grotesk";
     font-size: 20px;
     font-weight: 400;
-    position: absolute;
-    left: 1249px;
-    top: -35px;
-    width: 64px;
-    height: 30px;
     text-decoration: none; /* Remove underline from text link */
+    position: relative;
 }
 
+/* User Button */
 .user-button {
-    width: 192px;
-    height: 53.02px;
-    position: absolute;
+    width: 55px;
+    height: 55px;
+    position: relative;
 }
 
 .user-pic {
     border-radius: 15px;
     width: 55px;
     height: 55px;
-    position: absolute;
-    left: 1343px;
-    top: -47px;
     transform-origin: 0 0;
     transform: rotate(-1.062deg) scale(1, 1);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    position: relative;
 }
