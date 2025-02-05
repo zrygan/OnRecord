@@ -1,91 +1,176 @@
 <!DOCTYPE html>
-<html lang="en">
-<meta charset="UTF-8" />
-<link rel="stylesheet" href="../styles/style-userpage.css" />
-<link rel="stylesheet" href="../styles/colors.css">
-<link rel="stylesheet" href="../styles/type.css">
-<script src="../script.js"></script>
+    <html lang="en">
+    <meta charset="UTF-8" />
 
-<link rel="icon" href="../favicon.ico" type="image/x-icon" />
-<title>OnRecord: USERPAGE!</title>
-<head> 
-    
-    <div id="header-box">
-            <p class="head-text"> <span> HOME</span> <span>FORUMS</span> <span> PLACEHOLDER</span></p>
-    </div>
-</head>
+    <!--Stylesheets-->
+    <link rel="stylesheet" href="../styles/style-userpage.css" />
+    <link rel="stylesheet" href="../styles/colors.css">
+    <link rel="stylesheet" href="../styles/type.css">
+    <script src="../script.js"></script>
 
-<body>
-    <div class="content">
-        <div class="marquee"> 
-            <div class="username"> Now Viewing: <span id="name"> CabbageMan</span>'s Profile!                                      Now Viewing: <span id="name"> CabbageMan</span>'s Profile!                                      Now Viewing: <span id="name"> CabbageMan</span>'s Profile!                                      Now Viewing: <span id="name"> CabbageMan</span>'s Profile!</div>
-        </div>
+    <!--Icon-->
+    <link rel="icon" href="../favicon.ico" type="image/x-icon" />
+    <title>OnRecord: USERPAGE!</title>
+    <head> 
         
-        <div class="flex-box">
-            <div class="picture-box">
-                <img src="../img/userpage/sample-image.png" id="picture">
-                <div class="overlay">
-                    <div class="text">I FEEL SO SIGMA!</div>
-                </div>
-            </div>
-            
-            <div class="speech-bubble">
-                <div class="text-bio">
-                <p> "Hi my name is CabbageMan and I like cabbages."
+        <div id="header-box">
+                <p class="head-text"> 
+                    <a class="on-record" href="home.html">
+                        On
+                        <br />
+                        Record
+                    </a>
+                    <span> <a href= "about.html"> ABOUT </a></span>
+                    <span> <a href= "review.html"> FORUMS </a></span> 
+                    <span> <a href= "charts.html"> CHARTS</a> </span>
                 </p>
-                </div>
-            </div>
         </div>
-        
-        
-        <img id="star" src="../svg/userpage/star.svg">
-        <p class="status-text">
-            Status: Online! <br>
-            Account Created: 30/01/2025 <br>
-            Country of Origin: <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 30 30"><path d="M1,24c0,2.209,1.791,4,4,4H27c2.209,0,4-1.791,4-4V15H1v9Z" fill="#be2a2c"></path><path d="M27,4H5c-2.209,0-4,1.791-4,4v8H31V8c0-2.209-1.791-4-4-4Z" fill="#1334a3"></path><path d="M2.316,26.947l13.684-10.947L2.316,5.053c-.803,.732-1.316,1.776-1.316,2.947V24c0,1.172,.513,2.216,1.316,2.947Z" fill="#fff"></path><path d="M27,4H5c-2.209,0-4,1.791-4,4V24c0,2.209,1.791,4,4,4H27c2.209,0,4-1.791,4-4V8c0-2.209-1.791-4-4-4Zm3,20c0,1.654-1.346,3-3,3H5c-1.654,0-3-1.346-3-3V8c0-1.654,1.346-3,3-3H27c1.654,0,3,1.346,3,3V24Z" opacity=".15"></path><path d="M27,5H5c-1.657,0-3,1.343-3,3v1c0-1.657,1.343-3,3-3H27c1.657,0,3,1.343,3,3v-1c0-1.657-1.343-3-3-3Z" fill="#fff" opacity=".2"></path><path d="M10.569,15.303l-1.561,.31c-.051-.26-.154-.502-.296-.715l1.323-.884-.011-.975-.975-.011-.884,1.323c-.213-.143-.455-.245-.715-.296l.31-1.561-.697-.681-.697,.681,.31,1.561c-.26,.051-.502,.154-.715,.296l-.884-1.323-.975,.011-.011,.975,1.323,.884c-.143,.213-.245,.455-.296,.715l-1.561-.31-.681,.697,.681,.697,1.561-.31c.051,.26,.154,.502,.296,.715l-1.323,.884,.011,.975,.975,.011,.884-1.323c.213,.143,.455,.245,.715,.296l-.31,1.561,.697,.681,.697-.681-.31-1.561c.26-.051,.502-.154,.715-.296l.884,1.323,.975-.011,.011-.975-1.323-.884c.143-.213,
-                                .245-.455,.296-.715l1.561,.31,.681-.697-.681-.697Z" fill="#f4d24b"></path></svg><br>
-            Feeling: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-laughing" viewBox="0 0 16 16">
-                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                <path d="M12.331 9.5a1 1 0 0 1 0 1A5 5 0 0 1 8 13a5 5 0 0 1-4.33-2.5A1 1 0 0 1 4.535 9h6.93a1 1 0 0 1 .866.5M7 6.5c0 .828-.448 0-1 0s-1 .828-1 0S5.448 5 6 5s1 .672 1 1.5m4 0c0 .828-.448 0-1 0s-1 .828-1 0S9.448 5 10 5s1 .672 1 1.5"/>
-              </svg> <br>
-        </p>
+    </head>
 
-        <div class="user-informations">
-            <div class="tabs">
-                <input type="radio" class="tabs__radio" name="tabbies" id="tab1" checked>
-                <label for="tab1" class="tabs__label"> Reviews </label>
-                    <div id="Review" class="content-tabs">
-                        <div class="review">
-                        <h2> This song is fire!</h2>
-                        <img id="star-fill" src="../svg/userpage/star-fill.svg">
-                        <img id="star-fill" src="../svg/userpage/star-fill.svg">
-                        <img id="star-fill" src="../svg/userpage/star-fill.svg">
-                        <img id="star-fill" src="../svg/userpage/star-fill.svg">
-                        <img id="star-fill" src="../svg/userpage/star-fill.svg">
-                        <h3> Song 1 by Author 1</h3>
-                        <p> I love this song!!!!!</p>
-                        </div>
+    <body>
 
-                        <div class="review">
-                        <h2> This song is pretty terrible</h2>
-                        <img id="star-fill" src="../svg/userpage/star-fill.svg">
-                        <img id="star-fill" src="../svg/userpage/star-hallow.svg">
-                        <img id="star-fill" src="../svg/userpage/star-hallow.svg">
-                        <img id="star-fill" src="../svg/userpage/star-hallow.svg">
-                        <img id="star-fill" src="../svg/userpage/star-hallow.svg">
-                        <h3> Song 2 by Author 2</h3>
-                        <p> I hate this lol</p>
-                        </div>
-                    </div>
-                
-                <input type="radio" class="tabs__radio" name="tabbies" id="tab2">
-                <label for="tab2" class="tabs__label"> Favorites </label>
-                    <div id="Favorites" class="content-tabs">
-                        <p>This User Has No Favorites Yet!</p>
-                    </div>
+        <div class="content">
+            <div class="marquee"> 
+                <div class="username"> Now Viewing: <span id="name"> CabbageMan</span>'s Profile!</div>
             </div>
             
+            <div class="flex-box">
+                <div class="picture-box">
+                    <img src="../img/userpage/sample-image.png" id="picture">
+                    <div class="overlay">
+                        <div class="text">I FEEL SO SIGMA!</div>
+                    </div>
+                </div>
+                
+                <div class="speech-bubble">
+                    <div class="text-bio">
+                    <p> "Hi my name is CabbageMan and I like cabbages."
+                    </p>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <img id="star" src="../svg/userpage/star.svg">
+            <p class="status-text">
+                Status: <span id="Online-user">Online</span> <br>
+                Account Created: 30/01/2025 <br>
+                Country of Origin: <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 30 30"><path d="M1,24c0,2.209,1.791,4,4,4H27c2.209,0,4-1.791,4-4V15H1v9Z" fill="#be2a2c"></path><path d="M27,4H5c-2.209,0-4,1.791-4,4v8H31V8c0-2.209-1.791-4-4-4Z" fill="#1334a3"></path><path d="M2.316,26.947l13.684-10.947L2.316,5.053c-.803,.732-1.316,1.776-1.316,2.947V24c0,1.172,.513,2.216,1.316,2.947Z" fill="#fff"></path><path d="M27,4H5c-2.209,0-4,1.791-4,4V24c0,2.209,1.791,4,4,4H27c2.209,0,4-1.791,4-4V8c0-2.209-1.791-4-4-4Zm3,20c0,1.654-1.346,3-3,3H5c-1.654,0-3-1.346-3-3V8c0-1.654,1.346-3,3-3H27c1.654,0,3,1.346,3,3V24Z" opacity=".15"></path><path d="M27,5H5c-1.657,0-3,1.343-3,3v1c0-1.657,1.343-3,3-3H27c1.657,0,3,1.343,3,3v-1c0-1.657-1.343-3-3-3Z" fill="#fff" opacity=".2"></path><path d="M10.569,15.303l-1.561,.31c-.051-.26-.154-.502-.296-.715l1.323-.884-.011-.975-.975-.011-.884,1.323c-.213-.143-.455-.245-.715-.296l.31-1.561-.697-.681-.697,.681,.31,1.561c-.26,.051-.502,.154-.715,.296l-.884-1.323-.975,.011-.011,.975,1.323,.884c-.143,.213-.245,.455-.296,.715l-1.561-.31-.681,.697,.681,.697,1.561-.31c.051,.26,.154,.502,.296,.715l-1.323,.884,.011,.975,.975,.011,.884-1.323c.213,.143,.455,.245,.715,.296l-.31,1.561,.697,.681,.697-.681-.31-1.561c.26-.051,.502-.154,.715-.296l.884,1.323,.975-.011,.011-.975-1.323-.884c.143-.213,
+                                    .245-.455,.296-.715l1.561,.31,.681-.697-.681-.697Z" fill="#f4d24b"></path></svg><br>
+                Feeling: <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-laughing" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                    <path d="M12.331 9.5a1 1 0 0 1 0 1A5 5 0 0 1 8 13a5 5 0 0 1-4.33-2.5A1 1 0 0 1 4.535 9h6.93a1 1 0 0 1 .866.5M7 6.5c0 .828-.448 0-1 0s-1 .828-1 0S5.448 5 6 5s1 .672 1 1.5m4 0c0 .828-.448 0-1 0s-1 .828-1 0S9.448 5 10 5s1 .672 1 1.5"/>
+                </svg> <br>
+            </p>
+
+            <div class="user-informations">
+                <div class="tabs">
+                    <input type="radio" class="tabs__radio" name="tabbies" id="tab1" checked>
+                    <label for="tab1" class="tabs__label"> Reviews </label>
+                        <div class="content-tabs">
+                            <div class="review">
+                            <h2> This song is fire!</h2>
+                            <img id="star-fill" src="../svg/userpage/star-fill.svg">
+                            <img id="star-fill" src="../svg/userpage/star-fill.svg">
+                            <img id="star-fill" src="../svg/userpage/star-fill.svg">
+                            <img id="star-fill" src="../svg/userpage/star-fill.svg">
+                            <img id="star-fill" src="../svg/userpage/star-fill.svg">
+                            <h3> Song 1 by Author 1</h3>
+                            <p> I love this song!!!!!</p>
+                            </div>
+                            <div class="review">
+                            <h2> This song is pretty terrible</h2>
+                            <img id="star-fill" src="../svg/userpage/star-fill.svg">
+                            <img id="star-fill" src="../svg/userpage/star-hallow.svg">
+                            <img id="star-fill" src="../svg/userpage/star-hallow.svg">
+                            <img id="star-fill" src="../svg/userpage/star-hallow.svg">
+                            <img id="star-fill" src="../svg/userpage/star-hallow.svg">
+                            <h3> Song 2 by Author 2</h3>
+                            <p> I hate this lol</p>
+                            </div>
+                        </div>
+                    
+                    <input type="radio" class="tabs__radio" name="tabbies" id="tab2">
+                    <label for="tab2" class="tabs__label"> Favorites </label>
+                        <div class="content-tabs">
+                            <div id="boxes-of-pictures">
+                                <div class="album-box">
+                                    <img src="../img/userpage/images.jpeg" class="album-cover">
+                                    <div class="overlay-album">
+                                        <div class="text-album"> <h4>SONG</h4> by Hatsune Miku</div>
+                                    </div>
+                                </div>
+
+                                <div class="album-box">
+                                    <img src="../img/userpage/images (1).jpeg" class="album-cover">
+                                    <div class="overlay-album">
+                                        <div class="text-album"> <h4>SONG</h4> by Hatsune Miku</div>
+                                    </div>
+                                </div>
+
+                                <div class="album-box">
+                                    <img src="../img/userpage/images (2).jpeg" class="album-cover">
+                                    <div class="overlay-album">
+                                        <div class="text-album"> <h4>SONG</h4> by Hatsune Miku</div>
+                                    </div>
+                                </div>
+
+                                <div class="album-box">
+                                    <img src="../img/userpage/images (2).jpeg" class="album-cover">
+                                    <div class="overlay-album">
+                                        <div class="text-album"> <h4>SONG</h4> by Hatsune Miku</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                    <input type="radio" class="tabs__radio" name="tabbies" id="tab3">
+                    <label for="tab3" class="tabs__label"> Following </label> 
+                        <div class="content-tabs">
+                            <div id="boxes-of-pictures">
+                                <div class="album-box">
+                                    <img src="../img/review/user3.jpg" class="album-cover">
+                                    <div class="overlay-album">
+                                        <div class="text-album"> <h4> Tatsuya Suou </h4> Status: <span id="Online">Online</span></div>
+                                    </div>
+                                </div>
+                                <div class="album-box">
+                                    <img src="../img/review/user4.jpg" class="album-cover">
+                                    <div class="overlay-album">
+                                        <div class="text-album"> <h4> Kotone Shiomi </h4> Status: <span id="Offline">Offline</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>  
+                        
+                    <input type="radio" class="tabs__radio" name="tabbies" id="tab4">
+                    <label for="tab4" class="tabs__label"> Followers </label> 
+                        <div class="content-tabs">
+                            <div id="boxes-of-pictures">
+                                <div class="album-box">
+                                    <img src="../img/review/user2.jpg" class="album-cover">
+                                    <div class="overlay-album">
+                                        <div class="text-album"> <h4> Yu Narukami </h4> Status: <span id="Online">Online</span></div>
+                                    </div>
+                                </div>
+
+                                <div class="album-box">
+                                    <img src="../img/review/user5.jpg" class="album-cover">
+                                    <div class="overlay-album">
+                                        <div class="text-album"> <h4> Makoto Yuki </h4> Status: <span id="Offline">Offline</span></div>
+                                    </div>
+                                </div>
+
+                                <div class="album-box">
+                                    <img src="../img/review/user1.jpg" class="album-cover">
+                                    <div class="overlay-album">
+                                        <div class="text-album"> <h4> Ren Amamiya </h4> Status: <span id="Online">Online</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>   
+                </div>               
+            </div>
         </div>
-    </div>
-</body>
+    </body>
 </html>

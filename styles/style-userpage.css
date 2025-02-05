@@ -1,7 +1,22 @@
-body  {
-    background-color: var(--cyan);
-  }
+body{
+  background-color: var(--cyan);
+}
 
+.on-record {
+    color: #ffffff;
+    text-align: left;
+    font-family: var(--space);
+    font-size: 30px;
+    line-height: 27px;
+    letter-spacing: -0.08em;
+    font-weight: 700;
+    position: absolute;
+    left: 7%;
+    top: 10px;
+    width: 97px;
+    height: 53px;
+    text-decoration: none; /* Remove underline from text link */
+}
 
 #header-box{
   background-color: var(--darkBlue);
@@ -18,12 +33,33 @@ p.head-text{
     margin: 20px;
     text-align:right;
     font-size: 30px;
-    color: var( --white);
     font-family:var(--space);
     font-weight: bold;
+    word-spacing: 15px;
 }
 
-span:hover{
+a{
+  color: var( --white);
+}
+
+a:link {
+  text-decoration: none;
+  
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a:active {
+  text-decoration: none;
+}
+
+a:hover{
     color: var(--yellow);
     transition: .5s ease;
     cursor: pointer;
@@ -40,6 +76,7 @@ span:hover{
   animation: marquee 10s linear infinite;
   background-color: var(--royalBlue);
   overflow: hidden;
+  display: flex;
 }
 
 .username{
@@ -48,10 +85,11 @@ span:hover{
   color: var(--white);
   font-family: var(--space);
   font-size: 20px;
-  animation: scroll-left 15s linear infinite;
+  animation: scroll-left 10s linear infinite;
   transform: translateX(100%);
   margin-top: 10px;
-  white-space:pre;
+  display: inline-block; 
+  white-space: nowrap; 
 }
 
 #name{
@@ -61,7 +99,7 @@ span:hover{
 
 @keyframes scroll-left {
   0% {
-      transform: translateX(100%);
+      transform: translateX(500%);
   }
 
   100% {
@@ -116,7 +154,8 @@ span:hover{
 .text-bio{
   color: var( --darkBlue);
   font-family:var(--space);
-  font-size: 20px;
+  font-size: 25px;
+  font-weight: bold;
 }
 
 .speech-bubble {
@@ -178,6 +217,7 @@ span:hover{
   display: flex;
   flex-wrap: wrap;
   width: 1100px;
+  border-radius: 20px;
 }
 
 .tabs__label{
@@ -210,9 +250,12 @@ input[type=radio] {
   background-color: var(--darkBlue);
   float: left;
   padding: 14px 16px;
+  margin-bottom: -20px;
   font-size: 17px;
   width: 100%;
   display: none;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
 }
 
 .tabs__radio:checked {
@@ -225,13 +268,77 @@ input[type=radio] {
   line-height: 10px;
   background-color: var(--white);
   padding-left: 20px;
+  margin-top:10px;
   padding-right: 20px;
   margin-bottom: 20px;
   border-style: solid;
   border-color: var(--darkBlue);
 }
 
-#Favorites{
+#boxes-of-pictures{
   font-family:var(--space);
   color: var(--white);
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-left: 15px;
+  margin-bottom: 20px;
+  display:flex;
+}
+
+.album-cover{
+  width: 200px;
+  height: 200px;
+  margin: 20px;
+  border-style: solid;
+  border-radius: 10px;
+  border-color: var(--darkBlue);
+  border-width: 3px;
+  outline-style: solid;
+  outline-width: 6px;
+  outline-color: var(--white);
+}
+
+.album-box{
+  margin-left: 10px;
+  margin-bottom: -10px;
+  position: relative;
+}
+
+.overlay-album{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin:21px;
+  border-radius: 10px;
+  height: 202px;
+  width: 202px;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: var(--darkBlue);
+}
+
+.album-box:hover .overlay-album {
+  opacity: 0.9;
+}
+
+.text-album{
+  font-family: var(--space);
+  color: var(--white);
+  text-align: center;
+  margin-top:70px;
+  line-height: 5px;
+}
+
+#Online{
+  color: rgb(134, 246, 134);
+}
+
+#Online-user{
+  color: rgb(26, 109, 26);
+}
+
+#Offline{
+  color: rgb(154, 154, 154);
 }

@@ -132,10 +132,10 @@ html, body {
 }
 
 .genre-content a {
-    color: black;
-    padding: 13px 8px;
-    text-decoration: none;
-    display: block;
+  color: black;
+  padding: 13px 8px;
+  text-decoration: none;
+  display: block;
 }
 
 .genre-content a:hover {
@@ -173,7 +173,9 @@ html, body {
     position: relative;
 }
 
-.charts:hover {background-color: #6aa300;}
+.charts:hover {
+  background-color: #6aa300;
+}
 
 .charts-text {
     color: #ffffff;
