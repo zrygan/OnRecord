@@ -6,13 +6,12 @@ body {
 
 /*  Navigation Bar  */
 .nav-bar {
-  background-color: var(--darkBlue);
+  background-color: var(--white);
   width: 100%;
-  height: 75px;
+  height: 10vh;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
   z-index: 100;
   position: fixed;
   top: 0;
@@ -22,7 +21,7 @@ body {
 /* Centering nav-bar-elements and placing it on top */
 .nav-bar-elements {
   width: 70%;
-  height: 75px;
+  height: 10vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -39,12 +38,12 @@ body {
   text-align: left;
   font-family: "Space Grotesk";
   font-size: 2rem;
-  line-height: 27px;
+  line-height: 1.6875rem; /* Converted 27px to rem */
   letter-spacing: -0.08em;
   font-weight: 700;
   position: relative;
   text-decoration: none; /* Remove underline from text link */
-  margin-right: 20px; /* Add some space between the logo and the search bar */
+  margin-right: 1.25rem; /* Converted 20px to rem */
 }
 
 .on-record span:hover {
@@ -73,23 +72,22 @@ body {
 /*  Search Bar  */
 .search-bar {
   background: #ffffff;
-  border-radius: 10px;
+  border-radius: 0.625rem; /* Converted 10px to rem */
   width: 50%; /* Make the search bar responsive */
-  height: 53px;
+  height: 7.5vh;
   display: flex;
   align-items: center;
   position: relative;
   z-index: 1;
   overflow: hidden; /* Ensure elements do not overflow */
-  margin-right: 20px;
+  margin-right: 1vw;
+  min-width: 200px; /* Add min-width */
+  min-height: 50px; /* Add min-height */
 }
 
 .search-button {
-  border-radius: 10px;
-  width: 77px;
-  height: 60px; /* Match the height of the search bar */
+  border-radius: 0.625rem; /* Converted 10px to rem */
   position: relative;
-  top: 5px; /* Align to the top of the search bar */
   margin-left: auto;
   z-index: 2;
 }
@@ -97,14 +95,12 @@ body {
 .text-box {
   background: #ffffff;
   width: 95%;
-  height: 37px;
-  padding: 3px;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-family: "Space Grotesk";
   border: none; /* Ensure no border is applied */
   outline: none; /* Remove the default focus outline */
   position: relative;
-  left: 0px;
+  left: 0;
   z-index: 1;
 }
 
@@ -113,32 +109,32 @@ body {
   color: #a7a7a7;
   text-align: left;
   font-family: "Space Grotesk";
-  font-size: 20px;
+  font-size: 1.15rem;
   font-weight: 400;
   border: none;
   background: none;
   position: relative;
-  right: 30px;
-  top: 12px;
+  right: 1.75vw;
+  top: 1.65vh;
   z-index: 3;
-  margin-right: 20px;
+  margin-right: 1.75vw;
 }
 
 .genre-svg {
-  width: 50px;
-  height: 12px;
   position: relative;
-  bottom: 8px;
+  bottom: 1.15vh;
   z-index: 3;
 }
 
 .genre-button {
-  width: 80px;
-  height: 53px;
+  width: 6vw;
+  height: 7.5vh;
   display: inline-block;
   position: relative;
   z-index: 3; /* Ensure this is on top */
-  left: 20px;
+  left: 1.65vw;
+  min-width: 50px; /* Add min-width */
+  min-height: 50px; /* Add min-height */
 }
 
 .genre-content {
@@ -146,18 +142,16 @@ body {
   font-family: "Space Grotesk";
   position: absolute;
   background-color: #f1f1f1;
-  min-width: 80px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.2); /* Converted 8px and 16px to rem */
   z-index: 4; /* Ensure this is on top of .genre-button */
-  top: 50px;
-  border-radius: 3px;
+  border-radius: 1rem;
   text-align: left;
-  right: 15px;
+  right: 1.5vw;
 }
 
 .genre-content a {
   color: black;
-  padding: 13px 8px;
+  padding: 2vh 0.5vw;
   text-decoration: none;
   display: block;
 }
@@ -177,18 +171,23 @@ body {
   z-index: 3;
   width: 5vw;
   height: 5vh; /* Adjust height to match .charts */
-  border-radius: 15px;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); /* Fix typo: argba to rgba */
-  margin-right: 20px;
+  border-radius: 0.9375rem; /* Converted 15px to rem */
+  box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.25); /* Converted 4px to rem */
+  margin-right: 1vw; /* Changed to relative value */
+  min-width: 50px; /* Add min-width */
+  min-height: 50px; /* Add min-height */
 }
 
 .charts {
   font-family: "Space Grotesk";
-  background-color: #7fbe00;
-  border-radius: 15px;
+  background-color: var(--chart-bg-color, #7fbe00);
+  border-radius: var(
+    --chart-border-radius,
+    0.9375rem
+  ); /* Converted 15px to rem */
   width: 100%; /* Make it fill the parent .charts-button */
   height: 100%; /* Make it fill the parent .charts-button */
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); /* Fix typo: argba to rgba */
+  box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.25); /* Converted 4px to rem */
   border: none;
   text-decoration: none; /* Remove underline from text link */
   display: flex;
@@ -205,7 +204,7 @@ body {
   color: #ffffff;
   text-align: center;
   font-family: "Space Grotesk";
-  font-size: 20px;
+  font-size: 1.2rem;
   font-weight: 400;
   text-decoration: none; /* Remove underline from text link */
   position: relative;
@@ -213,17 +212,23 @@ body {
 
 /* User Button */
 .user-button {
-  width: 55px;
-  height: 55px;
+  width: 3vw;
+  aspect-ratio: 1;
   position: relative;
+  min-width: 50px; /* Add min-width */
+  min-height: 50px; /* Add min-height */
 }
 
 .user-pic {
-  border-radius: 15px;
-  width: 55px;
-  height: 55px;
+  border-radius: var(
+    --user-pic-border-radius,
+    0.9375rem
+  ); /* Converted 15px to rem */
+  width: var(--user-pic-width, 3.4375rem); /* Converted 55px to rem */
+  height: var(--user-pic-height, 3.4375rem); /* Converted 55px to rem */
+  aspect-ratio: 1;
   transform-origin: 0 0;
   transform: rotate(-1.062deg) scale(1, 1);
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.25); /* Converted 4px to rem */
   position: relative;
 }
