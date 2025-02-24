@@ -6,7 +6,7 @@ body {
 
 /*  Navigation Bar  */
 .nav-bar {
-  background-color: var(--white);
+  background-color: var(--darkBlue);
   width: 100%;
   height: 10vh;
   display: flex;
@@ -34,7 +34,6 @@ body {
 
 /*  Top Logo  */
 .on-record {
-  color: #ffffff;
   text-align: left;
   font-family: "Space Grotesk";
   font-size: 2rem;
