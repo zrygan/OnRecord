@@ -25,88 +25,70 @@ var register_modal = document.getElementById("register-modal");
 var register_button = document.getElementById("register-button");
 var register_close = document.getElementById("close-register-modal");
 
-register_button.onclick = function() {
-    register_modal.style.display = "block";
-}
+register_button.onclick = function () {
+  register_modal.style.display = "block";
+};
 
-register_close.onclick = function() {
-    register_modal.style.display = "none";
-}
+register_close.onclick = function () {
+  register_modal.style.display = "none";
+};
 
 /* closes modal when clicked outside of bounds */
-window.onclick = function(event) {
-    if (event.target == register_modal) {
-        register_modal.style.display = "none";
-    }
-}
+window.onclick = function (event) {
+  if (event.target == register_modal) {
+    register_modal.style.display = "none";
+  }
+};
 
 /* form for registering a new user */
 const register_form = document.getElementById("register-form");
-register_form.addEventListener('submit', function(event) {
-    event.preventDefault();
+register_form.addEventListener("submit", function (event) {
+  event.preventDefault();
 
-    const user_data = new FormData(register_form);
-    let user_object = {};
-    user_data.forEach((value, key) => {
-        user_object[key] = value;
-    });
+  const user_data = new FormData(register_form);
+  let user_object = {};
+  user_data.forEach((value, key) => {
+    user_object[key] = value;
+  });
 
-    // birthday validation
-    // (user must be at least 12 years old)
-    const today = new Date();
-    const birthDate = new Date(user_object.birthday);
-    let age = today.getFullYear() - birthDate.getFullYear();
-    const monthDiff = today.getMonth() - birthDate.getMonth();
-    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
-    }
-    if (age < 12) {
-        alert("You must be at least 12 years old to register.");
-        return;
-    }
+  // birthday validation
+  // (user must be at least 12 years old)
+  const today = new Date();
+  const birthDate = new Date(user_object.birthday);
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const monthDiff = today.getMonth() - birthDate.getMonth();
+  if (
+    monthDiff < 0 ||
+    (monthDiff === 0 && today.getDate() < birthDate.getDate())
+  ) {
+    age--;
+  }
+  if (age < 12) {
+    alert("You must be at least 12 years old to register.");
+    return;
+  }
 
-    // splitting fullname -> firstname/s + surname
-    const nameParts = user_object.fullname.trim().split(/\s+/);
-    const surname = nameParts.pop();
-    const firstname = nameParts.join(' ');
+  // splitting fullname -> firstname/s + surname
+  const nameParts = user_object.fullname.trim().split(/\s+/);
+  const surname = nameParts.pop();
+  const firstname = nameParts.join(" ");
 
-    // store the user data in local storage
-    const user_info = {
-        surname: surname,
-        firstname: firstname,
-        username: user_object.username,
-        email: user_object.email,
-        password: user_object.password,
-        birthday: user_object.birthday
-    };
-    localStorage.setItem('user_data', JSON.stringify(user_info));
+  // store the user data in local storage
+  const user_info = {
+    surname: surname,
+    firstname: firstname,
+    username: user_object.username,
+    email: user_object.email,
+    password: user_object.password,
+    birthday: user_object.birthday,
+  };
+  localStorage.setItem("user_data", JSON.stringify(user_info));
 
-    console.log('User data stored:', user_info);
+  console.log("User data stored:", user_info);
 
-    register_modal.style.display = "none";
+  register_modal.style.display = "none";
 
-    window.location.replace("home.html");
-
-});
-
-/* form for logging in */
-const login_form = document.getElementById("login-form");
-login_form.addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    const user_data = new FormData(login_form);
-    let user_object = {};
-    user_data.forEach((value, key) => {
-        user_object[key] = value;
-    });
-
-    // retrieve the user data from local storage
-    // TODO when the backend is here
-
-    login_modal.style.display = "none"; 
-
-    //
-    window.location.replace("home.html");
+  window.location.replace("home.html");
 });
 
 // LOGIN MODAL
@@ -114,32 +96,88 @@ var login_modal = document.getElementById("login-modal");
 var login_button = document.getElementById("login-button");
 var login_close = document.getElementById("close-login-modal");
 
-login_button.onclick = function() {
-    login_modal.style.display = "block";
-}
+login_button.onclick = function () {
+  login_modal.style.display = "block";
+};
 
-login_close.onclick = function() {
+login_close.onclick = function () {
+  login_modal.style.display = "none";
+};
+
+window.onclick = function (event) {
+  if (event.target == login_modal) {
     login_modal.style.display = "none";
-}
+  }
+};
 
-window.onclick = function(event) {
-    if (event.target == login_modal) {
-        login_modal.style.display = "none";
+const err = document.getElementById("error");
+const login_form = document.getElementById("login-form");
+
+login_form.addEventListener("submit", async function (event) {
+  event.preventDefault();
+
+  const user_data = new FormData(login_form);
+  let user_object = {};
+  user_data.forEach((value, key) => {
+    user_object[key] = value;
+  });
+
+  const username = user_object.username;
+  const password = user_object.password;
+
+  if (password.length < 6) {
+    err.textContent = "Error: password must be at least 6 characters";
+    document.getElementById("password").value = "";
+    return;
+  }
+
+  const passwordRegex = /^[A-Za-z0-9._$%^*!]+$/;
+  if (!passwordRegex.test(password)) {
+    err.textContent =
+      "Error: password can contain only letters, numbers, and the symbols: . _ $ % ^ * !";
+    document.getElementById("password").value = "";
+    return;
+  }
+
+  try {
+    const response = await fetch("/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password }),
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      console.log("Login successful:", data);
+      window.location.replace("home.html");
+    } else {
+      err.textContent = data.error;
+      document.getElementById("password").value = "";
+      console.error("Login error:", data.error);
     }
-}
+  } catch (error) {
+    console.error("Error connecting to login endpoint:", error);
+    err.textContent = "Login error, please try again.";
+  }
+});
 
+// HOVERBOX
 function hoverbox_on() {
-    document.getElementById("hoverbox").innerHTML = `
+  document.getElementById("hoverbox").innerHTML = `
         Click to learn more about the <br>
         Developers 🤖 of OnRecord!
     `;
 }
 
 function hoverbox_off() {
-    document.getElementById("hoverbox").innerHTML = `
+  document.getElementById("hoverbox").innerHTML = `
         People on the record: <span>${num_users}</span> <br />
         Artists on the record: <span>${num_artists}</span> <br />
         Tracks on the record: <span>${num_tracks}</span><br />
         Albums on the record: <span>${num_albums}</span><br />
     `;
 }
+
+const hoverbox = document.getElementById("hoverbox");
+hoverbox.addEventListener("mouseover", hoverbox_on);
+hoverbox.addEventListener("mouseout", hoverbox_off);

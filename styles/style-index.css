@@ -316,3 +316,13 @@ body {
   font-style: italic;
   background-color: var(--cyan);
 }
+
+.error-box {
+  color: red;
+  max-height: 30%;
+  max-width: 80%;
+  min-height: 30%;
+  min-width: 80%;
+  height: 30%;
+  width: 80%;
+}

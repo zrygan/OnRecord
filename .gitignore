@@ -1,6 +1,7 @@
 # Feel free to add test files here in your own device if you're pushing from Git CLI or an IDE
 pages/11testfile.html
 
+db/
 
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
