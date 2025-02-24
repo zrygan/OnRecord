@@ -46,6 +46,20 @@ const read_user_all = async () => {
     }
 };
 
+
+const read_user = async (id, username) => {
+    try {
+        const user = await User.findOne({ $or: [{ _id: id }, { username: username }] });
+        if (!user) {
+            console.log('User not found');
+        } else {
+            console.log('User found:', user);
+        }
+    } catch (error) {
+        console.error('Error reading user:', error.message);
+    }
+};
+
 const update_user = async (id, username, email) => {
     try {
         const updatedUser = await User.findByIdAndUpdate(id, {
