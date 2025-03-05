@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -46,15 +45,23 @@
 
     <div class="metrics space-grotesk" id="hoverbox">
       <!-- Metrics -->
-      People on the record: <span id="num_users"></span> <br />
-      Artists on the record: <span id="num_artists"></span> <br />
-      Tracks on the record: <span id="num_tracks"></span><br />
-      Albums on the record: <span id="num_albums"></span><br />
+      People on the record:
+      <span id="num_users"></span>
+      <br />
+      Artists on the record:
+      <span id="num_artists"></span>
+      <br />
+      Tracks on the record:
+      <span id="num_tracks"></span><br />
+      Albums on the record:
+      <span id="num_albums"></span><br />
     </div>
 
     <div class="subtext space-grotesk">
       <p>
-        Join the people <span class="emph">On</span> the
+        Join the people
+        <span class="emph">On</span>
+        the
         <span class="emph">Record</span>
       </p>
       <p>Discover the music people are listening to</p>
@@ -99,16 +106,14 @@
       </span>
       <div class="register-modal-content space-grotesk">
         <h2>So... you <i>want</i> to be on the record eh?</h2>
-        <form id="register-form">
+        <form action="/register" id="register-form">
           <h3>
             Anyways, *cough* *cough* Hello there young traveler! Let's get you
             On the Record.
           </h3>
 
-          <label for="fullname"
-            >Pray tell young one, what's your full name? Mine's Glorious Maximus
-            Onnus Recordus!</label
-          ><br />
+          <label for="fullname">Pray tell young one, what's your full name?
+            Mine's Glorious Maximus Onnus Recordus!</label><br />
           <input
             type="text"
             id="fullname"
@@ -117,10 +122,8 @@
             placeholder="enter your full name here "
           /><br />
 
-          <label for="username"
-            >Aha! What a boring name! Please tell me I can call you something
-            else:</label
-          >
+          <label for="username">Aha! What a boring name! Please tell me I can
+            call you something else:</label>
           <br />
           <input
             type="text"
@@ -130,9 +133,8 @@
             placeholder="enter your username here"
           /><br />
 
-          <label for="email"
-            >Okay then, to where do I send my messenger pigeon too?:</label
-          >
+          <label for="email">Okay then, to where do I send my messenger pigeon
+            too?:</label>
           <br />
           <input
             type="email"
@@ -142,10 +144,10 @@
             placeholder="enter your email here"
           /><br />
 
-          <label for="password"
-            >Okay then, choose a secret word or phrase that only
-            <i>the two of us</i> should know:</label
-          >
+          <label for="password">Okay then, choose a secret word or phrase that
+            only
+            <i>the two of us</i>
+            should know:</label>
           <br />
           <input
             type="password"
@@ -155,12 +157,13 @@
             placeholder="enter your password here"
           /><br />
 
-          <label for="birthday"
-            >My, my, I almost forgot! When is this young man's birthday?</label
-          ><br />
+          <label for="birthday">My, my, I almost forgot! When is this young
+            man's birthday?</label><br />
           <input type="date" id="birthday" name="birthday" required /><br />
-
           <button type="submit">Put me on the record!</button>
+          <div class="error-box">
+            <p id="error_register">&#8203;</p>
+          </div>
         </form>
       </div>
     </div>
@@ -170,9 +173,10 @@
         &times;
       </span>
       <div class="login-modal-content space-grotesk">
-        <form id="login-form">
+        <form action="/login" id="login-form">
           <h3>
-            Why hello there young traveller! <br />
+            Why hello there young traveller!
+            <br />
             Oh! I kind of recognize you?
           </h3>
           <label for="username">
@@ -203,7 +207,7 @@
           <button type="submit">Login</button>
         </form>
         <div class="error-box">
-          <p id="error">&#8203;</p>
+          <p id="error_login">&#8203;</p>
         </div>
         <br />
       </div>

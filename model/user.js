@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
 mongoose
-  .connect("mongodb://localhost:27017/OnRecord")
+  .connect("mongodb://localhost:27017/onrecord")
   .then(() => console.log("Connected to MongoDB"))
-  .catch((err) => console.error("Could not connect to MongoDB", err));
+  .catch(() => console.error("Could not connect to MongoDB"));
 
 const schema_user = new mongoose.Schema({
   surname: { type: String, required: true },
@@ -18,10 +18,12 @@ const schema_user = new mongoose.Schema({
   password: { type: String, required: true, minlength: 6 },
   birthday: { type: Date, required: true },
   date_created: { type: Date, default: Date.now },
-  type: { type: String, default: "normal", enum: ["normal", "admin"] },
+  type: {
+    type: String,
+    default: "normal",
+    enum: ["normal", "admin", "artist"],
+  },
 });
-
-const User = mongoose.model("User", schema_user);
 
 // CRUD Functions
 const create_user = async (
@@ -40,7 +42,6 @@ const create_user = async (
       username,
       password,
       birthday,
-      type: "normal",
     });
 
     await new_user.save();
@@ -121,11 +122,6 @@ const delete_user = async (id) => {
 };
 
 // Export the functions
-module.exports = {
-  create_user,
-  read_user_all,
-  read_user,
-  update_user,
-  delete_user,
-  User,
-};
+const collection = mongoose.model("user", schema_user);
+
+module.exports = collection;

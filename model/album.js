@@ -1,103 +1,112 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-mongoose.connect('mongodb://localhost:27017/OnRecord')
-    .then(() => console.log('Connected to MongoDB'))
-    .catch(err => console.error('Could not connect to MongoDB', err));
-
-const schema_music = new mongoose.Schema({
-    name: { type: String, required: true },
-    artists: { type: [String], required: true },
-    album: { type: String, required: true },
-    release_date: { type: Date, required: true },
-    genres: { type: [String], required: true },
-    description: { type: String, required: true },
-    rating: { type: String, required: true},
-});
+mongoose
+  .connect("mongodb://localhost:27017/onrecord")
+  .then(() => console.log("Connected to MongoDB"))
+  .catch(() => console.error("Could not connect to MongoDB"));
 
 const schema_album = new mongoose.Schema({
-    name: { type: String, required: true },
-    artists: { type: [String], required: true },
-    release_date: { type: Date, required: true },
-    genres: { type: [String], required: true },
-    description: { type: String, required: true },
+  name: { type: String, required: true },
+  artists: { type: [String], required: true },
+  release_date: { type: Date, required: true },
+  genres: { type: [String], required: true },
+  description: { type: String, required: true },
 });
-
-const Music = mongoose.model('User', schema_music);
 
 // CRUD Functions
 
-const create_music = async (name, artists, album, release_date, genres, description, rating) => {
-    try {
-        const new_music = new Music({
-            name,
-            artists,
-            album,
-            release_date,
-            genres,
-            description,
-            rating
-        });
+const create_album = async (
+  name,
+  artists,
+  release_date,
+  genres,
+  description
+) => {
+  try {
+    const new_album = new Album({
+      name,
+      artists,
+      release_date,
+      genres,
+      description,
+    });
 
-        await new_music.save();
-        console.log('Music created:', new_music);
-    } catch (error) {
-        console.error('Error creating music:', error.message);
+    await new_album.save();
+    console.log("Album created:", new_album);
+  } catch (error) {
+    console.error("Error creating album:", error.message);
+  }
+};
+
+const read_album_all = async () => {
+  try {
+    const albums = await Album.find();
+    console.log("All albums:", albums);
+  } catch (error) {
+    console.error("Error reading albums:", error.message);
+  }
+};
+
+const read_album = async (id, name, artists) => {
+  try {
+    const album = await Album.findOne({
+      $or: [{ _id: id }, { name: name }, { artists: artists }],
+    });
+    if (!album) {
+      console.log("Album not found");
+    } else {
+      console.log("Album found:", album);
     }
-}
+  } catch (error) {
+    console.error("Error reading album:", error.message);
+  }
+};
 
-const read_music_all = async () => {
-    try {
-        const music = await Music.find();
-        console.log('All music:', music);
-    } catch (error) {
-        console.error('Error reading music:', error.message);
+const update_album = async (
+  id,
+  name,
+  artists,
+  release_date,
+  genres,
+  description
+) => {
+  try {
+    const updatedAlbum = await Album.findByIdAndUpdate(
+      id,
+      {
+        name,
+        artists,
+        release_date,
+        genres,
+        description,
+      },
+      { new: true }
+    );
+
+    if (!updatedAlbum) {
+      console.log("Album not found");
+    } else {
+      console.log("Album updated:", updatedAlbum);
     }
-}
+  } catch (error) {
+    console.error("Error updating album:", error.message);
+  }
+};
 
-const read_music = async (id, name, artists) => {
-    try {
-        const music = await Music.findOne({ $or: [{ _id: id }, { name: name }, { artists: artists }] });
-        if (!music) {
-            console.log('Music not found');
-        } else {
-            console.log('Music found:', music);
-        }
-    } catch (error) {
-        console.error('Error reading music:', error.message);
+const delete_album = async (id) => {
+  try {
+    const deletedAlbum = await Album.findByIdAndDelete(id);
+    if (!deletedAlbum) {
+      console.log("Album not found");
+    } else {
+      console.log("Album deleted");
     }
-}
+  } catch (error) {
+    console.error("Error deleting album:", error.message);
+  }
+};
 
-const update_music = async (id, name, artists, album, release_date, genres, description, rating) => {
-    try {
-        const updatedMusic = await Music.findByIdAndUpdate(id, {
-            name,
-            artists,
-            album,
-            release_date,
-            genres,
-            description,
-            rating
-        }, { new: true });
+// Export the functions
+const collection = mongoose.model("album", schema_album);
 
-        if (!updatedMusic) {
-            console.log('Music not found');
-        } else {
-            console.log('Music updated:', updatedMusic);
-        }
-    } catch (error) {
-        console.error('Error updating music:', error.message);
-    }
-}
-
-const delete_music = async (id) => {
-    try {
-        const deletedMusic = await Music.findByIdAndDelete(id);
-        if (!deletedMusic) {
-            console.log('Music not found');
-        } else {
-            console.log('Music deleted');
-        }
-    } catch (error) {
-        console.error('Error deleting music:', error.message);
-    }
-}
+module.exports = collection;

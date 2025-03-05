@@ -2,23 +2,6 @@
 // by Zhean Ganituen (zrygan), January 26, 2025
 // Random numbers for the metrics
 
-// FIXME:   Once the back end is here, change this to the actual
-//          numbers in the database
-let num_users = Math.floor(Math.random() * 1000);
-let num_artists = Math.floor(Math.random() * 1000);
-let num_tracks = Math.floor(Math.random() * 1000);
-let num_albums = Math.floor(Math.random() * 1000);
-
-let span_num_users = document.getElementById("num_users");
-let span_num_artists = document.getElementById("num_artists");
-let span_num_tracks = document.getElementById("num_tracks");
-let span_num_albums = document.getElementById("num_albums");
-
-span_num_users.innerHTML = num_users;
-span_num_artists.innerHTML = num_artists;
-span_num_tracks.innerHTML = num_tracks;
-span_num_albums.innerHTML = num_albums;
-
 // REGISTER MODAL
 // ref: https://www.w3schools.com/howto/howto_css_modals.asp
 var register_modal = document.getElementById("register-modal");
@@ -41,8 +24,9 @@ window.onclick = function (event) {
 };
 
 /* form for registering a new user */
+const err_register = document.getElementById("error_register");
 const register_form = document.getElementById("register-form");
-register_form.addEventListener("submit", function (event) {
+register_form.addEventListener("submit", async function (event) {
   event.preventDefault();
 
   const user_data = new FormData(register_form);
@@ -51,8 +35,54 @@ register_form.addEventListener("submit", function (event) {
     user_object[key] = value;
   });
 
-  // birthday validation
-  // (user must be at least 12 years old)
+  // Check username and email uniqueness
+  try {
+    const response = await fetch("/register/check-availability", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username: user_object.username,
+        email: user_object.email,
+      }),
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      console.log("Username and Email available:", data);
+    } else {
+      console.error(data.error);
+      err_register.textContent =
+        data.error || "Username or Email already taken, please choose another.";
+      return;
+    }
+  } catch (error) {
+    console.error("Error connecting to register endpoint:", error);
+    err_register.textContent = "Error connecting to server. Please try again.";
+    return;
+  }
+
+  // Check if user entered email instead of username
+  if (user_object.username.includes("@")) {
+    err_register.textContent = "Input your username not your email.";
+    document.getElementById("username").focus();
+    return;
+  }
+
+  // Password validation
+  if (user_object.password.length < 6) {
+    err_register.textContent = "Password must be at least 6 characters.";
+    return;
+  }
+
+  const passwordRegex = /^[A-Za-z0-9._$%^*!]+$/;
+  if (!passwordRegex.test(user_object.password)) {
+    err_register.textContent =
+      "Error: password can contain only letters, numbers, and the symbols: . _ $ % ^ * !";
+    document.getElementById("password").value = "";
+    return;
+  }
+
+  // Birthday validation
   const today = new Date();
   const birthDate = new Date(user_object.birthday);
   let age = today.getFullYear() - birthDate.getFullYear();
@@ -64,17 +94,17 @@ register_form.addEventListener("submit", function (event) {
     age--;
   }
   if (age < 12) {
-    alert("You must be at least 12 years old to register.");
+    err_register.textContent = "You must be at least 12 years old to register.";
     return;
   }
 
-  // splitting fullname -> firstname/s + surname
+  // Split fullname -> firstname/s + surname
   const nameParts = user_object.fullname.trim().split(/\s+/);
   const surname = nameParts.pop();
   const firstname = nameParts.join(" ");
 
-  // store the user data in local storage
-  const user_info = {
+  // Prepare data for server
+  const userData = {
     surname: surname,
     firstname: firstname,
     username: user_object.username,
@@ -82,13 +112,26 @@ register_form.addEventListener("submit", function (event) {
     password: user_object.password,
     birthday: user_object.birthday,
   };
-  localStorage.setItem("user_data", JSON.stringify(user_info));
 
-  console.log("User data stored:", user_info);
+  try {
+    const response = await fetch("/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(userData),
+    });
 
-  register_modal.style.display = "none";
-
-  window.location.replace("home.html");
+    const data = await response.json();
+    if (response.ok) {
+      console.log("Registration successful");
+      window.location.href = "/pages/home.html";
+    } else {
+      console.error("Registration failed", data.error);
+      err_register.textContent = data.error || "Registration failed";
+    }
+  } catch (error) {
+    console.error("Error connecting to register endpoint:", error);
+    err_register.textContent = "Error connecting to server. Please try again.";
+  }
 });
 
 // LOGIN MODAL
@@ -110,7 +153,7 @@ window.onclick = function (event) {
   }
 };
 
-const err = document.getElementById("error");
+const err_login = document.getElementById("error_login");
 const login_form = document.getElementById("login-form");
 
 login_form.addEventListener("submit", async function (event) {
@@ -125,15 +168,22 @@ login_form.addEventListener("submit", async function (event) {
   const username = user_object.username;
   const password = user_object.password;
 
+  // Check if user entered email instead of username
+  if (username.includes("@")) {
+    err_login.textContent = "Input your username not your email.";
+    document.getElementById("username").focus();
+    return;
+  }
+
   if (password.length < 6) {
-    err.textContent = "Error: password must be at least 6 characters";
+    err_login.textContent = "Error: password must be at least 6 characters";
     document.getElementById("password").value = "";
     return;
   }
 
   const passwordRegex = /^[A-Za-z0-9._$%^*!]+$/;
   if (!passwordRegex.test(password)) {
-    err.textContent =
+    err_login.textContent =
       "Error: password can contain only letters, numbers, and the symbols: . _ $ % ^ * !";
     document.getElementById("password").value = "";
     return;
@@ -149,19 +199,67 @@ login_form.addEventListener("submit", async function (event) {
     const data = await response.json();
     if (response.ok) {
       console.log("Login successful:", data);
-      window.location.replace("home.html");
+      window.location.href = "/pages/home.html"; // Use absolute path
     } else {
-      err.textContent = data.error;
+      err_login.textContent = data.error || "Login failed";
       document.getElementById("password").value = "";
-      console.error("Login error:", data.error);
     }
   } catch (error) {
     console.error("Error connecting to login endpoint:", error);
-    err.textContent = "Login error, please try again.";
+    err_login.textContent = "Login error, please try again.";
   }
 });
 
-// HOVERBOX
+// HOVERBOX and METRICS
+
+// FIXME:   Once the back end is here, change this to the actual
+//          numbers in the database
+let num_users = 0;
+let num_artists = 0;
+let num_tracks = 0;
+let num_albums = 0;
+
+let span_num_users = document.getElementById("num_users");
+let span_num_artists = document.getElementById("num_artists");
+let span_num_tracks = document.getElementById("num_tracks");
+let span_num_albums = document.getElementById("num_albums");
+
+function updateDisplay() {
+  span_num_users.innerHTML = num_users;
+  span_num_artists.innerHTML = num_artists;
+  span_num_tracks.innerHTML = num_tracks;
+  span_num_albums.innerHTML = num_albums;
+}
+
+async function updateCounts() {
+  try {
+    const response = await fetch("/api/metrics");
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    num_users = data.users;
+    num_artists = data.artists;
+    num_tracks = data.tracks;
+    num_albums = data.albums;
+
+    updateDisplay();
+  } catch (error) {
+    console.error("Error fetching metrics:", error);
+    // Optionally, display an error message to the user
+    // span_num_users.innerHTML = "Error";
+    // span_num_artists.innerHTML = "Error";
+    // span_num_tracks.innerHTML = "Error";
+    // span_num_albums.innerHTML = "Error";
+  }
+}
+
+// Initial fetch
+updateCounts();
+
+// Periodic updates (e.g., every 5 seconds)
+setInterval(updateCounts, 5000);
+
 function hoverbox_on() {
   document.getElementById("hoverbox").innerHTML = `
         Click to learn more about the <br>
