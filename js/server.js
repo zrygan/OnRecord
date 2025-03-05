@@ -48,11 +48,9 @@ app.post("/login", async (req, res) => {
       }
     } else {
       // User doesn't exist
-      res
-        .status(401)
-        .json({
-          error: `The acocunt ${username} doesn't exist, please register first.`,
-        });
+      res.status(401).json({
+        error: `The acocunt ${username} doesn't exist, please register first.`,
+      });
     }
   } catch (error) {
     console.error("Login error:", error);
@@ -76,17 +74,28 @@ app.post("/register", async (req, res) => {
   };
 
   try {
-    const checker = await users.findOne({
-      $or: [{ username: data.username }, { email: data.email }],
-    });
-
-    if (checker) {
-      res.status(400).json({ error: "User already exists" });
-    } else {
-      const newUser = new users(data);
-      await newUser.save();
-      res.status(200).json({ success: true });
+    // Check username uniqueness first
+    const usernameExists = await users.findOne({ username: data.username });
+    if (usernameExists) {
+      return res
+        .status(400)
+        .json({
+          error: `Username ${data.username} is already taken, please choose another.`,
+        });
     }
+
+    // Then check email uniqueness
+    const emailExists = await users.findOne({ email: data.email });
+    if (emailExists) {
+      return res
+        .status(400)
+        .json({ error: `Email ${data.email} is already registered.` });
+    }
+
+    // If both are unique, create the user
+    const newUser = new users(data);
+    await newUser.save();
+    res.status(200).json({ success: true });
   } catch (e) {
     console.error("Registration error:", e);
     res.status(500).json({ error: "Registration failed", e });
