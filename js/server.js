@@ -59,6 +59,38 @@ app.post("/login", async (req, res) => {
 });
 
 // Register endpoint
+// Check username and email availability
+app.post("/register/check-availability", async (req, res) => {
+  const { username, email } = req.body;
+
+  try {
+    const [usernameExists, emailExists] = await Promise.all([
+      users.findOne({ username }),
+      users.findOne({ email }),
+    ]);
+
+    if (usernameExists) {
+      return res.status(400).json({
+        error: `Username ${username} is already taken, please choose another.`,
+      });
+    }
+
+    if (emailExists) {
+      return res.status(400).json({
+        error: `Email ${email} is already registered.`,
+      });
+    }
+
+    res.status(200).json({ success: true });
+  } catch (e) {
+    console.error("Availability check error:", e);
+    res
+      .status(500)
+      .json({ error: "Error checking availability. Please try again." });
+  }
+});
+
+// Register endpoint
 app.post("/register", async (req, res) => {
   const data = {
     surname: req.body.surname,
@@ -74,25 +106,6 @@ app.post("/register", async (req, res) => {
   };
 
   try {
-    // Check username uniqueness first
-    const usernameExists = await users.findOne({ username: data.username });
-    if (usernameExists) {
-      return res
-        .status(400)
-        .json({
-          error: `Username ${data.username} is already taken, please choose another.`,
-        });
-    }
-
-    // Then check email uniqueness
-    const emailExists = await users.findOne({ email: data.email });
-    if (emailExists) {
-      return res
-        .status(400)
-        .json({ error: `Email ${data.email} is already registered.` });
-    }
-
-    // If both are unique, create the user
     const newUser = new users(data);
     await newUser.save();
     res.status(200).json({ success: true });

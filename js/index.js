@@ -41,6 +41,7 @@ window.onclick = function (event) {
 };
 
 /* form for registering a new user */
+const err_register = document.getElementById("error_register");
 const register_form = document.getElementById("register-form");
 register_form.addEventListener("submit", async function (event) {
   event.preventDefault();
@@ -50,6 +51,53 @@ register_form.addEventListener("submit", async function (event) {
   user_data.forEach((value, key) => {
     user_object[key] = value;
   });
+
+  // Check username and email uniqueness
+  try {
+    const response = await fetch("/register/check-availability", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username: user_object.username,
+        email: user_object.email,
+      }),
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      console.log("Username and Email available:", data);
+    } else {
+      console.error(data.error);
+      err_register.textContent =
+        data.error || "Username or Email already taken, please choose another.";
+      return;
+    }
+  } catch (error) {
+    console.error("Error connecting to register endpoint:", error);
+    err_register.textContent = "Error connecting to server. Please try again.";
+    return;
+  }
+
+  // Check if user entered email instead of username
+  if (user_object.username.includes("@")) {
+    err_register.textContent = "Input your username not your email.";
+    document.getElementById("username").focus();
+    return;
+  }
+
+  // Password validation
+  if (user_object.password.length < 6) {
+    err_register.textContent = "Password must be at least 6 characters.";
+    return;
+  }
+
+  const passwordRegex = /^[A-Za-z0-9._$%^*!]+$/;
+  if (!passwordRegex.test(user_object.password)) {
+    err_register.textContent =
+      "Error: password can contain only letters, numbers, and the symbols: . _ $ % ^ * !";
+    document.getElementById("password").value = "";
+    return;
+  }
 
   // Birthday validation
   const today = new Date();
@@ -63,7 +111,7 @@ register_form.addEventListener("submit", async function (event) {
     age--;
   }
   if (age < 12) {
-    alert("You must be at least 12 years old to register.");
+    err_register.textContent = "You must be at least 12 years old to register.";
     return;
   }
 
@@ -89,18 +137,17 @@ register_form.addEventListener("submit", async function (event) {
       body: JSON.stringify(userData),
     });
 
+    const data = await response.json();
     if (response.ok) {
       console.log("Registration successful");
-      register_modal.style.display = "none";
-      window.location.replace("home.html");
+      window.location.href = "/pages/home.html";
     } else {
-      const errorText = await response.text();
-      console.error("Registration failed:", errorText);
-      alert("Registration failed: " + errorText);
+      console.error("Registration failed", data.error);
+      err_register.textContent = data.error || "Registration failed";
     }
   } catch (error) {
     console.error("Error connecting to register endpoint:", error);
-    alert("Error connecting to server. Please try again.");
+    err_register.textContent = "Error connecting to server. Please try again.";
   }
 });
 
@@ -123,7 +170,7 @@ window.onclick = function (event) {
   }
 };
 
-const err = document.getElementById("error");
+const err_login = document.getElementById("error_login");
 const login_form = document.getElementById("login-form");
 
 login_form.addEventListener("submit", async function (event) {
@@ -140,20 +187,20 @@ login_form.addEventListener("submit", async function (event) {
 
   // Check if user entered email instead of username
   if (username.includes("@")) {
-    err.textContent = "Input your username not your email.";
+    err_login.textContent = "Input your username not your email.";
     document.getElementById("username").focus();
     return;
   }
 
   if (password.length < 6) {
-    err.textContent = "Error: password must be at least 6 characters";
+    err_login.textContent = "Error: password must be at least 6 characters";
     document.getElementById("password").value = "";
     return;
   }
 
   const passwordRegex = /^[A-Za-z0-9._$%^*!]+$/;
   if (!passwordRegex.test(password)) {
-    err.textContent =
+    err_login.textContent =
       "Error: password can contain only letters, numbers, and the symbols: . _ $ % ^ * !";
     document.getElementById("password").value = "";
     return;
@@ -171,12 +218,12 @@ login_form.addEventListener("submit", async function (event) {
       console.log("Login successful:", data);
       window.location.href = "/pages/home.html"; // Use absolute path
     } else {
-      err.textContent = data.error || "Login failed";
+      err_login.textContent = data.error || "Login failed";
       document.getElementById("password").value = "";
     }
   } catch (error) {
     console.error("Error connecting to login endpoint:", error);
-    err.textContent = "Login error, please try again.";
+    err_login.textContent = "Login error, please try again.";
   }
 });
 
