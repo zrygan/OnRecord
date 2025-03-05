@@ -138,6 +138,13 @@ login_form.addEventListener("submit", async function (event) {
   const username = user_object.username;
   const password = user_object.password;
 
+  // Check if user entered email instead of username
+  if (username.includes("@")) {
+    err.textContent = "Input your username not your email.";
+    document.getElementById("username").focus();
+    return;
+  }
+
   if (password.length < 6) {
     err.textContent = "Error: password must be at least 6 characters";
     document.getElementById("password").value = "";

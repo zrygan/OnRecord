@@ -27,18 +27,32 @@ app.post("/login", async (req, res) => {
   try {
     const { username, password } = req.body;
 
-    const user = await users.findOne({ username, password });
+    // First check if user exists with that username
+    const userExists = await users.findOne({ username });
 
-    if (user) {
-      res.status(200).json({
-        success: true,
-        user: {
-          username: user.username,
-          type: user.type,
-        },
-      });
+    if (userExists) {
+      // If user exists, check password separately
+      const passwordMatch = await users.findOne({ username, password });
+
+      if (passwordMatch) {
+        res.status(200).json({
+          success: true,
+          user: {
+            username: passwordMatch.username,
+            type: passwordMatch.type,
+          },
+        });
+      } else {
+        // User exists but password doesn't match
+        res.status(401).json({ error: `Incorrect password for ${username}.` });
+      }
     } else {
-      res.status(401).json({ error: "Invalid username or password" });
+      // User doesn't exist
+      res
+        .status(401)
+        .json({
+          error: `The acocunt ${username} doesn't exist, please register first.`,
+        });
     }
   } catch (error) {
     console.error("Login error:", error);
