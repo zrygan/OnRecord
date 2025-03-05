@@ -42,7 +42,7 @@ window.onclick = function (event) {
 
 /* form for registering a new user */
 const register_form = document.getElementById("register-form");
-register_form.addEventListener("submit", function (event) {
+register_form.addEventListener("submit", async function (event) {
   event.preventDefault();
 
   const user_data = new FormData(register_form);
@@ -51,8 +51,7 @@ register_form.addEventListener("submit", function (event) {
     user_object[key] = value;
   });
 
-  // birthday validation
-  // (user must be at least 12 years old)
+  // Birthday validation
   const today = new Date();
   const birthDate = new Date(user_object.birthday);
   let age = today.getFullYear() - birthDate.getFullYear();
@@ -68,13 +67,13 @@ register_form.addEventListener("submit", function (event) {
     return;
   }
 
-  // splitting fullname -> firstname/s + surname
+  // Split fullname -> firstname/s + surname
   const nameParts = user_object.fullname.trim().split(/\s+/);
   const surname = nameParts.pop();
   const firstname = nameParts.join(" ");
 
-  // store the user data in local storage
-  const user_info = {
+  // Prepare data for server
+  const userData = {
     surname: surname,
     firstname: firstname,
     username: user_object.username,
@@ -82,13 +81,27 @@ register_form.addEventListener("submit", function (event) {
     password: user_object.password,
     birthday: user_object.birthday,
   };
-  localStorage.setItem("user_data", JSON.stringify(user_info));
 
-  console.log("User data stored:", user_info);
+  try {
+    const response = await fetch("/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(userData),
+    });
 
-  register_modal.style.display = "none";
-
-  window.location.replace("home.html");
+    if (response.ok) {
+      console.log("Registration successful");
+      register_modal.style.display = "none";
+      window.location.replace("home.html");
+    } else {
+      const errorText = await response.text();
+      console.error("Registration failed:", errorText);
+      alert("Registration failed: " + errorText);
+    }
+  } catch (error) {
+    console.error("Error connecting to register endpoint:", error);
+    alert("Error connecting to server. Please try again.");
+  }
 });
 
 // LOGIN MODAL
@@ -149,11 +162,10 @@ login_form.addEventListener("submit", async function (event) {
     const data = await response.json();
     if (response.ok) {
       console.log("Login successful:", data);
-      window.location.replace("home.html");
+      window.location.href = "/pages/home.html"; // Use absolute path
     } else {
-      err.textContent = data.error;
+      err.textContent = data.error || "Login failed";
       document.getElementById("password").value = "";
-      console.error("Login error:", data.error);
     }
   } catch (error) {
     console.error("Error connecting to login endpoint:", error);
