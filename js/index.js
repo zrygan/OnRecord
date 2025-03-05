@@ -2,23 +2,6 @@
 // by Zhean Ganituen (zrygan), January 26, 2025
 // Random numbers for the metrics
 
-// FIXME:   Once the back end is here, change this to the actual
-//          numbers in the database
-let num_users = Math.floor(Math.random() * 1000);
-let num_artists = Math.floor(Math.random() * 1000);
-let num_tracks = Math.floor(Math.random() * 1000);
-let num_albums = Math.floor(Math.random() * 1000);
-
-let span_num_users = document.getElementById("num_users");
-let span_num_artists = document.getElementById("num_artists");
-let span_num_tracks = document.getElementById("num_tracks");
-let span_num_albums = document.getElementById("num_albums");
-
-span_num_users.innerHTML = num_users;
-span_num_artists.innerHTML = num_artists;
-span_num_tracks.innerHTML = num_tracks;
-span_num_albums.innerHTML = num_albums;
-
 // REGISTER MODAL
 // ref: https://www.w3schools.com/howto/howto_css_modals.asp
 var register_modal = document.getElementById("register-modal");
@@ -227,7 +210,56 @@ login_form.addEventListener("submit", async function (event) {
   }
 });
 
-// HOVERBOX
+// HOVERBOX and METRICS
+
+// FIXME:   Once the back end is here, change this to the actual
+//          numbers in the database
+let num_users = 0;
+let num_artists = 0;
+let num_tracks = 0;
+let num_albums = 0;
+
+let span_num_users = document.getElementById("num_users");
+let span_num_artists = document.getElementById("num_artists");
+let span_num_tracks = document.getElementById("num_tracks");
+let span_num_albums = document.getElementById("num_albums");
+
+function updateDisplay() {
+  span_num_users.innerHTML = num_users;
+  span_num_artists.innerHTML = num_artists;
+  span_num_tracks.innerHTML = num_tracks;
+  span_num_albums.innerHTML = num_albums;
+}
+
+async function updateCounts() {
+  try {
+    const response = await fetch("/api/metrics");
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    num_users = data.users;
+    num_artists = data.artists;
+    num_tracks = data.tracks;
+    num_albums = data.albums;
+
+    updateDisplay();
+  } catch (error) {
+    console.error("Error fetching metrics:", error);
+    // Optionally, display an error message to the user
+    // span_num_users.innerHTML = "Error";
+    // span_num_artists.innerHTML = "Error";
+    // span_num_tracks.innerHTML = "Error";
+    // span_num_albums.innerHTML = "Error";
+  }
+}
+
+// Initial fetch
+updateCounts();
+
+// Periodic updates (e.g., every 5 seconds)
+setInterval(updateCounts, 5000);
+
 function hoverbox_on() {
   document.getElementById("hoverbox").innerHTML = `
         Click to learn more about the <br>

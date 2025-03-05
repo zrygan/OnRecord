@@ -5,8 +5,30 @@
 const express = require("express");
 const app = express();
 const path = require("path");
-const hbs = require("hbs");
-const users = require("../model/user");
+// const hbs = require("hbs");
+const User = require("../model/user");
+const Music = require("../model/music");
+const Album = require("../model/album");
+
+app.get("/api/metrics", async (req, res) => {
+  try {
+    const users = await User.countDocuments();
+    const artists = await User.countDocuments({ type: "artist" });
+    const tracks = await Music.countDocuments();
+    const albums = await Album.countDocuments();
+
+    // Return the metrics as a response
+    res.json({
+      users,
+      artists,
+      tracks,
+      albums,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server error");
+  }
+});
 
 const viewPath = path.join(__dirname, "../pages");
 
@@ -27,17 +49,17 @@ app.post("/login", async (req, res) => {
   try {
     const { username, password } = req.body;
 
-    // First check if user exists with that username
-    const userExists = await users.findOne({ username });
+    // First check if User exists with that username
+    const userExists = await User.findOne({ username });
 
     if (userExists) {
-      // If user exists, check password separately
-      const passwordMatch = await users.findOne({ username, password });
+      // If User exists, check password separately
+      const passwordMatch = await User.findOne({ username, password });
 
       if (passwordMatch) {
         res.status(200).json({
           success: true,
-          user: {
+          User: {
             username: passwordMatch.username,
             type: passwordMatch.type,
           },
@@ -65,8 +87,8 @@ app.post("/register/check-availability", async (req, res) => {
 
   try {
     const [usernameExists, emailExists] = await Promise.all([
-      users.findOne({ username }),
-      users.findOne({ email }),
+      User.findOne({ username }),
+      User.findOne({ email }),
     ]);
 
     if (usernameExists) {
@@ -102,11 +124,13 @@ app.post("/register", async (req, res) => {
     type:
       req.body.email && req.body.email.endsWith("@onrecord.com")
         ? "admin"
+        : req.body.email && req.body.email.endsWith("@artists.onrecord.com")
+        ? "artist"
         : "normal",
   };
 
   try {
-    const newUser = new users(data);
+    const newUser = new User(data);
     await newUser.save();
     res.status(200).json({ success: true });
   } catch (e) {

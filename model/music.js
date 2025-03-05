@@ -14,8 +14,6 @@ const schema_music = new mongoose.Schema({
   description: { type: String, required: true },
 });
 
-const Music = mongoose.model("User", schema_music);
-
 // CRUD Functions
 
 const create_music = async (
@@ -113,3 +111,8 @@ const delete_music = async (id) => {
     console.error("Error deleting music:", error.message);
   }
 };
+
+// Export the functions
+const collection = mongoose.model("music", schema_music);
+
+module.exports = collection;
