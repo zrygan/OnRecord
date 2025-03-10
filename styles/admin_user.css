@@ -1,0 +1,57 @@
+#choice_button {
+    margin-top: 3%;
+    justify-content: center;
+    display: flex;
+    gap: 2vw;
+    flex-direction: column;
+    align-items: center;
+  }
+
+#choice_button button {
+    /* font styles  */
+    font-size: 2vh;
+    color: var(--white);
+  
+    /* button styles */
+    background-color: var(--cyan);
+    border: none;
+    padding: 1%;
+    border-radius: 50vw;
+    min-width: 10vw;
+    max-width: 10vw;
+    min-height: 3vw;
+    max-height: 3vw;
+    /* margin-left: 0.5%;
+    margin-right: 0.5%; */
+  }
+
+#choice_button button:hover {
+    background-color: var(--orange);
+    cursor: pointer;
+    transform: scale(1.25);
+  }
+
+.content {
+    position: relative;
+    margin-top: 10%;
+}
+
+.content h1 {
+  color: var(--white);
+  font-size: 5vh;
+}
+
+.content h2 {
+  font-weight: normal;
+  color: var(--white);
+  font-size: 20px;
+  text-align: center;
+}
+
+#Option{
+  color: var(--white);
+  font-weight: normal;
+  font-size: 30px;
+  text-align: center;
+  margin-top: 1vw;
+}
