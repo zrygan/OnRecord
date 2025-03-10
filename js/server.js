@@ -7,9 +7,21 @@ const app = express();
 const path = require("path");
 // const hbs = require("hbs");
 const User = require("../model/user");
-const Music = require("../model/music");
 const Album = require("../model/album");
 const { read_music_all } = require("../model/music");
+const { Music } = require("../model/music");
+
+// Example usage of count method
+const countMusic = async () => {
+  try {
+    const count = await Music.count({}); // Use count instead of countDocuments
+    console.log(`Total music documents: ${count}`);
+  } catch (error) {
+    console.error("Error counting music documents:", error.message);
+  }
+};
+
+countMusic();
 
 app.get("/api/metrics", async (req, res) => {
   try {

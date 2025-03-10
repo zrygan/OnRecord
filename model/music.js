@@ -1,8 +1,12 @@
-const fs = require('fs');
+const fs = require("fs");
 const mongoose = require("mongoose");
 
 mongoose
-  .connect("mongodb://localhost:27017/onrecord")
+  .connect("mongodb://localhost:27017/onrecord", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    serverSelectionTimeoutMS: 30000, // Increase timeout to 30 seconds
+  })
   .then(() => console.log("Connected to MongoDB"))
   .catch(() => console.error("Could not connect to MongoDB"));
 
@@ -16,13 +20,13 @@ const schema_music = new mongoose.Schema({
   image: { type: String, required: true },
 });
 
-const Music = mongoose.model('Music', schema_music);
+const Music = mongoose.model("Music", schema_music);
 
 // Read JSON file
-fs.readFile('d:\\Documents\\Program Projects\\DLSU Projects\\2nd Year Term 2\\CCAPDEV\\OnRecord\\data\\music.json', 'utf8', async (err, data) => {
+fs.readFile("data\\music.json", "utf8", async (err, data) => {
   if (err) {
-      console.error('Error reading file:', err);
-      return;
+    console.error("Error reading file:", err);
+    return;
   }
 
   try {
@@ -31,13 +35,13 @@ fs.readFile('d:\\Documents\\Program Projects\\DLSU Projects\\2nd Year Term 2\\CC
 
     // Empty the Music collection
     await Music.deleteMany({});
-    console.log('Music collection emptied');
+    console.log("Music collection emptied");
 
     // Insert the data into the database
     await Music.insertMany(musicData);
-    console.log('Music Data inserted successfully');
+    console.log("Music Data inserted successfully");
   } catch (err) {
-    console.error('Error processing data:', err);
+    console.error("Error processing data:", err);
   }
 });
 
@@ -64,9 +68,9 @@ const create_music = async (
     });
 
     await new_music.save();
-    console.log('Music created:', new_music);
+    console.log("Music created:", new_music);
   } catch (error) {
-    console.error('Error creating music:', error.message);
+    console.error("Error creating music:", error.message);
   }
 };
 
@@ -75,7 +79,7 @@ const read_music_all = async () => {
     const music = await Music.find();
     return music;
   } catch (error) {
-    console.error('Error reading music:', error.message);
+    console.error("Error reading music:", error.message);
   }
 };
 
@@ -85,12 +89,12 @@ const read_music = async (id, name, artists) => {
       $or: [{ _id: id }, { name: name }, { artists: artists }],
     });
     if (!music) {
-      console.log('Music not found');
+      console.log("Music not found");
     } else {
-      console.log('Music found:', music);
+      console.log("Music found:", music);
     }
   } catch (error) {
-    console.error('Error reading music:', error.message);
+    console.error("Error reading music:", error.message);
   }
 };
 
@@ -114,18 +118,18 @@ const update_music = async (
         release_date,
         genres,
         description,
-        image
+        image,
       },
       { new: true }
     );
 
     if (!updatedMusic) {
-      console.log('Music not found');
+      console.log("Music not found");
     } else {
-      console.log('Music updated:', updatedMusic);
+      console.log("Music updated:", updatedMusic);
     }
   } catch (error) {
-    console.error('Error updating music:', error.message);
+    console.error("Error updating music:", error.message);
   }
 };
 
@@ -134,19 +138,19 @@ const delete_music = async (id) => {
     const deletedMusic = await Music.findByIdAndDelete(id);
 
     if (!deletedMusic) {
-      console.log('Music not found');
+      console.log("Music not found");
     } else {
-      console.log('Music deleted:', deletedMusic);
+      console.log("Music deleted:", deletedMusic);
     }
   } catch (error) {
-    console.error('Error deleting music:', error.message);
+    console.error("Error deleting music:", error.message);
   }
 };
 
 const musicExists = async (name, artists, album) => {
-  console.log('Checking existence for:', { name, artists, album }); // Debugging statement
+  console.log("Checking existence for:", { name, artists, album }); // Debugging statement
   const existingMusic = await Music.find({ name, artists, album });
-  console.log('Existing music found:', existingMusic); // Debugging statement
+  console.log("Existing music found:", existingMusic); // Debugging statement
   return existingMusic.length > 0;
 };
 
