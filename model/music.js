@@ -1,3 +1,4 @@
+const fs = require('fs');
 const mongoose = require("mongoose");
 
 mongoose
@@ -12,6 +13,32 @@ const schema_music = new mongoose.Schema({
   release_date: { type: Date, required: true },
   genres: { type: [String], required: true },
   description: { type: String, required: true },
+  image: { type: String, required: true },
+});
+
+const Music = mongoose.model('Music', schema_music);
+
+// Read JSON file
+fs.readFile('d:\\Documents\\Program Projects\\DLSU Projects\\2nd Year Term 2\\CCAPDEV\\OnRecord\\data\\music.json', 'utf8', async (err, data) => {
+  if (err) {
+      console.error('Error reading file:', err);
+      return;
+  }
+
+  try {
+    // Parse JSON data
+    const musicData = JSON.parse(data);
+
+    // Empty the Music collection
+    await Music.deleteMany({});
+    console.log('Music collection emptied');
+
+    // Insert the data into the database
+    await Music.insertMany(musicData);
+    console.log('Music Data inserted successfully');
+  } catch (err) {
+    console.error('Error processing data:', err);
+  }
 });
 
 // CRUD Functions
@@ -22,7 +49,8 @@ const create_music = async (
   album,
   release_date,
   genres,
-  description
+  description,
+  image
 ) => {
   try {
     const new_music = new Music({
@@ -32,21 +60,22 @@ const create_music = async (
       release_date,
       genres,
       description,
+      image,
     });
 
     await new_music.save();
-    console.log("Music created:", new_music);
+    console.log('Music created:', new_music);
   } catch (error) {
-    console.error("Error creating music:", error.message);
+    console.error('Error creating music:', error.message);
   }
 };
 
 const read_music_all = async () => {
   try {
     const music = await Music.find();
-    console.log("All music:", music);
+    return music;
   } catch (error) {
-    console.error("Error reading music:", error.message);
+    console.error('Error reading music:', error.message);
   }
 };
 
@@ -56,12 +85,12 @@ const read_music = async (id, name, artists) => {
       $or: [{ _id: id }, { name: name }, { artists: artists }],
     });
     if (!music) {
-      console.log("Music not found");
+      console.log('Music not found');
     } else {
-      console.log("Music found:", music);
+      console.log('Music found:', music);
     }
   } catch (error) {
-    console.error("Error reading music:", error.message);
+    console.error('Error reading music:', error.message);
   }
 };
 
@@ -72,7 +101,8 @@ const update_music = async (
   album,
   release_date,
   genres,
-  description
+  description,
+  image
 ) => {
   try {
     const updatedMusic = await Music.findByIdAndUpdate(
@@ -84,17 +114,18 @@ const update_music = async (
         release_date,
         genres,
         description,
+        image
       },
       { new: true }
     );
 
     if (!updatedMusic) {
-      console.log("Music not found");
+      console.log('Music not found');
     } else {
-      console.log("Music updated:", updatedMusic);
+      console.log('Music updated:', updatedMusic);
     }
   } catch (error) {
-    console.error("Error updating music:", error.message);
+    console.error('Error updating music:', error.message);
   }
 };
 
@@ -103,16 +134,29 @@ const delete_music = async (id) => {
     const deletedMusic = await Music.findByIdAndDelete(id);
 
     if (!deletedMusic) {
-      console.log("Music not found");
+      console.log('Music not found');
     } else {
-      console.log("Music deleted:", deletedMusic);
+      console.log('Music deleted:', deletedMusic);
     }
   } catch (error) {
-    console.error("Error deleting music:", error.message);
+    console.error('Error deleting music:', error.message);
   }
 };
 
-// Export the functions
-const collection = mongoose.model("music", schema_music);
+const musicExists = async (name, artists, album) => {
+  console.log('Checking existence for:', { name, artists, album }); // Debugging statement
+  const existingMusic = await Music.find({ name, artists, album });
+  console.log('Existing music found:', existingMusic); // Debugging statement
+  return existingMusic.length > 0;
+};
 
-module.exports = collection;
+// Export the functions and model
+module.exports = {
+  create_music,
+  read_music_all,
+  read_music,
+  update_music,
+  delete_music,
+  musicExists,
+  Music,
+};

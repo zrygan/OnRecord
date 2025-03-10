@@ -123,7 +123,7 @@ register_form.addEventListener("submit", async function (event) {
     const data = await response.json();
     if (response.ok) {
       console.log("Registration successful");
-      window.location.href = "/pages/home.html";
+      window.location.href = "/home";
     } else {
       console.error("Registration failed", data.error);
       err_register.textContent = data.error || "Registration failed";
@@ -199,7 +199,7 @@ login_form.addEventListener("submit", async function (event) {
     const data = await response.json();
     if (response.ok) {
       console.log("Login successful:", data);
-      window.location.href = "/pages/home.html"; // Use absolute path
+      window.location.href = "/home"; // Use absolute path
     } else {
       err_login.textContent = data.error || "Login failed";
       document.getElementById("password").value = "";

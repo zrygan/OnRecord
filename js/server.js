@@ -9,6 +9,7 @@ const path = require("path");
 const User = require("../model/user");
 const Music = require("../model/music");
 const Album = require("../model/album");
+const { read_music_all } = require("../model/music");
 
 app.get("/api/metrics", async (req, res) => {
   try {
@@ -42,6 +43,16 @@ app.use(express.static(path.join(__dirname, "../")));
 // Root route to serve index page
 app.get("/", (req, res) => {
   res.render("index");
+});
+
+// Route to render home page
+app.get("/home", async (req, res) => {
+  try {
+    const music = await read_music_all();
+    res.render("home", { music });
+  } catch (error) {
+    res.status(500).send("Error fetching music data");
+  }
 });
 
 // Login endpoint
