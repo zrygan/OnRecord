@@ -75,7 +75,8 @@
 }
 
 .admin_controls form label,
-.album_field label {
+.album_field label,
+#songDetails label {
   width: 30vw; /* Align labels with inputs */
   text-align: left;
   font-size: 2vh;
@@ -85,7 +86,8 @@
 .admin_controls form input,
 .admin_controls form select,
 .admin_controls form textarea,
-.album_field input {
+.album_field input,
+#songDetails input {
   width: 30vw;
   max-width: 100%;
   font-size: 2vh;
