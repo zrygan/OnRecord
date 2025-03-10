@@ -8,7 +8,7 @@ body {
 .nav-bar {
   background-color: var(--darkBlue);
   width: 100%;
-  height: 10vh;
+  height: 9vh;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -104,6 +104,19 @@ body {
 }
 
 /* Genre Button */
+.genre-button {
+  width: 5.3vw;
+  height: auto;
+  display: inline-flex; /* Change to inline-flex to center the content */
+  align-items: center; /* Center items vertically */
+  justify-content: center; /* Center items horizontally */
+  position: relative;
+  z-index: 3; /* Ensure this is on top */
+  min-width: 50px; /* Add min-width */
+  min-height: 50px; /* Add min-height */
+  row-gap: 1vw; /* Add gap between elements */
+}
+
 .genre {
   color: #a7a7a7;
   text-align: left;
@@ -113,27 +126,10 @@ body {
   border: none;
   background: none;
   position: relative;
-  right: 1.75vw;
-  top: 1.65vh;
+  right: auto;
+  top: auto;
   z-index: 3;
-  margin-right: 1.75vw;
-}
-
-.genre-svg {
-  position: relative;
-  bottom: 1.15vh;
-  z-index: 3;
-}
-
-.genre-button {
-  width: 6vw;
-  height: 7.5vh;
-  display: inline-block;
-  position: relative;
-  z-index: 3; /* Ensure this is on top */
-  left: 1.65vw;
-  min-width: 50px; /* Add min-width */
-  min-height: 50px; /* Add min-height */
+  margin-right: auto;
 }
 
 .genre-content {
@@ -145,7 +141,9 @@ body {
   z-index: 4; /* Ensure this is on top of .genre-button */
   border-radius: 1rem;
   text-align: left;
-  right: 1.5vw;
+  top: 100%; /* Position below the .genre-button */
+  left: 0; /* Align to the left of the .genre-button */
+  width: 100%; /* Make the width of genre-content match the genre-button */
 }
 
 .genre-content a {
@@ -153,6 +151,8 @@ body {
   padding: 2vh 0.5vw;
   text-decoration: none;
   display: block;
+  white-space: normal; /* Allow text to wrap */
+  word-wrap: break-word; /* Break long words if necessary */
 }
 
 .genre-content a:hover {
@@ -169,7 +169,7 @@ body {
   border: none;
   z-index: 3;
   width: 5vw;
-  height: 5vh; /* Adjust height to match .charts */
+  height: 6vh;
   border-radius: 0.9375rem; /* Converted 15px to rem */
   box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.25); /* Converted 4px to rem */
   margin-right: 1vw; /* Changed to relative value */

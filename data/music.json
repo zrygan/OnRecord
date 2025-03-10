@@ -1,0 +1,227 @@
+[
+  {
+    "name": "Alexander Hamilton",
+    "artists": ["Lin-Manuel Miranda"],
+    "album": "Hamilton",
+    "release_date": "2015-09-25T00:00:00Z",
+    "genres": ["Musical", "Hip-hop", "R&B"],
+    "description": "The opening number of *Hamilton*, introducing the life and story of Alexander Hamilton, using hip-hop and rap to convey his rise to prominence in early American history.",
+    "image": "https://i.scdn.co/image/ab67616d0000b273d72fb5571087bca0a2fed008"
+  },
+  {
+    "name": "My Shot",
+    "artists": ["Lin-Manuel Miranda"],
+    "album": "Hamilton",
+    "release_date": "2015-09-25T00:00:00Z",
+    "genres": ["Musical", "Hip-hop", "Rap"],
+    "description": "'My Shot' expresses Hamilton's determination and ambition. The song blends rap with musical theater, highlighting Hamilton’s revolutionary spirit.",
+    "image": "https://i.scdn.co/image/ab67616d0000b273d72fb5571087bca0a2fed008"
+  },
+  {
+    "name": "The Schuyler Sisters",
+    "artists": ["Phillipa Soo", "Renée Elise Goldsberry"],
+    "album": "Hamilton",
+    "release_date": "2015-09-25T00:00:00Z",
+    "genres": ["Musical", "R&B", "Pop"],
+    "description": "A lively song introducing the Schuyler sisters—Angelica, Eliza, and Peggy—as they sing about their roles and relationships within the revolution and their political beliefs.",
+    "image": "https://i.scdn.co/image/ab67616d0000b273d72fb5571087bca0a2fed008"
+  },
+  {
+    "name": "You'll Be Back",
+    "artists": ["Jonathan Groff"],
+    "album": "Hamilton",
+    "release_date": "2015-09-25T00:00:00Z",
+    "genres": ["Musical", "Pop", "Comedy"],
+    "description": "A humorous and satirical song sung by King George III, expressing his possessive and condescending attitude toward the American colonies as they prepare for revolution.",
+    "image": "https://i.scdn.co/image/ab67616d0000b273d72fb5571087bca0a2fed008"
+  },
+  {
+    "name": "Helpless",
+    "artists": ["Phillipa Soo"],
+    "album": "Hamilton",
+    "release_date": "2015-09-25T00:00:00Z",
+    "genres": ["Musical", "Pop", "R&B"],
+    "description": "'Helpless' is Eliza Schuyler’s love song to Alexander Hamilton, expressing her emotions about falling in love with him and her hopes for their future together.",
+    "image": "https://i.scdn.co/image/ab67616d0000b273d72fb5571087bca0a2fed008"
+  },
+  {
+    "name": "Satisfied",
+    "artists": ["Renée Elise Goldsberry"],
+    "album": "Hamilton",
+    "release_date": "2015-09-25T00:00:00Z",
+    "genres": ["Musical", "Hip-hop", "R&B"],
+    "description": "Angelica Schuyler reflects on her feelings for Hamilton and her decision to step aside for her sister, Eliza, in this powerful and complex rap ballad.",
+    "image": "https://i.scdn.co/image/ab67616d0000b273d72fb5571087bca0a2fed008"
+  },
+  {
+    "name": "Wait For It",
+    "artists": ["Leslie Odom Jr."],
+    "album": "Hamilton",
+    "release_date": "2015-09-25T00:00:00Z",
+    "genres": ["Musical", "R&B", "Soul"],
+    "description": "Aaron Burr sings 'Wait For It', expressing his patience and determination to take things slow while his rival Hamilton acts impulsively. A soulful, introspective number.",
+    "image": "https://i.scdn.co/image/ab67616d0000b273d72fb5571087bca0a2fed008"
+  },
+  {
+    "name": "Guns and Ships",
+    "artists": ["Daveed Diggs"],
+    "album": "Hamilton",
+    "release_date": "2015-09-25T00:00:00Z",
+    "genres": ["Musical", "Hip-hop", "Rap"],
+    "description": "One of the fastest-paced songs in the musical, sung by Lafayette and Hamilton as they prepare for war. The track features rapid-fire rapping and high energy.",
+    "image": "https://i.scdn.co/image/ab67616d0000b273d72fb5571087bca0a2fed008"
+  },
+  {
+    "name": "The Room Where It Happens",
+    "artists": ["Leslie Odom Jr."],
+    "album": "Hamilton",
+    "release_date": "2015-09-25T00:00:00Z",
+    "genres": ["Musical", "R&B", "Hip-hop"],
+    "description": "Aaron Burr reflects on his jealousy and desire for power, desiring to be part of the deals and decisions that shape the new nation. This song features jazz-inspired vocals and catchy beats.",
+    "image": "https://i.scdn.co/image/ab67616d0000b273d72fb5571087bca0a2fed008"
+  },
+  {
+    "name": "Who Lives, Who Dies, Who Tells Your Story",
+    "artists": ["Phillipa Soo", "Lin-Manuel Miranda"],
+    "album": "Hamilton",
+    "release_date": "2015-09-25T00:00:00Z",
+    "genres": ["Musical", "Pop", "R&B"],
+    "description": "The closing song of *Hamilton*, reflecting on the legacy of Alexander Hamilton and his contributions to American history, as well as the people who remember him.",
+    "image": "https://i.scdn.co/image/ab67616d0000b273d72fb5571087bca0a2fed008"
+  },
+  {
+    "name": "360",
+    "artists": ["Charli xcx"],
+    "album": "Brat",
+    "release_date": "2024-06-07T00:00:00Z",
+    "genres": ["Pop", "Electric"],
+    "description": "Brat is the sixth studio album by English singer Charli XCX, released through Atlantic Records on 7 June 2024. It features production by Charli XCX, her longtime executive producer A. G. Cook, Finn Keane, Cirkut, her partner George Daniel, and others.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Charli_XCX_-_Brat_%28album_cover%29.svg"
+  },
+  {
+    "name": "Club classics",
+    "artists": ["Charli xcx"],
+    "album": "Brat",
+    "release_date": "2024-06-07T00:00:00Z",
+    "genres": ["Pop", "Electric"],
+    "description": "Brat is the sixth studio album by English singer Charli XCX, released through Atlantic Records on 7 June 2024. It features production by Charli XCX, her longtime executive producer A. G. Cook, Finn Keane, Cirkut, her partner George Daniel, and others.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Charli_XCX_-_Brat_%28album_cover%29.svg"
+  },
+  {
+    "name": "Sympathy is a knife",
+    "artists": ["Charli xcx"],
+    "album": "Brat",
+    "release_date": "2024-06-07T00:00:00Z",
+    "genres": ["Pop", "Electric"],
+    "description": "Brat is the sixth studio album by English singer Charli XCX, released through Atlantic Records on 7 June 2024. It features production by Charli XCX, her longtime executive producer A. G. Cook, Finn Keane, Cirkut, her partner George Daniel, and others.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Charli_XCX_-_Brat_%28album_cover%29.svg"
+  },
+  {
+    "name": "I might say something stupid",
+    "artists": ["Charli xcx"],
+    "album": "Brat",
+    "release_date": "2024-06-07T00:00:00Z",
+    "genres": ["Pop", "Electric"],
+    "description": "Brat is the sixth studio album by English singer Charli XCX, released through Atlantic Records on 7 June 2024. It features production by Charli XCX, her longtime executive producer A. G. Cook, Finn Keane, Cirkut, her partner George Daniel, and others.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Charli_XCX_-_Brat_%28album_cover%29.svg"
+  },
+  {
+    "name": "Talk talk",
+    "artists": ["Charli xcx"],
+    "album": "Brat",
+    "release_date": "2024-06-07T00:00:00Z",
+    "genres": ["Pop", "Electric"],
+    "description": "Brat is the sixth studio album by English singer Charli XCX, released through Atlantic Records on 7 June 2024. It features production by Charli XCX, her longtime executive producer A. G. Cook, Finn Keane, Cirkut, her partner George Daniel, and others.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Charli_XCX_-_Brat_%28album_cover%29.svg"
+  },
+  {
+    "name": "Von dutch",
+    "artists": ["Charli xcx"],
+    "album": "Brat",
+    "release_date": "2024-06-07T00:00:00Z",
+    "genres": ["Pop", "Electric"],
+    "description": "Brat is the sixth studio album by English singer Charli XCX, released through Atlantic Records on 7 June 2024. It features production by Charli XCX, her longtime executive producer A. G. Cook, Finn Keane, Cirkut, her partner George Daniel, and others.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Charli_XCX_-_Brat_%28album_cover%29.svg"
+  },
+  {
+    "name": "Everything is romantic",
+    "artists": ["Charli xcx"],
+    "album": "Brat",
+    "release_date": "2024-06-07T00:00:00Z",
+    "genres": ["Pop", "Electric"],
+    "description": "Brat is the sixth studio album by English singer Charli XCX, released through Atlantic Records on 7 June 2024. It features production by Charli XCX, her longtime executive producer A. G. Cook, Finn Keane, Cirkut, her partner George Daniel, and others.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Charli_XCX_-_Brat_%28album_cover%29.svg"
+  },
+  {
+    "name": "Rewind",
+    "artists": ["Charli xcx"],
+    "album": "Brat",
+    "release_date": "2024-06-07T00:00:00Z",
+    "genres": ["Pop", "Electric"],
+    "description": "Brat is the sixth studio album by English singer Charli XCX, released through Atlantic Records on 7 June 2024. It features production by Charli XCX, her longtime executive producer A. G. Cook, Finn Keane, Cirkut, her partner George Daniel, and others.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Charli_XCX_-_Brat_%28album_cover%29.svg"
+  },
+  {
+    "name": "So I",
+    "artists": ["Charli xcx"],
+    "album": "Brat",
+    "release_date": "2024-06-07T00:00:00Z",
+    "genres": ["Pop", "Electric"],
+    "description": "Brat is the sixth studio album by English singer Charli XCX, released through Atlantic Records on 7 June 2024. It features production by Charli XCX, her longtime executive producer A. G. Cook, Finn Keane, Cirkut, her partner George Daniel, and others.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Charli_XCX_-_Brat_%28album_cover%29.svg"
+  },
+  {
+    "name": "Girl, so confusing",
+    "artists": ["Charli xcx"],
+    "album": "Brat",
+    "release_date": "2024-06-07T00:00:00Z",
+    "genres": ["Pop", "Electric"],
+    "description": "Brat is the sixth studio album by English singer Charli XCX, released through Atlantic Records on 7 June 2024. It features production by Charli XCX, her longtime executive producer A. G. Cook, Finn Keane, Cirkut, her partner George Daniel, and others.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Charli_XCX_-_Brat_%28album_cover%29.svg"
+  },
+  {
+    "name": "Apple",
+    "artists": ["Charli xcx"],
+    "album": "Brat",
+    "release_date": "2024-06-07T00:00:00Z",
+    "genres": ["Pop", "Electric"],
+    "description": "Brat is the sixth studio album by English singer Charli XCX, released through Atlantic Records on 7 June 2024. It features production by Charli XCX, her longtime executive producer A. G. Cook, Finn Keane, Cirkut, her partner George Daniel, and others.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Charli_XCX_-_Brat_%28album_cover%29.svg"
+  },
+  {
+    "name": "B2b",
+    "artists": ["Charli xcx"],
+    "album": "Brat",
+    "release_date": "2024-06-07T00:00:00Z",
+    "genres": ["Pop", "Electric"],
+    "description": "Brat is the sixth studio album by English singer Charli XCX, released through Atlantic Records on 7 June 2024. It features production by Charli XCX, her longtime executive producer A. G. Cook, Finn Keane, Cirkut, her partner George Daniel, and others.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Charli_XCX_-_Brat_%28album_cover%29.svg"
+  },
+  {
+    "name": "Mean girls",
+    "artists": ["Charli xcx"],
+    "album": "Brat",
+    "release_date": "2024-06-07T00:00:00Z",
+    "genres": ["Pop", "Electric"],
+    "description": "Brat is the sixth studio album by English singer Charli XCX, released through Atlantic Records on 7 June 2024. It features production by Charli XCX, her longtime executive producer A. G. Cook, Finn Keane, Cirkut, her partner George Daniel, and others.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Charli_XCX_-_Brat_%28album_cover%29.svg"
+  },
+  {
+    "name": "I think about it all the time",
+    "artists": ["Charli xcx"],
+    "album": "Brat",
+    "release_date": "2024-06-07T00:00:00Z",
+    "genres": ["Pop", "Electric"],
+    "description": "Brat is the sixth studio album by English singer Charli XCX, released through Atlantic Records on 7 June 2024. It features production by Charli XCX, her longtime executive producer A. G. Cook, Finn Keane, Cirkut, her partner George Daniel, and others.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Charli_XCX_-_Brat_%28album_cover%29.svg"
+  },
+  {
+    "name": "365",
+    "artists": ["Charli xcx"],
+    "album": "Brat",
+    "release_date": "2024-06-07T00:00:00Z",
+    "genres": ["Pop", "Electric"],
+    "description": "Brat is the sixth studio album by English singer Charli XCX, released through Atlantic Records on 7 June 2024. It features production by Charli XCX, her longtime executive producer A. G. Cook, Finn Keane, Cirkut, her partner George Daniel, and others.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Charli_XCX_-_Brat_%28album_cover%29.svg"
+  }
+]
