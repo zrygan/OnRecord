@@ -69,19 +69,21 @@ app.get("/", (req, res) => {
 // Route to render home page
 app.get("/home", async (req, res) => {
   try {
-    const music = await read_music_all();
-    let user = req.session.user;
+    const music = await Music.find();
+    const user = req.session.user;
 
-    if (!user) {
-      user = await User.findOne({ username: "Anonymous" });
-      if (!user) {
-        return res.status(500).send("Dummy user not found in the database");
-      }
-    }
+    const musicWithCounts = await Promise.all(music.map(async (song) => {
+      const reviews = await Review.countDocuments({ songId: song._id });
+      return {
+        ...song.toObject(),
+        hearts: song.likes.length,
+        reviews: reviews // FIXME: add once reviews are done
+      };
+    }));
 
-    res.render("home", { music, user });
+    res.render("home", { music: musicWithCounts, user });
   } catch (error) {
-    console.error(error);
+    console.error("Error fetching music data:", error);
     res.status(500).send("Error fetching music data");
   }
 });
@@ -179,6 +181,65 @@ app.post("/register", async (req, res) => {
   } catch (e) {
     console.error("Registration error:", e);
     res.status(500).json({ error: "Registration failed", e });
+  }
+});
+
+// Get Username of the User
+app.get("/api/current-username", (req, res) => {
+  if (req.session.user) {
+    res.json({ username: req.session.user.username });
+  } else {
+    res.status(401).json({ error: "User not logged in" });
+  }
+});
+
+// Get the likes for a song
+app.get("/api/songs/:id/likes", async (req, res) => {
+  try {
+    const song = await Music.findById(req.params.id);
+    if (!song) {
+      return res.status(404).json({ error: "Song not found" });
+    }
+    res.json({ likes: song.likes });
+  } catch (error) {
+    console.error("Error fetching song likes:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+// Like a song
+app.post("/api/songs/:id/like", async (req, res) => {
+  try {
+    const song = await Music.findById(req.params.id);
+    if (!song) {
+      return res.status(404).json({ error: "Song not found" });
+    }
+    const username = req.body.username;
+    if (!song.likes.includes(username)) {
+      song.likes.push(username);
+      await song.save();
+    }
+    res.json({ likes: song.likes });
+  } catch (error) {
+    console.error("Error liking song:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+// Unlike a song
+app.post("/api/songs/:id/unlike", async (req, res) => {
+  try {
+    const song = await Music.findById(req.params.id);
+    if (!song) {
+      return res.status(404).json({ error: "Song not found" });
+    }
+    const username = req.body.username;
+    song.likes = song.likes.filter(user => user !== username);
+    await song.save();
+    res.json({ likes: song.likes });
+  } catch (error) {
+    console.error("Error unliking song:", error);
+    res.status(500).json({ error: "Server error" });
   }
 });
 

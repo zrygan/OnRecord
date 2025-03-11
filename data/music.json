@@ -6,7 +6,8 @@
     "release_date": "2015-09-25T00:00:00Z",
     "genres": ["Musical", "Hip-hop", "R&B"],
     "description": "The opening number of *Hamilton*, introducing the life and story of Alexander Hamilton, using hip-hop and rap to convey his rise to prominence in early American history.",
-    "image": "https://i.scdn.co/image/ab67616d0000b273d72fb5571087bca0a2fed008"
+    "image": "https://i.scdn.co/image/ab67616d0000b273d72fb5571087bca0a2fed008",
+    "likes": ["john_doe123"]
   },
   {
     "name": "My Shot",
@@ -16,6 +17,7 @@
     "genres": ["Musical", "Hip-hop", "Rap"],
     "description": "'My Shot' expresses Hamilton's determination and ambition. The song blends rap with musical theater, highlighting Hamilton’s revolutionary spirit.",
     "image": "https://i.scdn.co/image/ab67616d0000b273d72fb5571087bca0a2fed008"
+    ,"likes": ["john_doe123"]
   },
   {
     "name": "The Schuyler Sisters",
@@ -25,6 +27,7 @@
     "genres": ["Musical", "R&B", "Pop"],
     "description": "A lively song introducing the Schuyler sisters—Angelica, Eliza, and Peggy—as they sing about their roles and relationships within the revolution and their political beliefs.",
     "image": "https://i.scdn.co/image/ab67616d0000b273d72fb5571087bca0a2fed008"
+    ,"likes": ["john_doe123"]
   },
   {
     "name": "You'll Be Back",
@@ -34,6 +37,7 @@
     "genres": ["Musical", "Pop", "Comedy"],
     "description": "A humorous and satirical song sung by King George III, expressing his possessive and condescending attitude toward the American colonies as they prepare for revolution.",
     "image": "https://i.scdn.co/image/ab67616d0000b273d72fb5571087bca0a2fed008"
+    ,"likes": ["john_doe123"]
   },
   {
     "name": "Helpless",
@@ -43,6 +47,7 @@
     "genres": ["Musical", "Pop", "R&B"],
     "description": "'Helpless' is Eliza Schuyler’s love song to Alexander Hamilton, expressing her emotions about falling in love with him and her hopes for their future together.",
     "image": "https://i.scdn.co/image/ab67616d0000b273d72fb5571087bca0a2fed008"
+    ,"likes": ["john_doe123"]
   },
   {
     "name": "Satisfied",
@@ -52,6 +57,7 @@
     "genres": ["Musical", "Hip-hop", "R&B"],
     "description": "Angelica Schuyler reflects on her feelings for Hamilton and her decision to step aside for her sister, Eliza, in this powerful and complex rap ballad.",
     "image": "https://i.scdn.co/image/ab67616d0000b273d72fb5571087bca0a2fed008"
+    ,"likes": ["john_doe123"]
   },
   {
     "name": "Wait For It",
@@ -61,6 +67,7 @@
     "genres": ["Musical", "R&B", "Soul"],
     "description": "Aaron Burr sings 'Wait For It', expressing his patience and determination to take things slow while his rival Hamilton acts impulsively. A soulful, introspective number.",
     "image": "https://i.scdn.co/image/ab67616d0000b273d72fb5571087bca0a2fed008"
+    ,"likes": ["john_doe123"]
   },
   {
     "name": "Guns and Ships",
@@ -70,6 +77,7 @@
     "genres": ["Musical", "Hip-hop", "Rap"],
     "description": "One of the fastest-paced songs in the musical, sung by Lafayette and Hamilton as they prepare for war. The track features rapid-fire rapping and high energy.",
     "image": "https://i.scdn.co/image/ab67616d0000b273d72fb5571087bca0a2fed008"
+    ,"likes": ["john_doe123"]
   },
   {
     "name": "The Room Where It Happens",
@@ -79,6 +87,7 @@
     "genres": ["Musical", "R&B", "Hip-hop"],
     "description": "Aaron Burr reflects on his jealousy and desire for power, desiring to be part of the deals and decisions that shape the new nation. This song features jazz-inspired vocals and catchy beats.",
     "image": "https://i.scdn.co/image/ab67616d0000b273d72fb5571087bca0a2fed008"
+    ,"likes": ["john_doe123"]
   },
   {
     "name": "Who Lives, Who Dies, Who Tells Your Story",
@@ -87,7 +96,8 @@
     "release_date": "2015-09-25T00:00:00Z",
     "genres": ["Musical", "Pop", "R&B"],
     "description": "The closing song of *Hamilton*, reflecting on the legacy of Alexander Hamilton and his contributions to American history, as well as the people who remember him.",
-    "image": "https://i.scdn.co/image/ab67616d0000b273d72fb5571087bca0a2fed008"
+    "image": "https://i.scdn.co/image/ab67616d0000b273d72fb5571087bca0a2fed008" 
+    ,"likes": ["john_doe123"]
   },
   {
     "name": "360",

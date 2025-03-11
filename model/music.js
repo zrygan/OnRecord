@@ -18,6 +18,7 @@ const schema_music = new mongoose.Schema({
   genres: { type: [String], required: true },
   description: { type: String, required: true },
   image: { type: String, required: true },
+  likes: { type: [String], default: [] }
 });
 
 const Music = mongoose.model("Music", schema_music);
@@ -54,7 +55,8 @@ const create_music = async (
   release_date,
   genres,
   description,
-  image
+  image,
+  likes = []
 ) => {
   try {
     const new_music = new Music({
@@ -65,6 +67,7 @@ const create_music = async (
       genres,
       description,
       image,
+      likes
     });
 
     await new_music.save();
@@ -106,7 +109,8 @@ const update_music = async (
   release_date,
   genres,
   description,
-  image
+  image,
+  likes
 ) => {
   try {
     const updatedMusic = await Music.findByIdAndUpdate(
@@ -119,6 +123,7 @@ const update_music = async (
         genres,
         description,
         image,
+        likes
       },
       { new: true }
     );

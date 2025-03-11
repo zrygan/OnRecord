@@ -171,6 +171,31 @@ body > * {
   align-items: center;
 }
 
+/* Hide scrollbar track for Webkit browsers (Chrome, Safari) */
+.catalog-list::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+/* Keep scrollbar thumb visible for Webkit browsers (Chrome, Safari) */
+.catalog-list::-webkit-scrollbar-thumb {
+  background-color: rgba(37, 37, 37, 0.81);
+}
+
+/* Hide scrollbar track for IE, Edge, and Firefox */
+.catalog-list {
+  scrollbar-color: rgba(37, 37, 37, 0.81) transparent; /* Firefox */
+}
+
+/* Hide scrollbar track for IE and Edge */
+.catalog-list::-ms-track {
+  background-color: transparent;
+}
+
+/* Keep scrollbar thumb visible for IE and Edge */
+.catalog-list::-ms-thumb {
+  background-color: rgba(37, 37, 37, 0.81);
+}
+
 .song-box div { 
   display: flex;
   flex-direction: row;
@@ -195,7 +220,7 @@ body > * {
   color: #ffffff;
   text-align: left;
   font-family: "Space Grotesk";
-  font-size: 1.5rem;
+  font-size: 1.45rem;
   line-height: 2rem;
   font-weight: 700;
   width: 20vw;
@@ -203,6 +228,17 @@ body > * {
   overflow: auto; /* Add scrollbars if needed */
   white-space: nowrap; /* Prevent text from wrapping */
   margin-right: 15px; /* Add margin to space out the text */
+}
+
+/* Hide scrollbar for Webkit browsers (Chrome, Safari) */
+.song-title::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge, and Firefox */
+.song-title {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 .song-artist {
@@ -213,6 +249,9 @@ body > * {
   font-weight: 400;
   width: 10vw;
   height: 2rem;
+  display: flex;
+  align-items: center; /* Center items vertically */
+  justify-content: center; /* Center items horizontally */
 }
 
 .catalog-pic {
@@ -230,6 +269,9 @@ body > * {
   font-weight: 400;
   width: 10vw;
   height: 2rem;
+  display: flex;
+  align-items: center; /* Center items vertically */
+  justify-content: center; /* Center items horizontally */
 }
 
 .song-heart-list {
@@ -238,14 +280,17 @@ body > * {
   margin-right: 1vw;
 }
 
-.song-heart-number {
+.song-review-number, .song-heart-number {
   color: #c2bdbd;
-  text-align: left;
+  text-align: center; /* Center text horizontally */
   font-family: "Space Grotesk";
   font-size: 1rem;
   font-weight: 400;
-  height: 2rem;
+  height: 1.4rem;
   width: 6vw;
+  display: flex;
+  align-items: center; /* Center items vertically */
+  justify-content: center; /* Center items horizontally */
 }
 
 .song-review-icon {
@@ -260,14 +305,8 @@ body > * {
   font-family: "Space Grotesk";
   font-size: 1rem;
   font-weight: 400;
-  height: 2rem;
+  height: 1rem;
   width: 6vw;
-}
-
-.song-heart-select {
-  width: 30px;
-  height: 30px;
-  margin-left: 1vw;
 }
 
 .red-pink-heart {
