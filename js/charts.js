@@ -50,11 +50,12 @@ async function fetchAndDisplaySongs() {
                         console.log("Accessed popular charts.");
                         break;
                     case "critical":
+                        musicData.sort((a, b) => b.dislike_count - a.dislike_count);
                         updateCritical(musicData);
                         console.log("Accessed critical charts");
                         break;
                     case "based":
-                        updateCritical(musicData);
+                        updateBased(musicData);
                         console.log("Accessed based charts");
                         break;
                     default:
@@ -102,23 +103,6 @@ function updatePopular(musicData) {
 }
 
 function updateCritical(musicData) {
-    // Sorting by (weighted) 80% dislike count and 20% comment count
-    // Compute total weights
-    const totalDislikes = musicData.reduce((sum, song) => sum + song.dislike_count, 0) || 1;
-    const totalComments = musicData.reduce((sum, song) => sum + song.comments.length, 0) || 1;
-
-    // Compute weighted scores
-    musicData = musicData.map(song => {
-        const dislikeWeight = song.dislike_count / totalDislikes;
-        const commentWeight = song.comments.length / totalComments;
-
-        song.score = (dislikeWeight * 0.8) + (commentWeight * 0.2);
-        return song;
-    });
-
-    // Sort music data by score (highest first)
-    musicData.sort((a, b) => b.score - a.score);
-
     let gridContainer = document.querySelector(".critical-grid");
     if (!gridContainer) {
         gridContainer = document.createElement("div");
@@ -149,26 +133,21 @@ function updateCritical(musicData) {
 }
 
 function updateBased(musicData) {
-    // Sorting by (weighted) 60% listen count, 30% like count, 10% comment count
-    const totalListens = musicData.reduce((sum, song) => sum + song.listen_count, 0) || 1;
-    const totalLikes = musicData.reduce((sum, song) => sum + song.likes, 0) || 1;
-    const totalComments = musicData.reduce((sum, song) => sum + song.comments.length, 0) || 1;
-
-    console.log("Total listens:", totalListens, "Total likes:", totalLikes, "Total comments:", totalComments);
+    // Sorting by (weighted) 60% listen count, 40% like count
+    const totalListens = musicData.reduce((sum, song) => sum + song.listen_count, 0) || 1; // Prevent division by zero
+    const totalLikes = musicData.reduce((sum, song) => sum + song.like_count, 0) || 1;
 
     // Compute weighted scores for each song
     const updatedMusicData = musicData.map(song => {
         const listenWeight = song.listen_count / totalListens;
-        const likeWeight = song.likes / totalLikes;
-        const commentWeight = song.comments.length / totalComments;
+        const likeWeight = song.like_count / totalLikes;
 
-        song.score = (listenWeight * 0.6) + 
-                     (likeWeight * 0.3) + 
-                     (commentWeight * 0.1);
-        return song;
+        return {
+            ...song,
+            score: (listenWeight * 0.6) + (likeWeight * 0.4)
+        };
     });
 
-    // Sort music data by score (highest first)
     updatedMusicData.sort((a, b) => b.score - a.score);
 
     console.log("Sorted music data:", updatedMusicData);
@@ -201,3 +180,4 @@ function updateBased(musicData) {
         });
     });
 }
+
