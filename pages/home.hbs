@@ -95,9 +95,9 @@
         <div class="catalog-list">
           {{#each music}}
           <div class="song-box">
-            <a href="/pages/review.html"
+            <a href="/review/{{this.id}}"
               ><img class="catalog-pic" src="{{this.image}}" /></a>
-            <div class="song-title">{{this.name}}</div>
+            <div class="song-title"><a href="/review/{{this.id}}" class="song-title-link">{{this.name}}</a></div>
             <div class="song-artist">{{this.artists}}</div>
             <div class="song-album">{{this.album}}</div>
             <img class="song-heart-list" src="../svg/home/heart_list.svg" />
