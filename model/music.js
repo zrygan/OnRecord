@@ -5,7 +5,7 @@ mongoose
   .connect("mongodb://localhost:27017/onrecord", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    serverSelectionTimeoutMS: 30000, // Increase timeout to 30 seconds
+    serverSelectionTimeoutMS: 30000,
   })
   .then(() => console.log("Connected to MongoDB"))
   .catch(() => console.error("Could not connect to MongoDB"));
@@ -18,16 +18,11 @@ const schema_music = new mongoose.Schema({
   genres: { type: [String], required: true },
   description: { type: String, required: true },
   image: { type: String, required: true },
-  likes: { type: [String], default: [] },
-  listen_count: { type: Number, required: true, default: 0 },
-  like_count: { type: Number, required: true, default: 0 },
-  dislike_count: { type: Number, required: true, default: 0 },
-	comment_count: { type: Number, required: true, default: 0 }
+  likes: { type: [String], default: [] }
 });
 
 const Music = mongoose.model("Music", schema_music);
 
-// Read JSON file
 fs.readFile("data\\music.json", "utf8", async (err, data) => {
   if (err) {
     console.error("Error reading file:", err);
@@ -35,40 +30,15 @@ fs.readFile("data\\music.json", "utf8", async (err, data) => {
   }
 
   try {
-    // Parse JSON data
-    let musicData = JSON.parse(data);
-
-    // Randomized metrics
-    musicData = musicData.map((item) => ({
-      ...item,
-      listen_count: item.listen_count ?? Math.floor(Math.random() * 10001),
-      like_count: item.like_count ?? Math.floor(Math.random() * 10001),
-      dislike_count: item.dislike_count ?? Math.floor(Math.random() * 10001),
-      comment_count: item.comment_count ?? Math.floor(Math.random() * 10001),
-    }));
-
-    // Empty the Music collection
+    const musicData = JSON.parse(data);
     await Music.deleteMany({});
     console.log("Music collection emptied");
-
-    // Insert the data into the database
-    for (const item of musicData) {
-      await Music.create({
-        ...item,
-        listen_count: Math.floor(Math.random() * 10001),
-        like_count: Math.floor(Math.random() * 10001),
-        dislike_count: Math.floor(Math.random() * 10001),
-        comment_count: Math.floor(Math.random() * 10001),
-      });
-    }
-
+    await Music.insertMany(musicData);
     console.log("Music Data inserted successfully");
   } catch (err) {
     console.error("Error processing data:", err);
   }
 });
-
-// CRUD Functions
 
 const create_music = async (
   name,
@@ -78,11 +48,7 @@ const create_music = async (
   genres,
   description,
   image,
-  likes = [],
-  listen_count,
-  like_count,
-  dislike_count,
-	comment_count
+  likes = []
 ) => {
   try {
     const new_music = new Music({
@@ -93,11 +59,7 @@ const create_music = async (
       genres,
       description,
       image,
-      likes,
-      listen_count: Math.floor(Math.random() * 10001),
-      like_count: Math.floor(Math.random() * 10001),
-      dislike_count: Math.floor(Math.random() * 10001),
-      comment_count: Math.floor(Math.random() * 10001)
+      likes
     });
 
     await new_music.save();
@@ -183,13 +145,12 @@ const delete_music = async (id) => {
 };
 
 const musicExists = async (name, artists, album) => {
-  console.log("Checking existence for:", { name, artists, album }); // Debugging statement
+  console.log("Checking existence for:", { name, artists, album });
   const existingMusic = await Music.find({ name, artists, album });
-  console.log("Existing music found:", existingMusic); // Debugging statement
+  console.log("Existing music found:", existingMusic);
   return existingMusic.length > 0;
 };
 
-// Export the functions and model
 module.exports = {
   create_music,
   read_music_all,

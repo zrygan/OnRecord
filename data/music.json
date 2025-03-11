@@ -233,5 +233,437 @@
     "genres": ["Pop", "Electric"],
     "description": "Brat is the sixth studio album by English singer Charli XCX, released through Atlantic Records on 7 June 2024. It features production by Charli XCX, her longtime executive producer A. G. Cook, Finn Keane, Cirkut, her partner George Daniel, and others.",
     "image": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Charli_XCX_-_Brat_%28album_cover%29.svg"
-  }
+  },
+  {
+    "name": "Buddy Holly",
+    "artists": ["Weezer"],
+    "album": "Weezer (Blue Album)",
+    "release_date": "1994-05-10T00:00:00Z",
+    "genres": ["Alternative Rock", "Power Pop"],
+    "description": "A song by American rock band Weezer, released as the second single from their debut album, Weezer (Blue Album).",
+    "image": "https://i.scdn.co/image/ab67616d0000b273345536847e60f622ee0eae96"
+},
+{
+    "name": "Undone – The Sweater Song",
+    "artists": ["Weezer"],
+    "album": "Weezer (Blue Album)",
+    "release_date": "1994-05-10T00:00:00Z",
+    "genres": ["Alternative Rock", "Power Pop"],
+    "description": "A song by American rock band Weezer, released as the debut single from their debut album, Weezer (Blue Album).",
+    "image": "https://i.scdn.co/image/ab67616d0000b273345536847e60f622ee0eae96"
+},
+{
+    "name": "Say It Ain't So",
+    "artists": ["Weezer"],
+    "album": "Weezer (Blue Album)",
+    "release_date": "1994-05-10T00:00:00Z",
+    "genres": ["Alternative Rock", "Power Pop"],
+    "description": "A song by American rock band Weezer, released as the third and final single from their debut album, Weezer (Blue Album).",
+    "image": "https://i.scdn.co/image/ab67616d0000b273345536847e60f622ee0eae96"
+},
+{
+    "name": "In the Garage",
+    "artists": ["Weezer"],
+    "album": "Weezer (Blue Album)",
+    "release_date": "1994-05-10T00:00:00Z",
+    "genres": ["Alternative Rock", "Power Pop"],
+    "description": "A song by American rock band Weezer, from their debut album, Weezer (Blue Album).",
+    "image": "https://i.scdn.co/image/ab67616d0000b273345536847e60f622ee0eae96"
+},
+{
+    "name": "Holiday",
+    "artists": ["Weezer"],
+    "album": "Weezer (Blue Album)",
+    "release_date": "1994-05-10T00:00:00Z",
+    "genres": ["Alternative Rock", "Power Pop"],
+    "description": "A song by American rock band Weezer, from their debut album, Weezer (Blue Album).",
+    "image": "https://i.scdn.co/image/ab67616d0000b273345536847e60f622ee0eae96"
+},
+{
+    "name": "Only in Dreams",
+    "artists": ["Weezer"],
+    "album": "Weezer (Blue Album)",
+    "release_date": "1994-05-10T00:00:00Z",
+    "genres": ["Alternative Rock", "Power Pop"],
+    "description": "A song by American rock band Weezer, from their debut album, Weezer (Blue Album).",
+    "image": "https://i.scdn.co/image/ab67616d0000b273345536847e60f622ee0eae96"
+},
+{
+  "name": "It's Raining After All",
+  "artists": ["ツユ"],
+  "album": "It's Raining After All",
+  "release_date": "2019-06-12T00:00:00Z",
+  "genres": ["J-Pop", "Vocaloid"],
+  "description": "A song by Japanese artist ツユ (Tuyu), known for her unique vocal style and emotional lyrics.",
+  "image": "https://i.scdn.co/image/ab67616d0000b273ec61804d798b2c42fe23f7c3"
+},
+{
+  "name": "Mayonaka no Door - Stay With Me",
+  "artists": ["Miki Matsubara"],
+  "album": "Miki Matsubara Best Collection",
+  "release_date": "1980-11-05T00:00:00Z",
+  "genres": ["J-Pop", "City Pop"],
+  "description": "A classic city pop song by Miki Matsubara, known for its catchy melody and nostalgic feel.",
+  "image": "https://i.scdn.co/image/ab67616d0000b27381052badd62d5e14c3377786"
+},
+{
+  "name": "Neat na Gogo 3 ji",
+  "artists": ["Miki Matsubara"],
+  "album": "Miki Matsubara Best Collection",
+  "release_date": "1980-11-05T00:00:00Z",
+  "genres": ["J-Pop", "City Pop"],
+  "description": "A popular track from Miki Matsubara's best collection, featuring her smooth vocals and a groovy city pop arrangement.",
+  "image": "https://i.scdn.co/image/ab67616d0000b27381052badd62d5e14c3377786"
+},
+{
+  "name": "Ai wa Energy",
+  "artists": ["Miki Matsubara"],
+  "album": "Miki Matsubara Best Collection",
+  "release_date": "1980-11-05T00:00:00Z",
+  "genres": ["J-Pop", "City Pop"],
+  "description": "A vibrant and energetic song by Miki Matsubara, part of her best collection album.",
+  "image": "https://i.scdn.co/image/ab67616d0000b27381052badd62d5e14c3377786"
+},
+{
+  "name": "Suki",
+  "artists": ["Miki Matsubara"],
+  "album": "Miki Matsubara Best Collection",
+  "release_date": "1980-11-05T00:00:00Z",
+  "genres": ["J-Pop", "City Pop"],
+  "description": "A romantic city pop song by Miki Matsubara, included in her best collection album.",
+  "image": "https://i.scdn.co/image/ab67616d0000b27381052badd62d5e14c3377786"
+}, 
+{
+  "name": "One More Time",
+  "artists": ["Daft Punk"],
+  "album": "Discovery",
+  "release_date": "2001-03-12T00:00:00Z",
+  "genres": ["House", "Dance"],
+  "description": "A song by Daft Punk, released as the lead single from their second studio album, Discovery.",
+  "image": "https://upload.wikimedia.org/wikipedia/en/2/27/Daft_Punk_-_Discovery.png"
+},
+{
+  "name": "Aerodynamic",
+  "artists": ["Daft Punk"],
+  "album": "Discovery",
+  "release_date": "2001-03-12T00:00:00Z",
+  "genres": ["House", "Dance"],
+  "description": "A song by Daft Punk, known for its distinctive guitar solo and electronic beats.",
+  "image": "https://upload.wikimedia.org/wikipedia/en/2/27/Daft_Punk_-_Discovery.png"
+},
+{
+  "name": "Digital Love",
+  "artists": ["Daft Punk"],
+  "album": "Discovery",
+  "release_date": "2001-03-12T00:00:00Z",
+  "genres": ["House", "Dance"],
+  "description": "A song by Daft Punk, featuring a blend of electronic music and rock elements.",
+  "image": "https://upload.wikimedia.org/wikipedia/en/2/27/Daft_Punk_-_Discovery.png"
+},
+{
+  "name": "Harder, Better, Faster, Stronger",
+  "artists": ["Daft Punk"],
+  "album": "Discovery",
+  "release_date": "2001-03-12T00:00:00Z",
+  "genres": ["House", "Dance"],
+  "description": "A song by Daft Punk, known for its catchy robotic vocals and electronic beats.",
+  "image": "https://upload.wikimedia.org/wikipedia/en/2/27/Daft_Punk_-_Discovery.png"
+},
+{
+  "name": "Crescendolls",
+  "artists": ["Daft Punk"],
+  "album": "Discovery",
+  "release_date": "2001-03-12T00:00:00Z",
+  "genres": ["House", "Dance"],
+  "description": "A song by Daft Punk, featuring a lively and upbeat electronic sound.",
+  "image": "https://upload.wikimedia.org/wikipedia/en/2/27/Daft_Punk_-_Discovery.png"
+},
+{
+  "name": "Nightvision",
+  "artists": ["Daft Punk"],
+  "album": "Discovery",
+  "release_date": "2001-03-12T00:00:00Z",
+  "genres": ["House", "Dance"],
+  "description": "A short instrumental track by Daft Punk, featuring a mellow and atmospheric sound.",
+  "image": "https://upload.wikimedia.org/wikipedia/en/2/27/Daft_Punk_-_Discovery.png"
+},
+{
+  "name": "Superheroes",
+  "artists": ["Daft Punk"],
+  "album": "Discovery",
+  "release_date": "2001-03-12T00:00:00Z",
+  "genres": ["House", "Dance"],
+  "description": "A song by Daft Punk, featuring a repetitive vocal sample and energetic beats.",
+  "image": "https://upload.wikimedia.org/wikipedia/en/2/27/Daft_Punk_-_Discovery.png"
+},
+{
+  "name": "High Life",
+  "artists": ["Daft Punk"],
+  "album": "Discovery",
+  "release_date": "2001-03-12T00:00:00Z",
+  "genres": ["House", "Dance"],
+  "description": "A song by Daft Punk, featuring a funky and upbeat electronic sound.",
+  "image": "https://upload.wikimedia.org/wikipedia/en/2/27/Daft_Punk_-_Discovery.png"
+},
+{
+  "name": "Something About Us",
+  "artists": ["Daft Punk"],
+  "album": "Discovery",
+  "release_date": "2001-03-12T00:00:00Z",
+  "genres": ["House", "Dance"],
+  "description": "A song by Daft Punk, featuring a smooth and romantic electronic sound.",
+  "image": "https://upload.wikimedia.org/wikipedia/en/2/27/Daft_Punk_-_Discovery.png"
+},
+{
+  "name": "Voyager",
+  "artists": ["Daft Punk"],
+  "album": "Discovery",
+  "release_date": "2001-03-12T00:00:00Z",
+  "genres": ["House", "Dance"],
+  "description": "A song by Daft Punk, featuring a mellow and groovy electronic sound.",
+  "image": "https://upload.wikimedia.org/wikipedia/en/2/27/Daft_Punk_-_Discovery.png"
+},
+{
+  "name": "Veridis Quo",
+  "artists": ["Daft Punk"],
+  "album": "Discovery",
+  "release_date": "2001-03-12T00:00:00Z",
+  "genres": ["House", "Dance"],
+  "description": "A song by Daft Punk, featuring a haunting and atmospheric electronic sound.",
+  "image": "https://upload.wikimedia.org/wikipedia/en/2/27/Daft_Punk_-_Discovery.png"
+},
+{
+  "name": "Short Circuit",
+  "artists": ["Daft Punk"],
+  "album": "Discovery",
+  "release_date": "2001-03-12T00:00:00Z",
+  "genres": ["House", "Dance"],
+  "description": "A song by Daft Punk, featuring a glitchy and experimental electronic sound.",
+  "image": "https://upload.wikimedia.org/wikipedia/en/2/27/Daft_Punk_-_Discovery.png"
+},
+{
+  "name": "Face to Face",
+  "artists": ["Daft Punk"],
+  "album": "Discovery",
+  "release_date": "2001-03-12T00:00:00Z",
+  "genres": ["House", "Dance"],
+  "description": "A song by Daft Punk, featuring a collaboration with Todd Edwards and a catchy electronic sound.",
+  "image": "https://upload.wikimedia.org/wikipedia/en/2/27/Daft_Punk_-_Discovery.png"
+},
+{
+  "name": "Too Long",
+  "artists": ["Daft Punk"],
+  "album": "Discovery",
+  "release_date": "2001-03-12T00:00:00Z",
+  "genres": ["House", "Dance"],
+  "description": "The closing track of Daft Punk's Discovery album, featuring a long and epic electronic sound.",
+  "image": "https://upload.wikimedia.org/wikipedia/en/2/27/Daft_Punk_-_Discovery.png"
+},
+{
+  "name": "Apricot Princess",
+  "artists": ["Rex Orange County"],
+  "album": "Apricot Princess",
+  "release_date": "2017-04-26T00:00:00Z",
+  "genres": ["Indie Pop", "Alternative"],
+  "description": "The title track of Rex Orange County's second studio album, featuring a blend of indie pop and alternative sounds.",
+  "image": "https://i.scdn.co/image/ab67616d0000b27394c6cd33b8be451c2372c6fa"
+},
+{
+  "name": "Television / So Far So Good",
+  "artists": ["Rex Orange County"],
+  "album": "Apricot Princess",
+  "release_date": "2017-04-26T00:00:00Z",
+  "genres": ["Indie Pop", "Alternative"],
+  "description": "A song by Rex Orange County from his second studio album, combining catchy melodies with introspective lyrics.",
+  "image": "https://i.scdn.co/image/ab67616d0000b27394c6cd33b8be451c2372c6fa"
+},
+{
+  "name": "Nothing",
+  "artists": ["Rex Orange County"],
+  "album": "Apricot Princess",
+  "release_date": "2017-04-26T00:00:00Z",
+  "genres": ["Indie Pop", "Alternative"],
+  "description": "A track from Rex Orange County's album 'Apricot Princess', featuring a mellow and reflective sound.",
+  "image": "https://i.scdn.co/image/ab67616d0000b27394c6cd33b8be451c2372c6fa"
+},
+{
+  "name": "Sycamore Girl",
+  "artists": ["Rex Orange County"],
+  "album": "Apricot Princess",
+  "release_date": "2017-04-26T00:00:00Z",
+  "genres": ["Indie Pop", "Alternative"],
+  "description": "A love song by Rex Orange County, showcasing his heartfelt lyrics and smooth vocals.",
+  "image": "https://i.scdn.co/image/ab67616d0000b27394c6cd33b8be451c2372c6fa"
+},
+{
+  "name": "Untitled",
+  "artists": ["Rex Orange County"],
+  "album": "Apricot Princess",
+  "release_date": "2017-04-26T00:00:00Z",
+  "genres": ["Indie Pop", "Alternative"],
+  "description": "An instrumental track from Rex Orange County's 'Apricot Princess' album, featuring a soothing and melodic sound.",
+  "image": "https://i.scdn.co/image/ab67616d0000b27394c6cd33b8be451c2372c6fa"
+},
+{
+  "name": "4 Seasons",
+  "artists": ["Rex Orange County"],
+  "album": "Apricot Princess",
+  "release_date": "2017-04-26T00:00:00Z",
+  "genres": ["Indie Pop", "Alternative"],
+  "description": "A song by Rex Orange County, reflecting on the changing seasons and personal growth.",
+  "image": "https://i.scdn.co/image/ab67616d0000b27394c6cd33b8be451c2372c6fa"
+},
+{
+  "name": "Waiting Room",
+  "artists": ["Rex Orange County"],
+  "album": "Apricot Princess",
+  "release_date": "2017-04-26T00:00:00Z",
+  "genres": ["Indie Pop", "Alternative"],
+  "description": "A track from 'Apricot Princess', featuring introspective lyrics and a laid-back vibe.",
+  "image": "https://i.scdn.co/image/ab67616d0000b27394c6cd33b8be451c2372c6fa"
+},
+{
+  "name": "Rain Man",
+  "artists": ["Rex Orange County"],
+  "album": "Apricot Princess",
+  "release_date": "2017-04-26T00:00:00Z",
+  "genres": ["Indie Pop", "Alternative"],
+  "description": "A song by Rex Orange County, blending indie pop with jazz influences.",
+  "image": "https://i.scdn.co/image/ab67616d0000b27394c6cd33b8be451c2372c6fa"
+},
+{
+  "name": "Never Enough",
+  "artists": ["Rex Orange County"],
+  "album": "Apricot Princess",
+  "release_date": "2017-04-26T00:00:00Z",
+  "genres": ["Indie Pop", "Alternative"],
+  "description": "A track from 'Apricot Princess', featuring upbeat melodies and reflective lyrics.",
+  "image": "https://i.scdn.co/image/ab67616d0000b27394c6cd33b8be451c2372c6fa"
+},
+{
+  "name": "Happiness",
+  "artists": ["Rex Orange County"],
+  "album": "Apricot Princess",
+  "release_date": "2017-04-26T00:00:00Z",
+  "genres": ["Indie Pop", "Alternative"],
+  "description": "The closing track of 'Apricot Princess', expressing themes of love and contentment.",
+  "image": "https://i.scdn.co/image/ab67616d0000b27394c6cd33b8be451c2372c6fa"
+},
+{
+  "name": "Helena",
+  "artists": ["My Chemical Romance"],
+  "album": "Three Cheers for Sweet Revenge",
+  "release_date": "2004-06-08T00:00:00Z",
+  "genres": ["Alternative Rock", "Emo"],
+  "description": "The opening track of My Chemical Romance's second studio album, featuring a blend of alternative rock and emo sounds.",
+  "image": "https://i.scdn.co/image/ab67616d0000b273cab7ae4868e9f9ce6bdfdf43"
+},
+{
+  "name": "Give 'Em Hell, Kid",
+  "artists": ["My Chemical Romance"],
+  "album": "Three Cheers for Sweet Revenge",
+  "release_date": "2004-06-08T00:00:00Z",
+  "genres": ["Alternative Rock", "Emo"],
+  "description": "A high-energy track from My Chemical Romance's second studio album, combining aggressive guitar riffs with emotional lyrics.",
+  "image": "https://i.scdn.co/image/ab67616d0000b273cab7ae4868e9f9ce6bdfdf43"
+},
+{
+  "name": "To the End",
+  "artists": ["My Chemical Romance"],
+  "album": "Three Cheers for Sweet Revenge",
+  "release_date": "2004-06-08T00:00:00Z",
+  "genres": ["Alternative Rock", "Emo"],
+  "description": "A song by My Chemical Romance, featuring dark and intense themes with a catchy melody.",
+  "image": "https://i.scdn.co/image/ab67616d0000b273cab7ae4868e9f9ce6bdfdf43"
+},
+{
+  "name": "You Know What They Do to Guys Like Us in Prison",
+  "artists": ["My Chemical Romance"],
+  "album": "Three Cheers for Sweet Revenge",
+  "release_date": "2004-06-08T00:00:00Z",
+  "genres": ["Alternative Rock", "Emo"],
+  "description": "A track from My Chemical Romance's album 'Three Cheers for Sweet Revenge', featuring a collaboration with Bert McCracken of The Used.",
+  "image": "https://i.scdn.co/image/ab67616d0000b273cab7ae4868e9f9ce6bdfdf43"
+},
+{
+  "name": "I'm Not Okay (I Promise)",
+  "artists": ["My Chemical Romance"],
+  "album": "Three Cheers for Sweet Revenge",
+  "release_date": "2004-06-08T00:00:00Z",
+  "genres": ["Alternative Rock", "Emo"],
+  "description": "One of the most popular songs by My Chemical Romance, known for its catchy chorus and relatable lyrics.",
+  "image": "https://i.scdn.co/image/ab67616d0000b273cab7ae4868e9f9ce6bdfdf43"
+},
+{
+  "name": "The Ghost of You",
+  "artists": ["My Chemical Romance"],
+  "album": "Three Cheers for Sweet Revenge",
+  "release_date": "2004-06-08T00:00:00Z",
+  "genres": ["Alternative Rock", "Emo"],
+  "description": "A haunting and emotional track by My Chemical Romance, featuring themes of loss and longing.",
+  "image": "https://i.scdn.co/image/ab67616d0000b273cab7ae4868e9f9ce6bdfdf43"
+},
+{
+  "name": "The Jetset Life Is Gonna Kill You",
+  "artists": ["My Chemical Romance"],
+  "album": "Three Cheers for Sweet Revenge",
+  "release_date": "2004-06-08T00:00:00Z",
+  "genres": ["Alternative Rock", "Emo"],
+  "description": "A song by My Chemical Romance, featuring dark lyrics and a driving rhythm.",
+  "image": "https://i.scdn.co/image/ab67616d0000b273cab7ae4868e9f9ce6bdfdf43"
+},
+{
+  "name": "Interlude",
+  "artists": ["My Chemical Romance"],
+  "album": "Three Cheers for Sweet Revenge",
+  "release_date": "2004-06-08T00:00:00Z",
+  "genres": ["Alternative Rock", "Emo"],
+  "description": "A short instrumental track by My Chemical Romance, serving as a transition between songs on the album.",
+  "image": "https://i.scdn.co/image/ab67616d0000b273cab7ae4868e9f9ce6bdfdf43"
+},
+{
+  "name": "Thank You for the Venom",
+  "artists": ["My Chemical Romance"],
+  "album": "Three Cheers for Sweet Revenge",
+  "release_date": "2004-06-08T00:00:00Z",
+  "genres": ["Alternative Rock", "Emo"],
+  "description": "A high-energy track by My Chemical Romance, featuring aggressive guitar riffs and powerful vocals.",
+  "image": "https://i.scdn.co/image/ab67616d0000b273cab7ae4868e9f9ce6bdfdf43"
+},
+{
+  "name": "Hang 'Em High",
+  "artists": ["My Chemical Romance"],
+  "album": "Three Cheers for Sweet Revenge",
+  "release_date": "2004-06-08T00:00:00Z",
+  "genres": ["Alternative Rock", "Emo"],
+  "description": "A fast-paced and intense song by My Chemical Romance, featuring themes of revenge and justice.",
+  "image": "https://i.scdn.co/image/ab67616d0000b273cab7ae4868e9f9ce6bdfdf43"
+},
+{
+  "name": "It's Not a Fashion Statement, It's a Deathwish",
+  "artists": ["My Chemical Romance"],
+  "album": "Three Cheers for Sweet Revenge",
+  "release_date": "2004-06-08T00:00:00Z",
+  "genres": ["Alternative Rock", "Emo"],
+  "description": "A song by My Chemical Romance, featuring dark and emotional lyrics with a powerful melody.",
+  "image": "https://i.scdn.co/image/ab67616d0000b273cab7ae4868e9f9ce6bdfdf43"
+},
+{
+  "name": "Cemetery Drive",
+  "artists": ["My Chemical Romance"],
+  "album": "Three Cheers for Sweet Revenge",
+  "release_date": "2004-06-08T00:00:00Z",
+  "genres": ["Alternative Rock", "Emo"],
+  "description": "A haunting track by My Chemical Romance, featuring themes of loss and regret.",
+  "image": "https://i.scdn.co/image/ab67616d0000b273cab7ae4868e9f9ce6bdfdf43"
+},
+{
+  "name": "I Never Told You What I Do for a Living",
+  "artists": ["My Chemical Romance"],
+  "album": "Three Cheers for Sweet Revenge",
+  "release_date": "2004-06-08T00:00:00Z",
+  "genres": ["Alternative Rock", "Emo"],
+  "description": "The closing track of My Chemical Romance's 'Three Cheers for Sweet Revenge', featuring intense and emotional lyrics.",
+  "image": "https://i.scdn.co/image/ab67616d0000b273cab7ae4868e9f9ce6bdfdf43"
+}
 ]

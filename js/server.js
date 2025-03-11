@@ -71,7 +71,22 @@ app.get("/", (req, res) => {
 app.get("/home", async (req, res) => {
   try {
     const music = await Music.find();
-    const user = req.session.user;
+    const randomSongs = await Music.aggregate([{ $sample: { size: 15 } }]);
+    let user = req.session.user;
+
+    // If no user is logged in, use the default user
+    if (!user) {
+      user = {
+        surname: "Dummy",
+        firstname: "User",
+        email: "dummy@example.com",
+        username: "Anonymous",
+        password: "password",
+        birthday: "1990-01-01T00:00:00.000Z",
+        date_created: "2025-03-11T00:00:00.000Z",
+        type: "normal"
+      };
+    }
 
     const musicWithCounts = await Promise.all(music.map(async (song) => {
       const reviews = await Review.countDocuments({ songId: song._id });
@@ -82,7 +97,7 @@ app.get("/home", async (req, res) => {
       };
     }));
 
-    res.render("home", { music: musicWithCounts, user });
+    res.render("home", { music: musicWithCounts, randomSongs, user });
   } catch (error) {
     console.error("Error fetching music data:", error);
     res.status(500).send("Error fetching music data");
