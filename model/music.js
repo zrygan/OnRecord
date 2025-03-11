@@ -38,30 +38,22 @@ fs.readFile("data\\music.json", "utf8", async (err, data) => {
     // Parse JSON data
     let musicData = JSON.parse(data);
 
-    // Randomized metrics
-    musicData = musicData.map((item) => ({
-      ...item,
-      listen_count: item.listen_count ?? Math.floor(Math.random() * 10001),
-      like_count: item.like_count ?? Math.floor(Math.random() * 10001),
-      dislike_count: item.dislike_count ?? Math.floor(Math.random() * 10001),
-      comment_count: item.comment_count ?? Math.floor(Math.random() * 10001),
-    }));
-
     // Empty the Music collection
     await Music.deleteMany({});
     console.log("Music collection emptied");
 
     // Insert the data into the database
+    // insertMany() is not used here because all entries will end up having the same one random number. Each entry has to be inserted individually so the RNG will have a different result this time.
     for (const item of musicData) {
       await Music.create({
         ...item,
-        listen_count: Math.floor(Math.random() * 10001),
-        like_count: Math.floor(Math.random() * 10001),
-        dislike_count: Math.floor(Math.random() * 10001),
-        comment_count: Math.floor(Math.random() * 10001),
+        listen_count: Math.floor(Math.random() * 3000001),
+        like_count: item.like_count,
+        dislike_count: item.dislike_count,
+        comment_count: item.comment_count
       });
     }
-
+    
     console.log("Music Data inserted successfully");
   } catch (err) {
     console.error("Error processing data:", err);
@@ -94,10 +86,10 @@ const create_music = async (
       description,
       image,
       likes,
-      listen_count: Math.floor(Math.random() * 10001),
-      like_count: Math.floor(Math.random() * 10001),
-      dislike_count: Math.floor(Math.random() * 10001),
-      comment_count: Math.floor(Math.random() * 10001)
+      listen_count,
+      like_count,
+      dislike_count,
+      comment_count
     });
 
     await new_music.save();
@@ -183,9 +175,9 @@ const delete_music = async (id) => {
 };
 
 const musicExists = async (name, artists, album) => {
-  console.log("Checking existence for:", { name, artists, album }); // Debugging statement
+  console.log("Checking existence for:", { name, artists, album });
   const existingMusic = await Music.find({ name, artists, album });
-  console.log("Existing music found:", existingMusic); // Debugging statement
+  console.log("Existing music found:", existingMusic);
   return existingMusic.length > 0;
 };
 

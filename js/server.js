@@ -45,6 +45,15 @@ app.get("/api/metrics", async (req, res) => {
   }
 });
 
+app.get("/api/music", async (req, res) => {
+  try {
+    const musicData = await Music.find();
+    res.json(musicData);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch music data" });
+  }
+});
+
 const viewPath = path.join(__dirname, "../pages");
 
 app.use(express.json());
@@ -73,6 +82,10 @@ app.get("/home", async (req, res) => {
     const music = await Music.find();
     const user = req.session.user;
 
+    checkUser(user);
+
+    const randomSongs = await Music.aggregate([{ $sample: { size: 15 } }]);
+
     const musicWithCounts = await Promise.all(music.map(async (song) => {
       const reviews = await Review.countDocuments({ songId: song._id });
       return {
@@ -82,12 +95,82 @@ app.get("/home", async (req, res) => {
       };
     }));
 
-    res.render("home", { music: musicWithCounts, user });
+    res.render("home", { music: musicWithCounts, randomSongs, user });
   } catch (error) {
     console.error("Error fetching music data:", error);
     res.status(500).send("Error fetching music data");
   }
 });
+
+// Charts
+app.get("/charts", async (req, res) => {
+  try {
+    let user = req.session.user;
+    if (!checkUser(user)) {
+      return res.status(500).send("User not found in the database.");
+    }
+    res.render("charts", { user });
+  
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error fetching charts data");
+  }
+});
+
+app.get("/charts-popular", async (req, res) => {
+  try {
+    const music = await Music.find();
+
+    let user = req.session.user;
+
+    if (!checkUser(user)) {
+      return res.status(500).send("User not found in the database.");
+    }
+
+    res.render("charts-popular", { user, music });
+
+  } catch (error) {
+    console.error("Error fetching charts data:", error);
+    res.status(500).send("Error fetching charts data");
+  }
+});
+
+app.get("/charts-critical", async (req, res) => {
+  try {
+    const music = await Music.find();
+
+    let user = req.session.user;
+
+    if (!checkUser(user)) {
+      return res.status(500).send("User not found in the database.");
+    }
+
+    res.render("charts-critical", { user, music });
+
+  } catch (error) {
+    console.error("Error fetching charts data:", error);
+    res.status(500).send("Error fetching charts data");
+  }
+});
+
+app.get("/charts-based", async (req, res) => {
+  try {
+    const music = await Music.find();
+    
+    let user = req.session.user;
+
+    if (!checkUser(user)) {
+      return res.status(500).send("User not found in the database.");
+    }
+
+    res.render("charts-based", { user, music });
+
+  } catch (error) {
+      console.error("Error fetching charts data:", error);
+      res.status(500).send("Error fetching charts data");
+  }
+});
+
 
 // Login endpoint
 app.post("/login", async (req, res) => {
@@ -212,9 +295,11 @@ app.get("/api/songs/:id/likes", async (req, res) => {
 app.post("/api/songs/:id/like", async (req, res) => {
   try {
     const song = await Music.findById(req.params.id);
+
     if (!song) {
       return res.status(404).json({ error: "Song not found" });
     }
+
     const username = req.body.username;
     if (!song.likes.includes(username)) {
       song.likes.push(username);
@@ -250,6 +335,13 @@ app.listen(3000, () => {
 
 app.get("/review/:id", async (req, res) => {
   try {
+
+    let user = req.session.user;
+
+    if (!checkUser(user)) {
+      return res.status(500).send("User not found in the database.");
+    }
+
     const songID = req.params.id;
 
     // Find the song by its ID
@@ -258,8 +350,6 @@ app.get("/review/:id", async (req, res) => {
 
     // Fetch all reviews for this song
     const reviews = await Review.find({ songID });
-
-    let user = req.session.user;
 
     // Render the review page with song details and reviews
     res.render("review", { 
@@ -279,3 +369,28 @@ app.get("/review/:id", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
+
+async function checkUser(user) {
+  // TODO: make this thing not return any routes after logout mechanic is implemented
+  try {
+    if (!user) {
+      user = {
+        surname: "Dummy",
+        firstname: "User",
+        email: "dummy@example.com",
+        username: "Anonymous",
+        password: "password",
+        birthday: "1990-01-01T00:00:00.000Z",
+        date_created: "2025-03-11T00:00:00.000Z",
+        type: "normal"
+      };
+      return false;
+    }
+    const foundUser = await User.findOne({ username: user.username });
+    return foundUser || false;
+  
+  } catch (error) {
+    console.error("Error checking user:", error);
+    return false;
+  }
+}

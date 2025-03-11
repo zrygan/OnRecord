@@ -1,3 +1,4 @@
+const fs = require("fs");
 const mongoose = require("mongoose");
 
 mongoose
@@ -9,7 +10,6 @@ mongoose
   .then(() => console.log("Connected to MongoDB"))
   .catch(() => console.error("Could not connect to MongoDB"));
 
-// Define the Review Schema
 const reviewSchema = new mongoose.Schema({
   userID: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   userName: { type: String, required: true },
@@ -21,6 +21,23 @@ const reviewSchema = new mongoose.Schema({
 });
 
 const Review = mongoose.model("Review", reviewSchema);
+
+// fs.readFile("data\\reviews.json", "utf8", async (err, data) => {
+//   if (err) {
+//     console.error("Error reading file:", err);
+//     return;
+//   }
+
+//   try {
+//     let reviews = JSON.parse(data);
+//     await Review.deleteMany({}); // Clear old reviews
+//     console.log("Reviews collection emptied");
+//     await Review.insertMany(reviews);
+//     console.log("Reviews inserted successfully");
+//   } catch (err) {
+//     console.error("Error processing reviews:", err);
+//   }
+// });
 
 // CRUD Operations for Reviews
 

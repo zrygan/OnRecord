@@ -57,8 +57,8 @@
         </div>
         <!-- Charts Button -->
         <div class="charts-button">
-          <a class="charts" href="charts.html">
-            <span class="charts-text" href="charts.html">Charts</span>
+          <a class="charts" href="charts">
+            <span class="charts-text" href="charts">Charts</span>
           </a>
         </div>
         <!-- User Button -->
@@ -78,15 +78,11 @@
         <div class="yellow-bar"></div>
         <div class="random-songs">
           <div class="random-content">
-            <img src="../img/index/1.png" />
-            <img src="../img/index/2.jpg" />
-            <img src="../img/index/3.jpg" />
-            <img src="../img/index/4.jpg" />
-            <img src="../img/index/5.jpg" />
-            <img src="../img/index/6.jpg" />
-            <img src="../img/index/7.png" />
-            <img src="../img/index/8.png" />
-            <img src="../img/index/9.png" />
+            {{#each randomSongs}}
+              <a href="/review/{{this._id}}">
+                <img src="{{this.image}}" alt="{{this.name}}" />
+              </a>
+            {{/each}}
           </div>
         </div>
       </div>
@@ -94,19 +90,19 @@
         <div class="catalog-title">The Catalog</div>
         <div class="catalog-list">
           {{#each music}}
-          <div class="song-box">
-            <a href="/review/{{this.id}}"
-              ><img class="catalog-pic" src="{{this.image}}" /></a>
-            <div class="song-title"><a href="/review/{{this.id}}" class="song-title-link">{{this.name}}</a></div>
-            <div class="song-artist">{{this.artists}}</div>
-            <div class="song-album">{{this.album}}</div>
-            <img class="song-heart-list" src="../svg/home/heart_list.svg" />
-            <div class="song-heart-number">{{this.hearts}}</div>
-            <img class="song-review-icon" src="../svg/home/review-icon.svg" />
-            <div class="song-review-number">{{this.reviews}}</div>
-            <div class="song-heart-select">
-              <img class="song-heart" src="../svg/home/heart-select-gray.svg" />
-            </div>
+            <div class="song-box" data-id="{{this._id}}">
+              <a href="/review/{{this._id}}">
+              <img class="catalog-pic" src="{{this.image}}" /></a>
+              <div class="song-title">{{this.name}}</div>
+              <div class="song-artist">{{this.artists}}</div>
+              <div class="song-album">{{this.album}}</div>
+              <img class="song-heart-list" src="../svg/home/heart_list.svg" />
+              <div class="song-heart-number">{{this.hearts}}</div>
+              <img class="song-review-icon" src="../svg/home/review-icon.svg" />
+              <div class="song-review-number">{{this.reviews}}</div>
+              <div class="song-heart-select">
+                <img class="song-heart" src="../svg/home/heart-select-gray.svg" />
+              </div>
           </div>
           {{/each}}
         </div>
