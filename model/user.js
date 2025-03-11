@@ -40,6 +40,7 @@ const create_user = async (
   username,
   password,
   birthday,
+  type,
   image
 ) => {
   try {
@@ -50,6 +51,7 @@ const create_user = async (
       username,
       password,
       birthday,
+      type,
       image,
     });
 
@@ -155,6 +157,7 @@ fs.readFile("data\\user.json", "utf8", async (err, data) => {
         user.username,
         user.password,
         user.birthday,
+        user.type,
         user.image || defaultImage
       );
     }
