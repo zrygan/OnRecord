@@ -22,7 +22,7 @@
   {
     "surname": "Smith",
     "firstname": "Jane",
-    "email": "jane.smith@example.com",
+    "email": "jane.smith@onrecord.com",
     "username": "jane_smith456",
     "password": "password456",
     "birthday": "1985-05-15T00:00:00.000Z",
@@ -32,7 +32,7 @@
   {
     "surname": "Brown",
     "firstname": "Charlie",
-    "email": "charlie.brown@example.com",
+    "email": "charlie.brown@artists.onrecord.com",
     "username": "charlie_brown789",
     "password": "password789",
     "birthday": "2000-12-25T00:00:00.000Z",

@@ -241,6 +241,16 @@ body > * {
   scrollbar-width: none; /* Firefox */
 }
 
+.song-title-link {
+  color: inherit; /* Ensures the text color matches the parent */
+  text-decoration: none; /* Removes the underline */
+  transition: color 0.3s ease; 
+}
+
+.song-title-link:hover {
+  color: yellow;
+}
+
 .song-artist {
   color: #c2bdbd;
   text-align: left;

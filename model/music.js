@@ -18,7 +18,11 @@ const schema_music = new mongoose.Schema({
   genres: { type: [String], required: true },
   description: { type: String, required: true },
   image: { type: String, required: true },
-  likes: { type: [String], default: [] }
+  likes: { type: [String], default: [] },
+  listen_count: { type: Number, required: true, default: 0 },
+  like_count: { type: Number, required: true, default: 0 },
+  dislike_count: { type: Number, required: true, default: 0 },
+	comment_count: { type: Number, required: true, default: 0 }
 });
 
 const Music = mongoose.model("Music", schema_music);
@@ -32,14 +36,32 @@ fs.readFile("data\\music.json", "utf8", async (err, data) => {
 
   try {
     // Parse JSON data
-    const musicData = JSON.parse(data);
+    let musicData = JSON.parse(data);
+
+    // Randomized metrics
+    musicData = musicData.map((item) => ({
+      ...item,
+      listen_count: item.listen_count ?? Math.floor(Math.random() * 10001),
+      like_count: item.like_count ?? Math.floor(Math.random() * 10001),
+      dislike_count: item.dislike_count ?? Math.floor(Math.random() * 10001),
+      comment_count: item.comment_count ?? Math.floor(Math.random() * 10001),
+    }));
 
     // Empty the Music collection
     await Music.deleteMany({});
     console.log("Music collection emptied");
 
     // Insert the data into the database
-    await Music.insertMany(musicData);
+    for (const item of musicData) {
+      await Music.create({
+        ...item,
+        listen_count: Math.floor(Math.random() * 10001),
+        like_count: Math.floor(Math.random() * 10001),
+        dislike_count: Math.floor(Math.random() * 10001),
+        comment_count: Math.floor(Math.random() * 10001),
+      });
+    }
+
     console.log("Music Data inserted successfully");
   } catch (err) {
     console.error("Error processing data:", err);
@@ -56,7 +78,11 @@ const create_music = async (
   genres,
   description,
   image,
-  likes = []
+  likes = [],
+  listen_count,
+  like_count,
+  dislike_count,
+	comment_count
 ) => {
   try {
     const new_music = new Music({
@@ -67,7 +93,11 @@ const create_music = async (
       genres,
       description,
       image,
-      likes
+      likes,
+      listen_count: Math.floor(Math.random() * 10001),
+      like_count: Math.floor(Math.random() * 10001),
+      dislike_count: Math.floor(Math.random() * 10001),
+      comment_count: Math.floor(Math.random() * 10001)
     });
 
     await new_music.save();

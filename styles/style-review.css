@@ -5,6 +5,10 @@ body {
     background-color: var(--cyan);
 }
 
+body > * {
+    padding-top: 10px;
+}
+
 /* review section */
 .review {
     padding: 2rem;

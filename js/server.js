@@ -10,6 +10,7 @@ const {User} = require("../model/user");
 const Album = require("../model/album");
 const { read_music_all } = require("../model/music");
 const { Music } = require("../model/music");
+const { Review } = require("../model/review")
 const session = require("express-session");
 
 // Example usage of count method
@@ -245,4 +246,36 @@ app.post("/api/songs/:id/unlike", async (req, res) => {
 
 app.listen(3000, () => {
   console.log("Server running on port 3000");
+});
+
+app.get("/review/:id", async (req, res) => {
+  try {
+    const songID = req.params.id;
+
+    // Find the song by its ID
+    const song = await Music.findById(songID);
+    if (!song) return res.status(404).send("Song not found");
+
+    // Fetch all reviews for this song
+    const reviews = await Review.find({ songID });
+
+    let user = req.session.user;
+
+    // Render the review page with song details and reviews
+    res.render("review", { 
+      pageTitle: song.name, 
+      songTitle: song.name, 
+      artist: song.artists.join(", "),
+      albumCover: song.image,
+      releaseDate: song.release_date.toDateString(),
+      songGenres: song.genres,
+      songDescription: song.description,
+      songRating: reviews.length ? (reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length).toFixed(1) : "No ratings yet",
+      reviews: reviews,
+      user // If authentication is used
+    });
+  } catch (error) {
+    console.error("Error fetching song and reviews:", error.message);
+    res.status(500).send("Internal Server Error");
+  }
 });

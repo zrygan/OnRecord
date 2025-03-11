@@ -94,20 +94,20 @@
         <div class="catalog-title">The Catalog</div>
         <div class="catalog-list">
           {{#each music}}
-            <div class="song-box" data-id="{{this._id}}">
-              <a href="/pages/review.html">
-              <img class="catalog-pic" src="{{this.image}}" /></a>
-              <div class="song-title">{{this.name}}</div>
-              <div class="song-artist">{{this.artists}}</div>
-              <div class="song-album">{{this.album}}</div>
-              <img class="song-heart-list" src="../svg/home/heart_list.svg" />
-              <div class="song-heart-number">{{this.hearts}}</div>
-              <img class="song-review-icon" src="../svg/home/review-icon.svg" />
-              <div class="song-review-number">{{this.reviews}}</div>
-              <div class="song-heart-select">
-                <img class="song-heart" src="../svg/home/heart-select-gray.svg" />
-              </div>
+          <div class="song-box">
+            <a href="/review/{{this.id}}"
+              ><img class="catalog-pic" src="{{this.image}}" /></a>
+            <div class="song-title"><a href="/review/{{this.id}}" class="song-title-link">{{this.name}}</a></div>
+            <div class="song-artist">{{this.artists}}</div>
+            <div class="song-album">{{this.album}}</div>
+            <img class="song-heart-list" src="../svg/home/heart_list.svg" />
+            <div class="song-heart-number">{{this.hearts}}</div>
+            <img class="song-review-icon" src="../svg/home/review-icon.svg" />
+            <div class="song-review-number">{{this.reviews}}</div>
+            <div class="song-heart-select">
+              <img class="song-heart" src="../svg/home/heart-select-gray.svg" />
             </div>
+          </div>
           {{/each}}
         </div>
       </div>

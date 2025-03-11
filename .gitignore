@@ -94,3 +94,24 @@ lerna-debug.log
 # System Files
 .DS_Store
 Thumbs.db
+model/_mdb_catalog.wt
+model/collection-0-14946476678254813558.wt
+model/collection-2-14946476678254813558.wt
+model/collection-4-14946476678254813558.wt
+model/index-1-14946476678254813558.wt
+model/index-3-14946476678254813558.wt
+model/index-5-14946476678254813558.wt
+model/index-6-14946476678254813558.wt
+model/mongod.lock
+model/sizeStorer.wt
+model/storage.bson
+model/WiredTiger
+model/WiredTiger.lock
+model/WiredTiger.turtle
+model/WiredTiger.wt
+model/WiredTigerHS.wt
+model/diagnostic.data/metrics.2025-03-09T06-49-17Z-00000
+model/diagnostic.data/metrics.2025-03-09T07-19-38Z-00000
+model/journal/WiredTigerLog.0000000002
+model/journal/WiredTigerPreplog.0000000001
+model/charts.js
