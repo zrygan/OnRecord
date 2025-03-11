@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const fs = require("fs");
 
 mongoose
   .connect("mongodb://localhost:27017/onrecord")
@@ -23,7 +24,13 @@ const schema_user = new mongoose.Schema({
     default: "normal",
     enum: ["normal", "admin", "artist"],
   },
+  image: { type: String },
 });
+
+// Define the User model
+const User = mongoose.model("user", schema_user);
+
+module.exports = User;
 
 // CRUD Functions
 const create_user = async (
@@ -32,7 +39,8 @@ const create_user = async (
   email,
   username,
   password,
-  birthday
+  birthday,
+  image
 ) => {
   try {
     const new_user = new User({
@@ -42,6 +50,7 @@ const create_user = async (
       username,
       password,
       birthday,
+      image,
     });
 
     await new_user.save();
@@ -121,7 +130,46 @@ const delete_user = async (id) => {
   return false;
 };
 
-// Export the functions
-const collection = mongoose.model("user", schema_user);
+// Read JSON file
+fs.readFile("data\\user.json", "utf8", async (err, data) => {
+  if (err) {
+    console.error("Error reading file:", err);
+    return;
+  }
 
-module.exports = collection;
+  try {
+    // Parse JSON data
+    const users = JSON.parse(data);
+    const defaultImage = "https://i.pinimg.com/736x/f2/01/1b/f2011bfb4e87a2e5219bd4c2fb02a5e9.jpg"; // If no image is provided, use this default image
+
+    // Empty the User collection
+    await User.deleteMany({});
+    console.log("User collection emptied");
+
+    // Insert the data into the database
+    for (const user of users) {
+      await create_user(
+        user.surname,
+        user.firstname,
+        user.email,
+        user.username,
+        user.password,
+        user.birthday,
+        user.image || defaultImage
+      );
+    }
+    console.log("User data inserted successfully");
+  } catch (err) {
+    console.error("Error processing data:", err);
+  }
+});
+
+// Export the functions
+module.exports = {
+  create_user,
+  read_user_all,
+  read_user,
+  update_user,
+  delete_user,
+  User,
+};

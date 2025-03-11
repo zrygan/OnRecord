@@ -6,10 +6,11 @@ const express = require("express");
 const app = express();
 const path = require("path");
 // const hbs = require("hbs");
-const User = require("../model/user");
+const {User} = require("../model/user");
 const Album = require("../model/album");
 const { read_music_all } = require("../model/music");
 const { Music } = require("../model/music");
+const session = require("express-session");
 
 // Example usage of count method
 const countMusic = async () => {
@@ -52,6 +53,14 @@ app.set("views", viewPath);
 // Serve static files from root directory
 app.use(express.static(path.join(__dirname, "../")));
 
+// Configure session middleware
+app.use(session({
+  secret: 'SUPER-DUPER-SECRET-KEY-NO-ONE-CAN-KNOW', // Replace with your own secret key
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false } // Set to true if using HTTPS
+}));
+
 // Root route to serve index page
 app.get("/", (req, res) => {
   res.render("index");
@@ -61,8 +70,18 @@ app.get("/", (req, res) => {
 app.get("/home", async (req, res) => {
   try {
     const music = await read_music_all();
-    res.render("home", { music });
+    let user = req.session.user;
+
+    if (!user) {
+      user = await User.findOne({ username: "Anonymous" });
+      if (!user) {
+        return res.status(500).send("Dummy user not found in the database");
+      }
+    }
+
+    res.render("home", { music, user });
   } catch (error) {
+    console.error(error);
     res.status(500).send("Error fetching music data");
   }
 });
@@ -80,6 +99,7 @@ app.post("/login", async (req, res) => {
       const passwordMatch = await User.findOne({ username, password });
 
       if (passwordMatch) {
+        req.session.user = passwordMatch; // Store user information in session
         res.status(200).json({
           success: true,
           User: {
@@ -94,7 +114,7 @@ app.post("/login", async (req, res) => {
     } else {
       // User doesn't exist
       res.status(401).json({
-        error: `The acocunt ${username} doesn't exist, please register first.`,
+        error: `The account ${username} doesn't exist, please register first.`,
       });
     }
   } catch (error) {

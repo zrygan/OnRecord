@@ -1,0 +1,42 @@
+[
+  {
+    "surname": "Dummy",
+    "firstname": "User",
+    "email": "dummy@example.com",
+    "username": "Anonymous",
+    "password": "password",
+    "birthday": "1990-01-01T00:00:00.000Z",
+    "date_created": "2025-03-11T00:00:00.000Z",
+    "type": "normal"
+  },
+  {
+    "surname": "Doe",
+    "firstname": "John",
+    "email": "john.doe@example.com",
+    "username": "john_doe123",
+    "password": "password123",
+    "birthday": "1990-01-01T00:00:00.000Z",
+    "date_created": "2025-03-11T00:00:00.000Z",
+    "type": "normal"
+  },
+  {
+    "surname": "Smith",
+    "firstname": "Jane",
+    "email": "jane.smith@example.com",
+    "username": "jane_smith456",
+    "password": "password456",
+    "birthday": "1985-05-15T00:00:00.000Z",
+    "date_created": "2025-03-11T00:00:00.000Z",
+    "type": "admin"
+  },
+  {
+    "surname": "Brown",
+    "firstname": "Charlie",
+    "email": "charlie.brown@example.com",
+    "username": "charlie_brown789",
+    "password": "password789",
+    "birthday": "2000-12-25T00:00:00.000Z",
+    "date_created": "2025-03-11T00:00:00.000Z",
+    "type": "artist"
+  }
+]
