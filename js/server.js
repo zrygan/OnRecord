@@ -526,3 +526,21 @@ app.get("/admin/music", async (req, res) => {
     res.status(500).send("Error loading admin music page");
   }
 });
+
+// FIXME: @mentosberi and/or @tsuruyu
+// add your Admin user manage page route here
+app.get("/admin/music", async (req, res) => {
+  try {
+    const user = req.session.user;
+
+    if (!user || user.type !== "admin") {
+      console.log("Unauthorized access attempt to music admin");
+      return res.redirect("/home");
+    }
+
+    res.render("admin/userpage_admin", { user });
+  } catch (error) {
+    console.error("Error loading admin music page:", error);
+    res.status(500).send("Error loading admin music page");
+  }
+});
