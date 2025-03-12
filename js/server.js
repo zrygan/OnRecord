@@ -443,6 +443,43 @@ app.get("/charts-based", async (req, res) => {
   }
 });
 
+app.get("/profile", async (req, res) => {
+  try {
+    const music = await Music.find();
+    const userData = await User.find();
+
+    let user = req.session.user;
+
+    if (!checkUser(user)) {
+      return res.status(500).send("User not found in the database.");
+    }
+
+    res.render("userpage", { userData, music });
+  } catch (error) {
+    console.error("Error fetching user/music data:", error);
+    res.status(500).send("Error fetching charts data");
+  }
+});
+
+app.get("/user/:username", async (req, res) => {
+  try {
+    const music = await Music.find();
+    const userData = await User.find();
+
+    let user = req.session.user;
+
+    if (!checkUser(user)) {
+      return res.status(500).send("User not found in the database.");
+    }
+
+    res.render("userpage", { userData, music });
+  } catch (error) {
+    console.error("Error fetching user/music data:", error);
+    res.status(500).send("Error fetching charts data");
+  }
+});
+
+
 // Login endpoint
 app.post("/login", async (req, res) => {
   try {
