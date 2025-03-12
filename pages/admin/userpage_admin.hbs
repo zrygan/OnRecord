@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="../../styles/admin_music.css" />
+    <link rel="stylesheet" href="../../styles/type.css" />
+    <link rel="stylesheet" href="../../styles/header-nav.css" />
+    <link rel="stylesheet" href="../../styles/admin_user.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nabla&display=swap"
+      rel="stylesheet"
+    />
+    
+    <link rel="icon" href="../../favicon.ico" type="image/x-icon" />
+    <script src="../../js/userpage_admin.js"></script>
+  </head>
+  <body>
+    <div class="content space-grotesk">
+    <div class="nav-bar">
+      <div class="nav-bar-elements">
+        <!-- Title -->
+        <a class="on-record" href="../../pages/home.html">
+          <span>O</span><span>n</span>
+          <br />
+          <span>R</span><span>e</span><span>c</span><span>o</span><span>r</span
+          ><span>d</span>
+        </a>
+        <!-- Search Bar -->
+        <div class="search-bar">
+          <!-- Text Box -->
+          <input type="text" class="text-box" />
+        </div>
+        <!-- Charts Button -->
+        <div class="charts-button">
+          <a class="charts" href="../../pages/charts.html">
+            <span class="charts-text" href="../../pages/charts.html">Charts</span>
+          </a>
+        </div>
+        <!-- User Button -->
+        <div class="user-button">
+          <a class="user-button" href="../../pages/userpage.html">
+            <img class="user-pic" src="../../img/index/1.png" />
+          </a>
+        </div>
+      </div>
+    </div>
+      
+      <h1>Admin Controls</h1>
+      <h2>This is where you can remove a user! Be careful as this is permanent!</h2>
+      
+        <p id="user_not_found"></p>
+
+        <div id="choice_button">
+            <button onclick="confirmation()"> Delete User </button>
+            <p id="Option"></p>
+        </div>
+
+    </div>
+
+    </body>
+</html>
