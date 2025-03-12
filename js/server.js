@@ -448,3 +448,13 @@ app.get("/search", async (req, res) => {
     res.status(500).send("Error fetching search results");
   }
 });
+
+// Delete a review
+app.delete('/delete-review/:id', async (req, res) => {
+  try {
+      await Review.findByIdAndDelete(req.params.id);
+      res.status(200).json({ message: 'Review deleted successfully' });
+  } catch (error) {
+      res.status(500).json({ error: error.message });
+  }
+});
