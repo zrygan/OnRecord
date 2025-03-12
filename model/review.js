@@ -11,10 +11,9 @@ mongoose
   .catch(() => console.error("Could not connect to MongoDB"));
 
 const reviewSchema = new mongoose.Schema({
-  userID: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   userName: { type: String, required: true },
   userPic: { type: String, required: true },
-  songID: { type: mongoose.Schema.Types.ObjectId, ref: "Music", required: true },
+  songName: { type: String, required: true },
   comment: { type: String, required: true },
   rating: { type: Number, required: true, min: 1, max: 5 },
   createdAt: { type: Date, default: Date.now },
@@ -22,29 +21,10 @@ const reviewSchema = new mongoose.Schema({
 
 const Review = mongoose.model("Review", reviewSchema);
 
-// fs.readFile("data\\reviews.json", "utf8", async (err, data) => {
-//   if (err) {
-//     console.error("Error reading file:", err);
-//     return;
-//   }
-
-//   try {
-//     let reviews = JSON.parse(data);
-//     await Review.deleteMany({}); // Clear old reviews
-//     console.log("Reviews collection emptied");
-//     await Review.insertMany(reviews);
-//     console.log("Reviews inserted successfully");
-//   } catch (err) {
-//     console.error("Error processing reviews:", err);
-//   }
-// });
-
-// CRUD Operations for Reviews
-
 // Create a Review
-const create_review = async (userID, userName, userPic, songID, comment, rating) => {
+const create_review = async (userName, userPic, songName, comment, rating) => {
   try {
-    const newReview = new Review({ userID, userName, userPic, songID, comment, rating });
+    const newReview = new Review({ userName, userPic, songName, comment, rating });
     await newReview.save();
     console.log("Review created:", newReview);
   } catch (error) {
@@ -53,9 +33,9 @@ const create_review = async (userID, userName, userPic, songID, comment, rating)
 };
 
 // Read all reviews for a specific song
-const read_reviews_by_song = async (songID) => {
+const read_reviews_by_song = async (songName) => {
   try {
-    const reviews = await Review.find({ songID }).sort({ createdAt: -1 });
+    const reviews = await Review.find({ songName }).sort({ createdAt: -1 });
     return reviews;
   } catch (error) {
     console.error("Error reading reviews:", error.message);
@@ -63,9 +43,9 @@ const read_reviews_by_song = async (songID) => {
 };
 
 // Read all reviews by a specific user
-const read_reviews_by_user = async (userID) => {
+const read_reviews_by_user = async (userName) => {
   try {
-    const reviews = await Review.find({ userID }).sort({ createdAt: -1 });
+    const reviews = await Review.find({ userName }).sort({ createdAt: -1 });
     return reviews;
   } catch (error) {
     console.error("Error reading user reviews:", error.message);
