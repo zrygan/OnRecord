@@ -55,3 +55,9 @@
   text-align: center;
   margin-top: 1vw;
 }
+
+#search-result{
+  color: var(--white);
+  font-size: 20px;
+  text-align: center;
+}
