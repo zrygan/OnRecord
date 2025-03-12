@@ -63,6 +63,15 @@ app.get("/api/music", async (req, res) => {
   }
 });
 
+app.get("/api/users", async (req, res) => {
+  try {
+    const userData = await User.find();
+    res.json(userData);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch music data" });
+  }
+});
+
 const viewPath = path.join(__dirname, "../pages");
 
 app.use(express.json());
