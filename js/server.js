@@ -785,7 +785,7 @@ app.get("/admin/music", async (req, res) => {
 app.put("/edit-review/:id", async (req, res) => {
   try {
       const { id } = req.params;
-      const { comment } = req.body;
+      const { comment, rating } = req.body;
 
       if (!comment || comment.trim() === "") {
           return res.status(400).json({ error: "Review comment cannot be empty." });
@@ -793,7 +793,7 @@ app.put("/edit-review/:id", async (req, res) => {
 
       const updatedReview = await Review.findByIdAndUpdate(
           id,
-          { comment: comment },
+          { comment: comment, rating: rating },
           { new: true, runValidators: true }
       );
 
