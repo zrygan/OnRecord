@@ -91,9 +91,9 @@ app.get("/", (req, res) => {
 app.get("/home", async (req, res) => {
   try {
     const music = await Music.find();
-    const user = req.session.user;
+    let user = req.session.user;
 
-    checkUser(user);
+    user = await checkUser(user);
 
     const randomSongs = await Music.aggregate([{ $sample: { size: 15 } }]);
 
@@ -103,7 +103,7 @@ app.get("/home", async (req, res) => {
         return {
           ...song.toObject(),
           hearts: song.likes.length,
-          reviews: reviews, // FIXME: add once reviews are done
+          reviews: reviews,
         };
       })
     );
@@ -193,6 +193,11 @@ app.post("/login", async (req, res) => {
       const passwordMatch = await User.findOne({ username, password });
 
       if (passwordMatch) {
+        // Set default image if none exists
+        if (!passwordMatch.image) {
+          passwordMatch.image = "../img/default-user.png"; // Ensure this default image exists
+        }
+
         req.session.user = passwordMatch; // Store user information in session
         res.status(200).json({
           success: true,
@@ -250,6 +255,7 @@ app.post("/register/check-availability", async (req, res) => {
 });
 
 // Register endpoint
+// Register endpoint
 app.post("/register", async (req, res) => {
   const data = {
     surname: req.body.surname,
@@ -258,6 +264,7 @@ app.post("/register", async (req, res) => {
     username: req.body.username,
     password: req.body.password,
     birthday: req.body.birthday,
+    image: "../img/default-user.png", // Add a default image
     type:
       req.body.email && req.body.email.endsWith("@onrecord.com")
         ? "admin"
@@ -269,6 +276,10 @@ app.post("/register", async (req, res) => {
   try {
     const newUser = new User(data);
     await newUser.save();
+
+    // Automatically log in the user after registration
+    req.session.user = newUser;
+
     res.status(200).json({ success: true });
   } catch (e) {
     console.error("Registration error:", e);
@@ -509,6 +520,30 @@ app.get("/admin", async (req, res) => {
     res.status(500).send("Error loading admin dashboard");
   }
 });
+
+// used for checking if the user is an admin or not
+// for the home.hbs
+async function checkUser(user) {
+  try {
+    if (!user) {
+      return {
+        surname: "Dummy",
+        firstname: "User",
+        email: "dummy@example.com",
+        username: "Anonymous",
+        password: "password",
+        birthday: "1990-01-01T00:00:00.000Z",
+        date_created: "2025-03-11T00:00:00.000Z",
+        type: "normal",
+      };
+    }
+    const foundUser = await User.findOne({ username: user.username });
+    return foundUser || user; // Return the database user or the session user
+  } catch (error) {
+    console.error("Error checking user:", error);
+    return user; // Return the original user if there's an error
+  }
+}
 
 // Admin music management page
 app.get("/admin/music", async (req, res) => {
