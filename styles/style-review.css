@@ -215,6 +215,51 @@ body > * {
     background-color: #0288a9; 
 }
 .edit-button img {
-    width: 20px; /* Adjust the width as needed */
-    height: 20px; /* Adjust the height as needed */
+    width: 20px; 
+    height: 20px; 
+}
+
+.edit-textarea {
+    width: 97%;
+    height: 60px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    resize: vertical;
+    min-height: 40px;
+}
+
+.save-button {
+    padding: 0.3rem 0.6rem;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    margin-right: 0.5rem;
+    align-items: right;
+    justify-content: right;
+}
+
+.cancel-button {
+    padding: 0.3rem 0.6rem;
+    border: none;
+    background-color: #cf1d1d;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    margin-right: 0.5rem;
+    align-items: right;
+    justify-content: right;
+}
+
+.cancel-button:hover {
+    background-color: #AF4C4C;
+}
+
+.save-button:hover {
+    background-color: #388E3C;
 }
