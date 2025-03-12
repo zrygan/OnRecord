@@ -72,8 +72,8 @@
       <!-- Images -->
       <!-- Using random songs from the database for album covers -->
       <div class="blursquare"></div>
-      {{#if randomSongs}}
-        {{#each randomSongs}}
+      {{#if cover_photos}}
+        {{#each cover_photos}}
           {{#if @index}}
             {{#if (eq @index 0)}}
               <img

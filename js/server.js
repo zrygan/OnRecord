@@ -95,8 +95,8 @@ app.use(
 app.get("/", async (req, res) => {
   try {
     // Get 9 random songs for album covers
-    const randomSongs = await Music.aggregate([{ $sample: { size: 9 } }]);
-    res.render("index");
+    const cover_photos = await Music.aggregate([{ $sample: { size: 9 } }]);
+    res.render("index", { cover_photos });
   } catch (error) {
     console.error("Error fetching random songs:", error);
     // Render without random songs if there's an error
