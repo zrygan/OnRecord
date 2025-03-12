@@ -349,12 +349,12 @@ app.get("/review/:id", async (req, res) => {
     if (!song) return res.status(404).send("Song not found");
 
     // Fetch all reviews for this song
-    const reviews = await Review.find({ songID });
+    const reviews = await Review.find({ songName: song.name});
 
     // Render the review page with song details and reviews
     res.render("review", { 
       pageTitle: song.name, 
-      songTitle: song.name, 
+      songTitle: song.name,
       artist: song.artists.join(", "),
       albumCover: song.image,
       releaseDate: song.release_date.toDateString(),
@@ -362,7 +362,7 @@ app.get("/review/:id", async (req, res) => {
       songDescription: song.description,
       songRating: reviews.length ? (reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length).toFixed(1) : "No ratings yet",
       reviews: reviews,
-      user // If authentication is used
+      user
     });
   } catch (error) {
     console.error("Error fetching song and reviews:", error.message);
@@ -394,3 +394,29 @@ async function checkUser(user) {
     return false;
   }
 }
+
+app.post("/submit-review", async (req, res) => {
+  try {
+    const { userName, userPic, songName, comment, rate } = req.body;
+
+    if (!userName || !songName || !comment || !rate) {
+      return res.status(400).json({ error: "All fields are required." });
+    }
+
+    const newReview = new Review({
+      userName,
+      userPic,
+      songName,
+      comment,
+      rating: parseInt(rate, 10),
+    });
+
+    console.log(req.body);
+
+    await newReview.save();
+    res.status(201).json({ message: "Review submitted successfully!", review: newReview });
+  } catch (error) {
+    console.error("Error submitting review:", error.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
