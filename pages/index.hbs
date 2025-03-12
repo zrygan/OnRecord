@@ -70,18 +70,85 @@
 
     <div class="albums">
       <!-- Images -->
-      <!-- FIXME: when the database is finished, make these albums randomly 
-                  selected from the database of album covers -->
+      <!-- Using random songs from the database for album covers -->
       <div class="blursquare"></div>
-      <img src="../img/index/1.png" id="album_1" class="album_1" />
-      <img src="../img/index/2.jpg" id="album_2" class="album_2" />
-      <img src="../img/index/3.jpg" id="album_3" class="album_3" />
-      <img src="../img/index/4.jpg" id="album_4" class="album_4" />
-      <img src="../img/index/5.jpg" id="album_5" class="album_5" />
-      <img src="../img/index/6.jpg" id="album_6" class="album_6" />
-      <img src="../img/index/7.png" id="album_7" class="album_7" />
-      <img src="../img/index/8.png" id="album_8" class="album_8" />
-      <img src="../img/index/9.png" id="album_9" class="album_9" />
+      {{#if randomSongs}}
+        {{#each randomSongs}}
+          {{#if @index}}
+            {{#if (eq @index 0)}}
+              <img
+                src="{{this.image}}"
+                alt="{{this.name}}"
+                id="album_1"
+                class="album_1"
+              />
+            {{else if (eq @index 1)}}
+              <img
+                src="{{this.image}}"
+                alt="{{this.name}}"
+                id="album_2"
+                class="album_2"
+              />
+            {{else if (eq @index 2)}}
+              <img
+                src="{{this.image}}"
+                alt="{{this.name}}"
+                id="album_3"
+                class="album_3"
+              />
+            {{else if (eq @index 3)}}
+              <img
+                src="{{this.image}}"
+                alt="{{this.name}}"
+                id="album_4"
+                class="album_4"
+              />
+            {{else if (eq @index 4)}}
+              <img
+                src="{{this.image}}"
+                alt="{{this.name}}"
+                id="album_5"
+                class="album_5"
+              />
+            {{else if (eq @index 5)}}
+              <img
+                src="{{this.image}}"
+                alt="{{this.name}}"
+                id="album_6"
+                class="album_6"
+              />
+            {{else if (eq @index 6)}}
+              <img
+                src="{{this.image}}"
+                alt="{{this.name}}"
+                id="album_7"
+                class="album_7"
+              />
+            {{else if (eq @index 7)}}
+              <img
+                src="{{this.image}}"
+                alt="{{this.name}}"
+                id="album_8"
+                class="album_8"
+              />
+            {{else if (eq @index 8)}}
+              <img
+                src="{{this.image}}"
+                alt="{{this.name}}"
+                id="album_9"
+                class="album_9"
+              />
+            {{/if}}
+          {{else}}
+            <img
+              src="{{this.image}}"
+              alt="{{this.name}}"
+              id="album_1"
+              class="album_1"
+            />
+          {{/if}}
+        {{/each}}
+      {{/if}}
     </div>
 
     <div class="buttons space-grotesk">

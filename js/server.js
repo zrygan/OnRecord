@@ -92,8 +92,16 @@ app.use(
 );
 
 // Root route to serve index page
-app.get("/", (req, res) => {
-  res.render("index");
+app.get("/", async (req, res) => {
+  try {
+    // Get 9 random songs for album covers
+    const randomSongs = await Music.aggregate([{ $sample: { size: 9 } }]);
+    res.render("index");
+  } catch (error) {
+    console.error("Error fetching random songs:", error);
+    // Render without random songs if there's an error
+    res.render("index");
+  }
 });
 
 // Route to render home page
