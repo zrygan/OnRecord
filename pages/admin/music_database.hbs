@@ -1,3 +1,4 @@
+hbs }}
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -88,28 +89,28 @@
     <!-- CONTENT -->
     <div class="content space-grotesk">
       <h1>Admin Controls: Music Database</h1>
+
       <!-- ADMIN CHOICE BUTTONS -->
       <div class="choice_buttons space-grotesk">
         <button onclick="add_controlpanel()">Add</button>
-        <button onclick="search_controlpanel()">Search</button>
         <button onclick="editDel_controlpanel()">Edit/Delete</button>
       </div>
-      <h2>
-        This is your control panel! Click a button to do operations on the music
-        and album database!
-        <br />
-      </h2>
-      <div class="help">
-        <b>Add</b>: add music or albums OnRecord.
-        <br />
-        <b>Search</b>: search or check if a song or album is OnRecord.
-        <br />
-        <b>Edit/Delete</b>: edit or delete a song or album OnRecord.
+
+      <div class="admin-instructions">
+        <h2>
+          This is your control panel! Click a button to manage the music
+          database.
+        </h2>
+        <div class="help">
+          <p><b>Add</b>: Add new music or albums to OnRecord.</p>
+          <p><b>Edit/Delete</b>: Modify or remove existing songs and albums.</p>
+        </div>
       </div>
 
       <!-- ADMIN CONTROLS -->
       <div class="admin_controls" id="control_panel"></div>
     </div>
+
     <script src="../js/admin_music_database.js"></script>
   </body>
 </html>

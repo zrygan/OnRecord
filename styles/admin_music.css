@@ -4,66 +4,84 @@
 
 .content {
   position: relative;
-  margin-top: 7%;
+  margin-top: 12vh; /* Increased margin to provide better spacing from navbar */
+  padding: 0 5vw; /* Added padding on sides */
 }
 
 .content h1 {
   color: var(--white);
-  font-size: 5vh;
+  font-size: 2.5rem;
+  margin-bottom: 2rem; /* Added bottom margin */
+  text-align: center;
+}
+
+.admin-instructions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 2rem 0;
+  background-color: rgba(255, 255, 255, 0.05); /* Subtle background */
+  border-radius: 10px;
+  padding: 1.5rem;
 }
 
 .content h2 {
   font-weight: normal;
-  text-align: left;
-  color: #808080;
-  font-size: 2vh;
-  margin-top: 5vh;
-  margin-left: 5vh;
+  color: #b0b0b0; /* Slightly brighter than before */
+  font-size: 1.25rem;
+  margin: 0;
+  margin-bottom: 1rem;
 }
 
 .help {
   font-weight: normal;
-  text-align: left;
-  color: #808080;
-  font-size: 2vh;
-  margin-bottom: 5vh;
-  margin-left: 5vh;
+  color: #909090; /* Slightly brighter */
+  font-size: 1rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.help p {
+  margin: 0.5rem 0;
 }
 
 .choice_buttons {
   position: relative;
-  margin-top: 3%;
   justify-content: center;
   display: flex;
-  gap: 2vw;
+  gap: 3rem; /* Increased space between buttons */
+  margin: 2rem 0;
 }
 
 .choice_buttons button {
-  /* font styles  */
-  font-size: 2vh;
+  /* font styles */
+  font-size: 1.2rem;
+  font-weight: 600;
   color: var(--white);
 
   /* button styles */
   background-color: var(--cyan);
   border: none;
-  padding: 1%;
-  border-radius: 50vw;
-  min-width: 10vw;
-  max-width: 10vw;
-  min-height: 3vw;
-  max-height: 3vw;
-  /* margin-left: 0.5%;
-  margin-right: 0.5%; */
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  min-width: 10rem;
+  transition: all 0.3s ease; /* Smooth transitions */
 }
 
 .choice_buttons button:hover {
   background-color: var(--orange);
   cursor: pointer;
-  transform: scale(1.25);
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(255, 165, 0, 0.5); /* Glow effect */
 }
 
 .admin_controls {
   color: var(--white);
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: 10px;
+  margin: 1rem 0 3rem 0;
+  min-height: 30vh; /* Minimum height for the control panel */
 }
 
 .admin_controls form,
@@ -71,16 +89,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1vh;
+  gap: 1rem;
 }
 
 .admin_controls form label,
 .album_field label,
 #songDetails label {
-  width: 30vw; /* Align labels with inputs */
+  width: 30vw;
+  max-width: 500px; /* Added max-width */
   text-align: left;
-  font-size: 2vh;
-  padding: 0.5vh;
+  font-size: 1rem;
+  padding: 0.25rem 0;
 }
 
 .admin_controls form input,
@@ -89,9 +108,18 @@
 .album_field input,
 #songDetails input {
   width: 30vw;
-  max-width: 100%;
-  font-size: 2vh;
-  padding: 0.5vh;
+  max-width: 500px;
+  font-size: 1rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #444;
+  background-color: #1e1e2e;
+  color: white;
+}
+
+.admin_controls form textarea {
+  min-height: 100px;
+  resize: vertical;
 }
 
 .admin_controls {
@@ -101,8 +129,27 @@
 }
 
 .submit_button {
-  margin-top: 2vh;
-  padding: 1vh 2vh;
-  font-size: 2vh;
+  margin-top: 1.5rem;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
   cursor: pointer;
+  background-color: var(--cyan);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.submit_button:hover {
+  background-color: var(--orange);
+  transform: scale(1.05);
+}
+
+/* Make sure inputs look nice when focused */
+.admin_controls form input:focus,
+.admin_controls form select:focus,
+.admin_controls form textarea:focus {
+  outline: 2px solid var(--cyan);
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
 }
