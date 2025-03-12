@@ -6,11 +6,11 @@ const express = require("express");
 const app = express();
 const path = require("path");
 // const hbs = require("hbs");
-const {User} = require("../model/user");
+const { User } = require("../model/user");
 const Album = require("../model/album");
 const { read_music_all } = require("../model/music");
 const { Music } = require("../model/music");
-const { Review } = require("../model/review")
+const { Review } = require("../model/review");
 const session = require("express-session");
 
 // Example usage of count method
@@ -64,12 +64,14 @@ app.set("views", viewPath);
 app.use(express.static(path.join(__dirname, "../")));
 
 // Configure session middleware
-app.use(session({
-  secret: 'SUPER-DUPER-SECRET-KEY-NO-ONE-CAN-KNOW', // Replace with your own secret key
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: false } // Set to true if using HTTPS
-}));
+app.use(
+  session({
+    secret: "SUPER-DUPER-SECRET-KEY-NO-ONE-CAN-KNOW", // Replace with your own secret key
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }, // Set to true if using HTTPS
+  })
+);
 
 // Root route to serve index page
 app.get("/", (req, res) => {
@@ -86,14 +88,16 @@ app.get("/home", async (req, res) => {
 
     const randomSongs = await Music.aggregate([{ $sample: { size: 15 } }]);
 
-    const musicWithCounts = await Promise.all(music.map(async (song) => {
-      const reviews = await Review.countDocuments({ songId: song._id });
-      return {
-        ...song.toObject(),
-        hearts: song.likes.length,
-        reviews: reviews // FIXME: add once reviews are done
-      };
-    }));
+    const musicWithCounts = await Promise.all(
+      music.map(async (song) => {
+        const reviews = await Review.countDocuments({ songId: song._id });
+        return {
+          ...song.toObject(),
+          hearts: song.likes.length,
+          reviews: reviews, // FIXME: add once reviews are done
+        };
+      })
+    );
 
     res.render("home", { music: musicWithCounts, randomSongs, user });
   } catch (error) {
@@ -110,7 +114,6 @@ app.get("/charts", async (req, res) => {
       return res.status(500).send("User not found in the database.");
     }
     res.render("charts", { user });
-  
   } catch (error) {
     console.error(error);
     res.status(500).send("Error fetching charts data");
@@ -128,7 +131,6 @@ app.get("/charts-popular", async (req, res) => {
     }
 
     res.render("charts-popular", { user, music });
-
   } catch (error) {
     console.error("Error fetching charts data:", error);
     res.status(500).send("Error fetching charts data");
@@ -146,7 +148,6 @@ app.get("/charts-critical", async (req, res) => {
     }
 
     res.render("charts-critical", { user, music });
-
   } catch (error) {
     console.error("Error fetching charts data:", error);
     res.status(500).send("Error fetching charts data");
@@ -156,7 +157,7 @@ app.get("/charts-critical", async (req, res) => {
 app.get("/charts-based", async (req, res) => {
   try {
     const music = await Music.find();
-    
+
     let user = req.session.user;
 
     if (!checkUser(user)) {
@@ -164,13 +165,11 @@ app.get("/charts-based", async (req, res) => {
     }
 
     res.render("charts-based", { user, music });
-
   } catch (error) {
-      console.error("Error fetching charts data:", error);
-      res.status(500).send("Error fetching charts data");
+    console.error("Error fetching charts data:", error);
+    res.status(500).send("Error fetching charts data");
   }
 });
-
 
 // Login endpoint
 app.post("/login", async (req, res) => {
@@ -320,7 +319,7 @@ app.post("/api/songs/:id/unlike", async (req, res) => {
       return res.status(404).json({ error: "Song not found" });
     }
     const username = req.body.username;
-    song.likes = song.likes.filter(user => user !== username);
+    song.likes = song.likes.filter((user) => user !== username);
     await song.save();
     res.json({ likes: song.likes });
   } catch (error) {
@@ -335,7 +334,6 @@ app.listen(3000, () => {
 
 app.get("/review/:id", async (req, res) => {
   try {
-
     let user = req.session.user;
 
     if (!checkUser(user)) {
@@ -349,20 +347,24 @@ app.get("/review/:id", async (req, res) => {
     if (!song) return res.status(404).send("Song not found");
 
     // Fetch all reviews for this song
-    const reviews = await Review.find({ songName: song.name});
+    const reviews = await Review.find({ songName: song.name });
 
     // Render the review page with song details and reviews
-    res.render("review", { 
-      pageTitle: song.name, 
+    res.render("review", {
+      pageTitle: song.name,
       songTitle: song.name,
       artist: song.artists.join(", "),
       albumCover: song.image,
       releaseDate: song.release_date.toDateString(),
       songGenres: song.genres,
       songDescription: song.description,
-      songRating: reviews.length ? (reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length).toFixed(1) : "No ratings yet",
+      songRating: reviews.length
+        ? (
+            reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length
+          ).toFixed(1)
+        : "No ratings yet",
       reviews: reviews,
-      user
+      user,
     });
   } catch (error) {
     console.error("Error fetching song and reviews:", error.message);
@@ -382,13 +384,12 @@ async function checkUser(user) {
         password: "password",
         birthday: "1990-01-01T00:00:00.000Z",
         date_created: "2025-03-11T00:00:00.000Z",
-        type: "normal"
+        type: "normal",
       };
       return false;
     }
     const foundUser = await User.findOne({ username: user.username });
     return foundUser || false;
-  
   } catch (error) {
     console.error("Error checking user:", error);
     return false;
@@ -414,9 +415,36 @@ app.post("/submit-review", async (req, res) => {
     console.log(req.body);
 
     await newReview.save();
-    res.status(201).json({ message: "Review submitted successfully!", review: newReview });
+    res
+      .status(201)
+      .json({ message: "Review submitted successfully!", review: newReview });
   } catch (error) {
     console.error("Error submitting review:", error.message);
     res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+app.get("/search", async (req, res) => {
+  try {
+    const query = req.query.query;
+    const users = await User.find({ username: new RegExp(query, "i") });
+    const albums = await Album.find({ name: new RegExp(query, "i") });
+    const songs = await Music.find({ name: new RegExp(query, "i") });
+    const artists = await User.find({
+      username: new RegExp(query, "i"),
+      type: true,
+    });
+
+    const results = [
+      ...users.map((user) => ({ type: "user", name: user.name })),
+      ...albums.map((album) => ({ type: "album", name: album.name })),
+      ...songs.map((music) => ({ type: "music", name: music.name })),
+      ...artists.map((artist) => ({ type: "artist", name: artist.name })),
+    ];
+
+    res.json(results);
+  } catch (error) {
+    console.error("Error fetching search results:", error);
+    res.status(500).send("Error fetching search results");
   }
 });

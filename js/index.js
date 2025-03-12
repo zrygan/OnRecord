@@ -279,3 +279,74 @@ function hoverbox_off() {
 const hoverbox = document.getElementById("hoverbox");
 hoverbox.addEventListener("mouseover", hoverbox_on);
 hoverbox.addEventListener("mouseout", hoverbox_off);
+
+// SEARCH FUNCTION
+const searchInput = document.getElementById("search-input");
+const searchResults = document.getElementById("search-results");
+
+searchInput.addEventListener("focus", function () {
+  searchResults.style.display = "block";
+});
+
+searchInput.addEventListener("blur", function () {
+  setTimeout(() => {
+    searchResults.style.display = "none";
+  }, 200); // Delay to allow click events on results
+});
+
+searchInput.addEventListener("input", async function () {
+  const query = searchInput.value.trim();
+  if (query.length === 0) {
+    searchResults.innerHTML = "";
+    return;
+  }
+
+  try {
+    const response = await fetch(`/search?query=${encodeURIComponent(query)}`);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    displaySearchResults(data);
+  } catch (error) {
+    console.error("Error fetching search results:", error);
+  }
+});
+
+function displaySearchResults(results) {
+  searchResults.innerHTML = "";
+
+  if (results.length === 0) {
+    searchResults.style.display = "none";
+    return;
+  }
+
+  searchResults.style.display = "block";
+
+  results.forEach((result) => {
+    let resultItem = document.createElement("div");
+    resultItem.classList.add("search-result-item");
+
+    if (result.type === "user") {
+      resultItem.innerHTML = `<span style="color: grey;">user: </span><span style="color: var(--darkBlue);">${result.username}</span>`;
+    } else if (result.type === "album") {
+      resultItem.innerHTML = `<span style="color: grey;">album: </span><span style="color: var(--darkBlue);">${result.name}</span>`;
+    } else if (result.type === "music") {
+      resultItem.innerHTML = `<span style="color: grey;">song: </span><span style="color: var(--darkBlue);">${result.name}</span>`;
+    } else if (result.type === "artist") {
+      resultItem.innerHTML = `<span style="color: var(--orange);">artist: </span><span style="color: var(--darkBlue);">${result.username}</span>`;
+    }
+
+    resultItem.addEventListener("click", function () {
+      if (result.type === "user" || result.type === "artist") {
+        window.location.href = `/user/${result.id}`;
+      } else if (result.type === "album") {
+        window.location.href = `/album/${result.id}`;
+      } else if (result.type === "music") {
+        window.location.href = `/review/${result.id}`;
+      }
+    });
+
+    searchResults.appendChild(resultItem);
+  });
+}

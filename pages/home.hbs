@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -32,8 +31,8 @@
         <a class="on-record" href="/home">
           <span>O</span><span>n</span>
           <br />
-          <span>R</span><span>e</span><span>c</span><span>o</span><span>r</span
-          ><span>d</span>
+          <span>R</span><span>e</span><span>c</span><span>o</span><span
+          >r</span><span>d</span>
         </a>
         <!-- Genre Button -->
         <div class="genre-button">
@@ -53,15 +52,20 @@
         <!-- Search Bar -->
         <div class="search-bar">
           <!-- Text Box -->
-          <input type="text" class="text-box" />
+          <input
+            type="search"
+            class="text-box"
+            id="search-input"
+            placeholder="Search..."
+          />
         </div>
+        <div id="search-results" class="search-results"></div>
         <!-- Charts Button -->
         <div class="charts-button">
           <a class="charts" href="charts">
             <span class="charts-text" href="charts">Charts</span>
           </a>
         </div>
-        <!-- User Button -->
         <!-- User Button -->
         <div class="user-button">
           <a class="user-button" href="userpage.html">
@@ -92,7 +96,7 @@
           {{#each music}}
             <div class="song-box" data-id="{{this._id}}">
               <a href="/review/{{this._id}}">
-              <img class="catalog-pic" src="{{this.image}}" /></a>
+                <img class="catalog-pic" src="{{this.image}}" /></a>
               <div class="song-title">{{this.name}}</div>
               <div class="song-artist">{{this.artists}}</div>
               <div class="song-album">{{this.album}}</div>
@@ -101,9 +105,12 @@
               <img class="song-review-icon" src="../svg/home/review-icon.svg" />
               <div class="song-review-number">{{this.reviews}}</div>
               <div class="song-heart-select">
-                <img class="song-heart" src="../svg/home/heart-select-gray.svg" />
+                <img
+                  class="song-heart"
+                  src="../svg/home/heart-select-gray.svg"
+                />
               </div>
-          </div>
+            </div>
           {{/each}}
         </div>
       </div>

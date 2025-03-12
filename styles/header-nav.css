@@ -103,6 +103,48 @@ body {
   z-index: 1;
 }
 
+.search-results {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 26.75%;
+  background: white;
+  min-height: 30vh;
+  max-height: 100vh;
+  overflow-y: auto;
+  width: 50%;
+  z-index: 999;
+  margin-top: -1.4vh;
+  text-align: left;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Added box shadow for better visibility */
+  border-radius: 0.25rem; /* Added border radius */
+}
+
+.search-result-item {
+  padding: 10px;
+  cursor: pointer;
+  color: #000000;
+  border-bottom: 1px solid #f0f0f0;
+  display: block; /* Ensure block display */
+  font-family: "Space Grotesk"; /* Match font family */
+  font-size: 1rem; /* Set font size */
+  line-height: 1.4; /* Improve line spacing */
+}
+
+.search-result-item:hover {
+  background-color: #f5f5f5;
+}
+
+.search-result-item:last-child {
+  border-bottom: none;
+}
+
+/* Add styling for spans inside search results */
+.search-result-item span {
+  display: inline-block; /* Ensure spans are displayed properly */
+  vertical-align: middle; /* Align text vertically */
+}
+
 /* Genre Button */
 .genre-button {
   width: 5.3vw;
