@@ -27,40 +27,53 @@
       <!-- Title -->
       <a class="on-record" href="/home">
         <span>O</span><span>n</span>
-        <br>
-        <span>R</span><span>e</span><span>c</span><span>o</span><span>r</span><span>d</span>
+        <br />
+        <span>R</span><span>e</span><span>c</span><span>o</span><span
+        >r</span><span>d</span>
       </a>
       <!-- Genre Button -->
       <div class="genre-button">
         <button class="genre">Genre</button>
         <div class="genre-content">
-          <div class="genre-content">
-            <a href="#">Pop</a>
-            <a href="#">Rock</a>
-            <a href="#">Hip-Hop</a>
-            <a href="#">R&B</a>
-            <a href="#">Country</a>
-            <a href="#">Jazz</a>
-            <a href="#">Classical</a>
-            <a href="#">Electronic</a>
-            <a href="#">Folk</a>
-          </div>
+          <a href="#">Pop</a>
+          <a href="#">Rock</a>
+          <a href="#">Hip-Hop</a>
+          <a href="#">R&B</a>
+          <a href="#">Country</a>
+          <a href="#">Jazz</a>
+          <a href="#">Classical</a>
+          <a href="#">Electronic</a>
+          <a href="#">Folk</a>
         </div>
       </div>
       <!-- Search Bar -->
       <div class="search-bar">
-        <input type="text" class="text-box" placeholder="Search...">
+        <!-- Text Box -->
+        <input
+          type="search"
+          class="text-box"
+          id="search-input"
+          placeholder="Search..."
+        />
       </div>
+      <div id="search-results" class="search-results"></div>
       <!-- Charts Button -->
       <div class="charts-button">
-        <a class="charts" href="/charts">
-          <span class="charts-text">Charts</span>
+        <a class="charts" href="charts">
+          <span class="charts-text" href="charts">Charts</span>
         </a>
       </div>
       <!-- User Button -->
       <div class="user-button">
-        <a href="/userpage">
-          <img class="user-pic" src="{{user.image}}" alt="User Profile Picture">
+        <a class="user-button" href="userpage.html">
+          <img class="user-pic" src="{{user.image}}" alt="User Image" />
+        </a>
+      </div>
+
+      <!-- Logout Button -->
+      <div class="logout-button">
+        <a class="logout" href="/logout">
+          <span class="logout-text">Logout</span>
         </a>
       </div>
     </div>
@@ -146,5 +159,6 @@
 
   </div>
   <script src="../js/review.js"></script>
+  <script src="../js/home.js"></script>
 </body>
 </html>
