@@ -19,7 +19,6 @@ document.addEventListener("DOMContentLoaded", function () {
             const result = await response.json();
             
             if (response.ok) {
-                alert("Review submitted successfully!");
                 location.reload(); // Refresh the page to show the new review
             } else {
                 alert("Error: " + result.error);

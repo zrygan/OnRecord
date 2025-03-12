@@ -14,16 +14,17 @@ body > * {
     padding: 2rem;
     max-width: 1400px;
     margin: 100px auto 0;
-    font-size: 1.1rem; /* Adjusting base font size */
+    font-size: 1.1rem; 
     color: #ffffff;
-    background: rgba(19, 19, 19, 0.95); /* Slightly darker background */
+    background: rgba(19, 19, 19, 0.95); 
     backdrop-filter: blur(2px);
     border-radius: 20px;
 }
 
 .review-header {
     display: flex;
-    align-items: center;
+    align-items: center; 
+    text-align: left; /*added*/
 }
 
 .review-header img {
@@ -33,6 +34,7 @@ body > * {
 
 .review-details {
     flex: 1;
+    margin-left: 30px  /*added*/
 }
 
 .review-details p {
@@ -72,33 +74,42 @@ body > * {
 }
 
 .rate {
-    float: left;
     height: 46px;
     padding: 0 10px;
+    /* text-align: center;  */
+    display: flex; /* Use flexbox for better alignment */
+    justify-content: center; /* Center the stars within the container */
+    flex-direction: row-reverse;
 }
+
 .rate:not(:checked) > input {
-    position:absolute;
-    top:-9999px;
+    position: absolute;
+    top: -9999px;
 }
+
 .rate:not(:checked) > label {
-    float:right;
-    width:1em;
-    overflow:hidden;
-    white-space:nowrap;
-    cursor:pointer;
-    font-size:30px;
-    color:#ccc;
+    float: none; /* Remove float */
+    width: 1em;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 30px;
+    color: #ccc;
 }
+
 .rate:not(:checked) > label:before {
     content: '★ ';
 }
+
 .rate > input:checked ~ label {
-    color: #ffc700;    
+    color: #ffc700;
 }
+
 .rate:not(:checked) > label:hover,
 .rate:not(:checked) > label:hover ~ label {
-    color: #deb217;  
+    color: #deb217;
 }
+
 .rate > input:checked + label:hover,
 .rate > input:checked + label:hover ~ label,
 .rate > input:checked ~ label:hover,
@@ -118,6 +129,8 @@ body > * {
     border: 1px solid #555; 
     font-size: 1rem; 
     resize: vertical;
+    min-height: 80px; /* Set a minimum height */
+    max-height: 1000px;
 }
 
 .comment-box button {
@@ -143,7 +156,7 @@ body > * {
 .user-review {
     display: flex;
     align-items: center;
-    background-color: #3c3c3c; /* Adjusting background color */
+    background-color: #3c3c3c; 
     padding: 1rem;
     margin-bottom: 1rem;
     border-radius: 5px;
@@ -157,6 +170,12 @@ body > * {
 
 .user-review-details {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start; 
+    text-align: left; 
+    margin-left: 40px;
 }
 
 /* Review Actions */
