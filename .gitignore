@@ -115,3 +115,6 @@ model/diagnostic.data/metrics.2025-03-09T07-19-38Z-00000
 model/journal/WiredTigerLog.0000000002
 model/journal/WiredTigerPreplog.0000000001
 model/charts.js
+
+# startup files
+*.bat

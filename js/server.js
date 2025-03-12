@@ -72,6 +72,252 @@ app.get("/api/users", async (req, res) => {
   }
 });
 
+// Admin API - Create new music
+app.post("/api/admin/music", async (req, res) => {
+  try {
+    const user = req.session.user;
+
+    // Check if user is admin
+    if (!user || user.type !== "admin") {
+      return res.status(403).json({ error: "Unauthorized" });
+    }
+
+    const {
+      name,
+      artists,
+      album,
+      release_date,
+      genres,
+      description,
+      image,
+      likes,
+      listen_count,
+      like_count,
+      dislike_count,
+      comment_count,
+    } = req.body;
+
+    // Validate required fields
+    if (
+      !name ||
+      !artists ||
+      !album ||
+      !release_date ||
+      !genres ||
+      !description
+    ) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
+
+    // Check if music already exists
+    const musicExists = await Music.findOne({ name, artists });
+    if (musicExists) {
+      return res
+        .status(400)
+        .json({ error: "A song with this name and artist already exists" });
+    }
+
+    // Create new music
+    const newMusic = new Music({
+      name,
+      artists,
+      album,
+      release_date: new Date(release_date),
+      genres,
+      description,
+      image: image || "../img/albums/default.jpg",
+      likes: likes || [],
+      listen_count: listen_count || 0,
+      like_count: like_count || 0,
+      dislike_count: dislike_count || 0,
+      comment_count: comment_count || 0,
+    });
+
+    await newMusic.save();
+    res.status(201).json({ success: true, music: newMusic });
+  } catch (error) {
+    console.error("Error creating music:", error);
+    res.status(500).json({ error: "Failed to create music" });
+  }
+});
+
+// Admin API - Search for music
+app.get("/api/admin/music/search", async (req, res) => {
+  try {
+    const user = req.session.user;
+
+    // Check if user is admin
+    if (!user || user.type !== "admin") {
+      return res.status(403).json({ error: "Unauthorized" });
+    }
+
+    const { name, artist, date } = req.query;
+
+    // Build search query
+    const query = {};
+    if (name) query.name = new RegExp(name, "i");
+    if (artist) query.artists = new RegExp(artist, "i");
+    if (date)
+      query.release_date = {
+        $gte: new Date(date),
+        $lt: new Date(date + "T23:59:59"),
+      };
+
+    // If searching for a specific song by name
+    if (req.query.name && !req.query.artist && !req.query.date) {
+      const song = await Music.findOne({
+        name: new RegExp(`^${req.query.name}$`, "i"),
+      });
+      return res.json({ song });
+    }
+
+    // Search for songs
+    const songs = await Music.find(query).limit(20);
+    res.json({ songs });
+  } catch (error) {
+    console.error("Error searching music:", error);
+    res.status(500).json({ error: "Failed to search music" });
+  }
+});
+
+// Admin API - Update music
+app.put("/api/admin/music/:id", async (req, res) => {
+  try {
+    const user = req.session.user;
+
+    // Check if user is admin
+    if (!user || user.type !== "admin") {
+      return res.status(403).json({ error: "Unauthorized" });
+    }
+
+    const { name, artists, album, release_date, genres, description } =
+      req.body;
+
+    // Validate required fields
+    if (
+      !name ||
+      !artists ||
+      !album ||
+      !release_date ||
+      !genres ||
+      !description
+    ) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
+
+    // Update music
+    const updatedMusic = await Music.findByIdAndUpdate(
+      req.params.id,
+      {
+        name,
+        artists,
+        album,
+        release_date: new Date(release_date),
+        genres,
+        description,
+      },
+      { new: true }
+    );
+
+    if (!updatedMusic) {
+      return res.status(404).json({ error: "Music not found" });
+    }
+
+    res.json({ success: true, music: updatedMusic });
+  } catch (error) {
+    console.error("Error updating music:", error);
+    res.status(500).json({ error: "Failed to update music" });
+  }
+});
+
+// Admin API - Delete music
+app.delete("/api/admin/music/:id", async (req, res) => {
+  try {
+    const user = req.session.user;
+
+    // Check if user is admin
+    if (!user || user.type !== "admin") {
+      return res.status(403).json({ error: "Unauthorized" });
+    }
+
+    // Delete music
+    const deletedMusic = await Music.findByIdAndDelete(req.params.id);
+
+    if (!deletedMusic) {
+      return res.status(404).json({ error: "Music not found" });
+    }
+
+    // Also delete associated reviews
+    await Review.deleteMany({ songName: deletedMusic.name });
+
+    res.json({ success: true });
+  } catch (error) {
+    console.error("Error deleting music:", error);
+    res.status(500).json({ error: "Failed to delete music" });
+  }
+});
+
+// Get Username of the User
+app.get("/api/current-username", (req, res) => {
+  if (req.session.user) {
+    res.json({ username: req.session.user.username });
+  } else {
+    res.status(401).json({ error: "User not logged in" });
+  }
+});
+
+// Get the likes for a song
+app.get("/api/songs/:id/likes", async (req, res) => {
+  try {
+    const song = await Music.findById(req.params.id);
+    if (!song) {
+      return res.status(404).json({ error: "Song not found" });
+    }
+    res.json({ likes: song.likes });
+  } catch (error) {
+    console.error("Error fetching song likes:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+// Like a song
+app.post("/api/songs/:id/like", async (req, res) => {
+  try {
+    const song = await Music.findById(req.params.id);
+
+    if (!song) {
+      return res.status(404).json({ error: "Song not found" });
+    }
+
+    const username = req.body.username;
+    if (!song.likes.includes(username)) {
+      song.likes.push(username);
+      await song.save();
+    }
+    res.json({ likes: song.likes });
+  } catch (error) {
+    console.error("Error liking song:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+// Unlike a song
+app.post("/api/songs/:id/unlike", async (req, res) => {
+  try {
+    const song = await Music.findById(req.params.id);
+    if (!song) {
+      return res.status(404).json({ error: "Song not found" });
+    }
+    const username = req.body.username;
+    song.likes = song.likes.filter((user) => user !== username);
+    await song.save();
+    res.json({ likes: song.likes });
+  } catch (error) {
+    console.error("Error unliking song:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
 const viewPath = path.join(__dirname, "../pages");
 
 app.use(express.json());
@@ -304,67 +550,6 @@ app.post("/register", async (req, res) => {
   }
 });
 
-// Get Username of the User
-app.get("/api/current-username", (req, res) => {
-  if (req.session.user) {
-    res.json({ username: req.session.user.username });
-  } else {
-    res.status(401).json({ error: "User not logged in" });
-  }
-});
-
-// Get the likes for a song
-app.get("/api/songs/:id/likes", async (req, res) => {
-  try {
-    const song = await Music.findById(req.params.id);
-    if (!song) {
-      return res.status(404).json({ error: "Song not found" });
-    }
-    res.json({ likes: song.likes });
-  } catch (error) {
-    console.error("Error fetching song likes:", error);
-    res.status(500).json({ error: "Server error" });
-  }
-});
-
-// Like a song
-app.post("/api/songs/:id/like", async (req, res) => {
-  try {
-    const song = await Music.findById(req.params.id);
-
-    if (!song) {
-      return res.status(404).json({ error: "Song not found" });
-    }
-
-    const username = req.body.username;
-    if (!song.likes.includes(username)) {
-      song.likes.push(username);
-      await song.save();
-    }
-    res.json({ likes: song.likes });
-  } catch (error) {
-    console.error("Error liking song:", error);
-    res.status(500).json({ error: "Server error" });
-  }
-});
-
-// Unlike a song
-app.post("/api/songs/:id/unlike", async (req, res) => {
-  try {
-    const song = await Music.findById(req.params.id);
-    if (!song) {
-      return res.status(404).json({ error: "Song not found" });
-    }
-    const username = req.body.username;
-    song.likes = song.likes.filter((user) => user !== username);
-    await song.save();
-    res.json({ likes: song.likes });
-  } catch (error) {
-    console.error("Error unliking song:", error);
-    res.status(500).json({ error: "Server error" });
-  }
-});
-
 // FROM https://expressjs.com/en/resources/middleware/session.html
 app.get("/logout", function (req, res, next) {
   // logout logic
@@ -594,191 +779,6 @@ app.get("/admin/music", async (req, res) => {
   } catch (error) {
     console.error("Error loading admin music page:", error);
     res.status(500).send("Error loading admin music page");
-  }
-});
-
-// Admin API - Create new music
-app.post("/api/admin/music", async (req, res) => {
-  try {
-    const user = req.session.user;
-
-    // Check if user is admin
-    if (!user || user.type !== "admin") {
-      return res.status(403).json({ error: "Unauthorized" });
-    }
-
-    const {
-      name,
-      artists,
-      album,
-      release_date,
-      genres,
-      description,
-      image,
-      likes,
-      listen_count,
-      like_count,
-      dislike_count,
-      comment_count,
-    } = req.body;
-
-    // Validate required fields
-    if (
-      !name ||
-      !artists ||
-      !album ||
-      !release_date ||
-      !genres ||
-      !description
-    ) {
-      return res.status(400).json({ error: "Missing required fields" });
-    }
-
-    // Check if music already exists
-    const musicExists = await Music.findOne({ name, artists });
-    if (musicExists) {
-      return res
-        .status(400)
-        .json({ error: "A song with this name and artist already exists" });
-    }
-
-    // Create new music
-    const newMusic = new Music({
-      name,
-      artists,
-      album,
-      release_date: new Date(release_date),
-      genres,
-      description,
-      image: image || "../img/albums/default.jpg",
-      likes: likes || [],
-      listen_count: listen_count || 0,
-      like_count: like_count || 0,
-      dislike_count: dislike_count || 0,
-      comment_count: comment_count || 0,
-    });
-
-    await newMusic.save();
-    res.status(201).json({ success: true, music: newMusic });
-  } catch (error) {
-    console.error("Error creating music:", error);
-    res.status(500).json({ error: "Failed to create music" });
-  }
-});
-
-// Admin API - Search for music
-app.get("/api/admin/music/search", async (req, res) => {
-  try {
-    const user = req.session.user;
-
-    // Check if user is admin
-    if (!user || user.type !== "admin") {
-      return res.status(403).json({ error: "Unauthorized" });
-    }
-
-    const { name, artist, date } = req.query;
-
-    // Build search query
-    const query = {};
-    if (name) query.name = new RegExp(name, "i");
-    if (artist) query.artists = new RegExp(artist, "i");
-    if (date)
-      query.release_date = {
-        $gte: new Date(date),
-        $lt: new Date(date + "T23:59:59"),
-      };
-
-    // If searching for a specific song by name
-    if (req.query.name && !req.query.artist && !req.query.date) {
-      const song = await Music.findOne({
-        name: new RegExp(`^${req.query.name}$`, "i"),
-      });
-      return res.json({ song });
-    }
-
-    // Search for songs
-    const songs = await Music.find(query).limit(20);
-    res.json({ songs });
-  } catch (error) {
-    console.error("Error searching music:", error);
-    res.status(500).json({ error: "Failed to search music" });
-  }
-});
-
-// Admin API - Update music
-app.put("/api/admin/music/:id", async (req, res) => {
-  try {
-    const user = req.session.user;
-
-    // Check if user is admin
-    if (!user || user.type !== "admin") {
-      return res.status(403).json({ error: "Unauthorized" });
-    }
-
-    const { name, artists, album, release_date, genres, description } =
-      req.body;
-
-    // Validate required fields
-    if (
-      !name ||
-      !artists ||
-      !album ||
-      !release_date ||
-      !genres ||
-      !description
-    ) {
-      return res.status(400).json({ error: "Missing required fields" });
-    }
-
-    // Update music
-    const updatedMusic = await Music.findByIdAndUpdate(
-      req.params.id,
-      {
-        name,
-        artists,
-        album,
-        release_date: new Date(release_date),
-        genres,
-        description,
-      },
-      { new: true }
-    );
-
-    if (!updatedMusic) {
-      return res.status(404).json({ error: "Music not found" });
-    }
-
-    res.json({ success: true, music: updatedMusic });
-  } catch (error) {
-    console.error("Error updating music:", error);
-    res.status(500).json({ error: "Failed to update music" });
-  }
-});
-
-// Admin API - Delete music
-app.delete("/api/admin/music/:id", async (req, res) => {
-  try {
-    const user = req.session.user;
-
-    // Check if user is admin
-    if (!user || user.type !== "admin") {
-      return res.status(403).json({ error: "Unauthorized" });
-    }
-
-    // Delete music
-    const deletedMusic = await Music.findByIdAndDelete(req.params.id);
-
-    if (!deletedMusic) {
-      return res.status(404).json({ error: "Music not found" });
-    }
-
-    // Also delete associated reviews
-    await Review.deleteMany({ songName: deletedMusic.name });
-
-    res.json({ success: true });
-  } catch (error) {
-    console.error("Error deleting music:", error);
-    res.status(500).json({ error: "Failed to delete music" });
   }
 });
 
