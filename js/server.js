@@ -5,13 +5,23 @@
 const express = require("express");
 const app = express();
 const path = require("path");
-// const hbs = require("hbs");
+const hbs = require("hbs");
 const { User } = require("../model/user");
 const Album = require("../model/album");
 const { read_music_all } = require("../model/music");
 const { Music } = require("../model/music");
 const { Review } = require("../model/review");
 const session = require("express-session");
+
+// Register the 'eq' helper
+hbs.registerHelper("eq", function (a, b, options) {
+  if (a === b) {
+    return true; // Execute the block inside the helper
+  } else {
+    return false;// Execute the else block (if any)
+  }
+});
+
 
 // Example usage of count method
 const countMusic = async () => {
