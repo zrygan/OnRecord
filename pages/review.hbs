@@ -125,13 +125,18 @@
                         <p>{{this.comment}}</p>
                         <p>Rating: {{this.rating}}/5</p>
                     </div>
-                    {{!-- Only render actions if the review belongs to the current user --}}
-                    {{!-- {{#if (this.userName === ../user.username)}}
-                        <div class="review-actions">
-                        <button class="edit-button">Edit</button>
-                        <button class="delete-button">Delete</button>
-                        </div>
-                    {{/if}} --}}
+                    {{#if (eq this.userName ../user.username)}}
+                      <div class="review-actions">
+                          <button class="edit-button" data-review-id="{{this._id}}">Edit</button>
+                          <button class="delete-button" data-review-id="{{this._id}}">Delete</button>
+                      </div>
+                    {{else}}
+                      {{#if (eq ../user.type "admin")}}
+                          <div class="review-actions">
+                            <button class="delete-button" data-review-id="{{this._id}}">Delete</button>
+                          </div>
+                      {{/if}}
+                    {{/if}}
                 </div>
             {{/each}}
         {{else}}
