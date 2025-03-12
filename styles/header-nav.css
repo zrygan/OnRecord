@@ -273,3 +273,29 @@ body {
   box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.25); /* Converted 4px to rem */
   position: relative;
 }
+
+.logout-button {
+  display: flex;
+  align-items: center;
+  margin-left: 1rem;
+}
+
+.logout {
+  text-decoration: none;
+}
+
+.logout-text {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 2vh;
+  color: var(--white);
+  background-color: var(--cyan);
+  padding: 8px 12px;
+  border-radius: 50vw;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.logout-text:hover {
+  background-color: var(--orange);
+  transform: scale(1.1);
+  cursor: pointer;
+}

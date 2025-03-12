@@ -328,6 +328,31 @@ app.post("/api/songs/:id/unlike", async (req, res) => {
   }
 });
 
+// FROM https://expressjs.com/en/resources/middleware/session.html
+app.get("/logout", function (req, res, next) {
+  // logout logic
+
+  // clear the user from the session object and save.
+  // this will ensure that re-using the old session id
+  // does not have a logged in user
+  req.session.user = null;
+  req.session.save(function (err) {
+    if (err) {
+      return next(err);
+    }
+
+    // regenerate the session, which is good practice to help
+    // guard against forms of session fixation
+    req.session.regenerate(function (err) {
+      if (err) {
+        return next(err);
+      }
+
+      res.redirect("/");
+    });
+  });
+});
+
 app.listen(3000, () => {
   console.log("Server running on port 3000");
 });
