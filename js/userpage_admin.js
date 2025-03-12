@@ -8,8 +8,13 @@ function confirmation() {
 
 
 /*search function*/
+function searchUser() {
 
+}
+ 
 
 /*delete function*/
-
+function deleteUser() {
+ 
+}
 
