@@ -18,10 +18,9 @@ hbs.registerHelper("eq", function (a, b, options) {
   if (a === b) {
     return true; // Execute the block inside the helper
   } else {
-    return false;// Execute the else block (if any)
+    return false; // Execute the else block (if any)
   }
 });
-
 
 // Example usage of count method
 const countMusic = async () => {
@@ -485,11 +484,45 @@ app.get("/search", async (req, res) => {
 });
 
 // Delete a review
-app.delete('/delete-review/:id', async (req, res) => {
+app.delete("/delete-review/:id", async (req, res) => {
   try {
-      await Review.findByIdAndDelete(req.params.id);
-      res.status(200).json({ message: 'Review deleted successfully' });
+    await Review.findByIdAndDelete(req.params.id);
+    res.status(200).json({ message: "Review deleted successfully" });
   } catch (error) {
-      res.status(500).json({ error: error.message });
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Admin dashboard route
+app.get("/admin", async (req, res) => {
+  try {
+    const user = req.session.user;
+
+    if (!user || user.type !== "admin") {
+      console.log("Unauthorized access attempt to admin panel");
+      return res.redirect("/home");
+    }
+
+    res.render("admin/admin", { user });
+  } catch (error) {
+    console.error("Error loading admin dashboard:", error);
+    res.status(500).send("Error loading admin dashboard");
+  }
+});
+
+// Admin music management page
+app.get("/admin/music", async (req, res) => {
+  try {
+    const user = req.session.user;
+
+    if (!user || user.type !== "admin") {
+      console.log("Unauthorized access attempt to music admin");
+      return res.redirect("/home");
+    }
+
+    res.render("admin/music_database", { user });
+  } catch (error) {
+    console.error("Error loading admin music page:", error);
+    res.status(500).send("Error loading admin music page");
   }
 });

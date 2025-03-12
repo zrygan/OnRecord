@@ -299,3 +299,30 @@ body {
   transform: scale(1.1);
   cursor: pointer;
 }
+
+/* Admin Button */
+.admin-button {
+  display: flex;
+  align-items: center;
+  margin-left: 1rem;
+}
+
+.admin {
+  text-decoration: none;
+}
+
+.admin-text {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 2vh;
+  color: var(--white);
+  background-color: black;
+  padding: 8px 12px;
+  border-radius: 50vw;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.admin-text:hover {
+  background-color: #333;
+  transform: scale(1.1);
+  cursor: pointer;
+}

@@ -1,0 +1,44 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: var(--space);
+  background-color: var(--darkBlue);
+  color: var(--white);
+}
+
+.admin-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 9vh);
+  text-align: center;
+}
+.admin-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  margin-top: 2rem;
+}
+
+.admin-action-button {
+  display: inline-block;
+  background-color: black;
+  color: white;
+  font-size: 1.5rem;
+  padding: 1.5rem 2.5rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  border: 2px solid var(--cyan);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+}
+
+.admin-action-button:hover {
+  background-color: var(--cyan);
+  color: black;
+  transform: scale(1.1);
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
+}
