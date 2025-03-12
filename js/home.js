@@ -2,11 +2,18 @@ document.addEventListener("DOMContentLoaded", async () => {
   // PART 1: Song interaction functionality
   try {
     const username = await getCurrentUsername(); // Fetch the current user's username
+    if (!username) {
+      throw new Error("Username not found");
+    }
     console.log("Current username:", username);
 
     const songBoxes = document.querySelectorAll(".song-box");
     const promises = Array.from(songBoxes).map(async (songBox) => {
       const songId = songBox.getAttribute("data-id");
+      if (!songId) {
+        console.error("Song ID not found for song box:", songBox);
+        return;
+      }
       console.log("Processing song with ID:", songId);
 
       const likes = await getSongLikes(songId);
