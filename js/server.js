@@ -781,3 +781,29 @@ app.delete("/api/admin/music/:id", async (req, res) => {
     res.status(500).json({ error: "Failed to delete music" });
   }
 });
+
+app.put("/edit-review/:id", async (req, res) => {
+  try {
+      const { id } = req.params;
+      const { comment } = req.body;
+
+      if (!comment || comment.trim() === "") {
+          return res.status(400).json({ error: "Review comment cannot be empty." });
+      }
+
+      const updatedReview = await Review.findByIdAndUpdate(
+          id,
+          { comment: comment },
+          { new: true, runValidators: true }
+      );
+
+      if (!updatedReview) {
+          return res.status(404).json({ error: "Review not found." });
+      }
+
+      res.json({ success: true, message: "Review updated successfully.", updatedReview });
+  } catch (error) {
+      console.error("Error updating review:", error);
+      res.status(500).json({ error: "Internal server error." });
+  }
+});
