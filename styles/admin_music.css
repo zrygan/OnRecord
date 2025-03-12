@@ -1,5 +1,7 @@
 :root {
   background-color: var(--darkBlue);
+  color: white;
+  font-family: "Space Grotesk", sans-serif;
 }
 
 .content {

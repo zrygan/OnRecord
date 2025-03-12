@@ -1,6 +1,6 @@
-<!DOCTYPE html>
 <html lang="en">
   <head>
+    {{! YES IT USES THE SAME STYLE AS MUSIC! (zhean) }}
     <link rel="stylesheet" href="../../styles/admin_music.css" />
     <link rel="stylesheet" href="../../styles/type.css" />
     <link rel="stylesheet" href="../../styles/header-nav.css" />
@@ -15,55 +15,75 @@
       href="https://fonts.googleapis.com/css2?family=Nabla&display=swap"
       rel="stylesheet"
     />
-    
+
     <link rel="icon" href="../../favicon.ico" type="image/x-icon" />
-    <script src="../../js/userpage_admin.js"></script>
+    <title>OnRecord Admin: User Management</title>
   </head>
-  <body>
-    <div class="content space-grotesk">
+  <body bgcolor="#191E38" style="font-color: white">
     <div class="nav-bar">
       <div class="nav-bar-elements">
         <!-- Title -->
-        <a class="on-record" href="../../pages/home.html">
+        <a class="on-record" href="/home">
           <span>O</span><span>n</span>
           <br />
-          <span>R</span><span>e</span><span>c</span><span>o</span><span>r</span
-          ><span>d</span>
+          <span>R</span><span>e</span><span>c</span><span>o</span><span
+          >r</span><span>d</span>
         </a>
         <!-- Search Bar -->
         <div class="search-bar">
-          <!-- Text Box -->
-          <input type="text" class="text-box" />
+          <input
+            type="search"
+            class="text-box"
+            id="search-input"
+            placeholder="Search..."
+          />
         </div>
+        <div id="search-results" class="search-results"></div>
         <!-- Charts Button -->
         <div class="charts-button">
-          <a class="charts" href="../../pages/charts.html">
-            <span class="charts-text" href="../../pages/charts.html">Charts</span>
+          <a class="charts" href="/charts">
+            <span class="charts-text">Charts</span>
           </a>
         </div>
         <!-- User Button -->
         <div class="user-button">
-          <a class="user-button" href="../../pages/userpage.html">
-            <img class="user-pic" src="../../img/index/1.png" />
+          <a class="user-button" href="/userpage.html">
+            <img class="user-pic" src="{{user.image}}" alt="User Image" />
+          </a>
+        </div>
+        <!-- Logout Button -->
+        <div class="logout-button">
+          <a class="logout" href="/logout">
+            <span class="logout-text">Logout</span>
+          </a>
+        </div>
+        <!-- Admin Button -->
+        <div class="admin-button">
+          <a class="admin" href="/admin">
+            <span class="admin-text">Admin</span>
           </a>
         </div>
       </div>
     </div>
-      
-      <h1>Admin Controls</h1>
-      <h2>This is where you can remove a user! Be careful as this is permanent!</h2>
-      
-      <div id ="search-result">
-        <p id="user_not_found"> This User is not Found :sad: </p>
-        <p id="user_found"> This User Found! </p>
+
+    <div class="content space-grotesk">
+      <h1>Admin Controls: User Management</h1>
+
+      <div class="admin-instructions">
+        <h2>This is where you can manage users in the system</h2>
+        <div class="help">
+          <p>Here you can<b> view, edit, and delete </b>all users OnRecord.</p>
+          <p>Input a username of the user, and additional tabs will appear if
+            user is found.</p>
+        </div>
       </div>
 
-        <div id="choice_button">
-            <button onclick="confirmation()"> Delete User </button>
-            <p id="Option"></p>
-        </div>
-
+      <!-- ADMIN CONTROLS -->
+      <div class="admin_controls" id="control_panel">
+        <!-- Content will be populated by JavaScript -->
+      </div>
     </div>
 
-    </body>
+    <script src="../../js/userpage_admin.js"></script>
+  </body>
 </html>

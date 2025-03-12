@@ -784,26 +784,165 @@ app.get("/admin/music", async (req, res) => {
 
 app.put("/edit-review/:id", async (req, res) => {
   try {
-      const { id } = req.params;
-      const { comment } = req.body;
+    const { id } = req.params;
+    const { comment } = req.body;
 
-      if (!comment || comment.trim() === "") {
-          return res.status(400).json({ error: "Review comment cannot be empty." });
-      }
+    if (!comment || comment.trim() === "") {
+      return res.status(400).json({ error: "Review comment cannot be empty." });
+    }
 
-      const updatedReview = await Review.findByIdAndUpdate(
-          id,
-          { comment: comment },
-          { new: true, runValidators: true }
-      );
+    const updatedReview = await Review.findByIdAndUpdate(
+      id,
+      { comment: comment },
+      { new: true, runValidators: true }
+    );
 
-      if (!updatedReview) {
-          return res.status(404).json({ error: "Review not found." });
-      }
+    if (!updatedReview) {
+      return res.status(404).json({ error: "Review not found." });
+    }
 
-      res.json({ success: true, message: "Review updated successfully.", updatedReview });
+    res.json({
+      success: true,
+      message: "Review updated successfully.",
+      updatedReview,
+    });
   } catch (error) {
-      console.error("Error updating review:", error);
-      res.status(500).json({ error: "Internal server error." });
+    console.error("Error updating review:", error);
+    res.status(500).json({ error: "Internal server error." });
+  }
+});
+
+// Admin API - Get user by username or ID
+app.get("/api/admin/user", async (req, res) => {
+  try {
+    const user = req.session.user;
+
+    // Check if user is admin
+    if (!user || user.type !== "admin") {
+      return res.status(403).json({ error: "Unauthorized" });
+    }
+
+    const { username, id } = req.query;
+
+    // Find user by either username or ID
+    let foundUser;
+    if (username) {
+      foundUser = await User.findOne({ username });
+    } else if (id) {
+      foundUser = await User.findById(id);
+    }
+
+    if (!foundUser) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    res.json({ user: foundUser });
+  } catch (error) {
+    console.error("Error finding user:", error);
+    res.status(500).json({ error: "Failed to fetch user" });
+  }
+});
+
+// Admin API - Get user by ID
+app.get("/api/admin/user/:id", async (req, res) => {
+  try {
+    const user = req.session.user;
+
+    // Check if user is admin
+    if (!user || user.type !== "admin") {
+      return res.status(403).json({ error: "Unauthorized" });
+    }
+
+    const foundUser = await User.findById(req.params.id);
+
+    if (!foundUser) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    res.json({ user: foundUser });
+  } catch (error) {
+    console.error("Error finding user by ID:", error);
+    res.status(500).json({ error: "Failed to fetch user" });
+  }
+});
+
+// Admin API - Update user
+app.put("/api/admin/user/:id", async (req, res) => {
+  try {
+    const user = req.session.user;
+
+    // Check if user is admin
+    if (!user || user.type !== "admin") {
+      return res.status(403).json({ error: "Unauthorized" });
+    }
+
+    const { firstname, surname, email, type } = req.body;
+
+    // Validate required fields
+    if (!firstname || !surname || !email || !type) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
+
+    // Update user
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      {
+        firstname,
+        surname,
+        email,
+        type,
+      },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    res.json({ success: true, user: updatedUser });
+  } catch (error) {
+    console.error("Error updating user:", error);
+    res.status(500).json({ error: "Failed to update user" });
+  }
+});
+
+// Admin API - Delete user
+app.delete("/api/admin/user/:id", async (req, res) => {
+  try {
+    const user = req.session.user;
+
+    // Check if user is admin
+    if (!user || user.type !== "admin") {
+      return res.status(403).json({ error: "Unauthorized" });
+    }
+
+    // Delete user
+    const deletedUser = await User.findByIdAndDelete(req.params.id);
+
+    if (!deletedUser) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    res.json({ success: true });
+  } catch (error) {
+    console.error("Error deleting user:", error);
+    res.status(500).json({ error: "Failed to delete user" });
+  }
+});
+
+// Admin user management page
+app.get("/admin/users", async (req, res) => {
+  try {
+    const user = req.session.user;
+
+    if (!user || user.type !== "admin") {
+      console.log("Unauthorized access attempt to user admin");
+      return res.redirect("/home");
+    }
+
+    res.render("admin/userpage_admin", { user });
+  } catch (error) {
+    console.error("Error loading admin user page:", error);
+    res.status(500).send("Error loading admin user page");
   }
 });
