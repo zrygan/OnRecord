@@ -6,6 +6,7 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const hbs = require("hbs");
+const mongoose = require("mongoose"); 
 const { User } = require("../model/user");
 const Album = require("../model/album");
 const { read_music_all } = require("../model/music");
@@ -622,11 +623,15 @@ app.get("/review/:id", async (req, res) => {
   try {
     let user = req.session.user;
 
-    if (!checkUser(user)) {
-      return res.status(500).send("User not found in the database.");
+    if (!user) {
+      return res.status(401).send("User not logged in");
     }
 
     const songID = req.params.id;
+
+    if (!songID) {
+      return res.status(400).send("Invalid song ID");
+    }
 
     // Find the song by its ID
     const song = await Music.findById(songID);
@@ -722,16 +727,59 @@ app.get("/search", async (req, res) => {
     });
 
     const results = [
-      ...users.map((user) => ({ type: "user", name: user.name })),
-      ...albums.map((album) => ({ type: "album", name: album.name })),
-      ...songs.map((music) => ({ type: "music", name: music.name })),
-      ...artists.map((artist) => ({ type: "artist", name: artist.name })),
+      ...users.map((user) => ({ type: "user", _id: user._id, username: user.username })),
+      ...albums.map((album) => ({ type: "album", _id: album._id, name: album.name })),
+      ...songs.map((music) => ({ type: "music", _id: music._id, name: music.name })),
+      ...artists.map((artist) => ({ type: "artist", _id: artist._id, username: artist.username })),
     ];
 
     res.json(results);
   } catch (error) {
     console.error("Error fetching search results:", error);
     res.status(500).send("Error fetching search results");
+  }
+});
+
+// Route to render user profile page
+app.get("/user/:id", async (req, res) => {
+  try {
+    let user = req.session.user;
+
+    if (!user) {
+      return res.status(401).send("User not logged in");
+    }
+
+    const userId = req.params.id;
+
+    if (!userId) {
+      return res.status(400).send("Invalid user ID");
+    }
+
+    // Validate user ID format
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(400).send("Invalid user ID format");
+    }
+
+    // Find the user by their ID
+    const profileUser = await User.findById(userId);
+    if (!profileUser) return res.status(404).send("User not found");
+
+    // Render the user profile page with user details
+    res.render("userpage", {
+      pageTitle: profileUser.username,
+      username: profileUser.username,
+      profilePicture: profileUser.image,
+      bio: profileUser.bio,
+      customNote: profileUser.customNote,
+      status: profileUser.status,
+      accountCreated: profileUser.date_created.toDateString(),
+      countryOrigin: profileUser.countryOrigin,
+      feel: profileUser.feel,
+      user,
+    });
+  } catch (error) {
+    console.error("Error fetching user profile:", error.message);
+    res.status(500).send("Internal Server Error");
   }
 });
 
