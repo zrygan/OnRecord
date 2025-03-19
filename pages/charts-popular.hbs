@@ -13,8 +13,8 @@
         <a class="on-record" href="/home">
           <span>O</span><span>n</span>
           <br />
-          <span>R</span><span>e</span><span>c</span><span>o</span><span>r</span
-          ><span>d</span>
+          <span>R</span><span>e</span><span>c</span><span>o</span><span
+          >r</span><span>d</span>
         </a>
         <!-- Genre Button REMOVED FOR NOW -->
         <div class="genre-button">
@@ -23,7 +23,13 @@
         <!-- Search Bar -->
         <div class="search-bar">
           <!-- Text Box -->
-          <input type="text" class="text-box" />
+          <input
+            type="search"
+            class="text-box"
+            id="search-input"
+            placeholder="Search..."
+          />
+        <div id="search-results" class="search-results"></div>
         </div>
         <!-- Charts Button -->
         <div class="charts-button">
@@ -33,10 +39,26 @@
         </div>
         <!-- User Button -->
         <div class="user-button">
-          <a class="user-button" href="/profile">
-            <img class="user-pic" src="{{user.image}}" />
+          <a class="user-button" href="profile">
+            <img class="user-pic" src="{{user.image}}" alt="User Image" />
           </a>
         </div>
+
+        <!-- Logout Button -->
+        <div class="logout-button">
+          <a class="logout" href="/logout">
+            <span class="logout-text">Logout</span>
+          </a>
+        </div>
+
+        <!-- Admin Button (conditional button) -->
+        {{#if (eq user.type "admin")}}
+          <div class="admin-button">
+            <a class="admin" href="/admin">
+              <span class="admin-text">Admin</span>
+            </a>
+          </div>
+        {{/if}}
       </div>
     </div>
   <section class="most-popular">
