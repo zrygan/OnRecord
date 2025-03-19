@@ -93,7 +93,7 @@ const create_music = async (
     });
 
     await new_music.save();
-    console.log("Music created:", new_music);
+    console.log("Music created:", new_music.name);
   } catch (error) {
     console.error("Error creating music:", error.message);
   }

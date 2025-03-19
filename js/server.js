@@ -274,7 +274,7 @@ app.delete("/api/admin/music/:id", async (req, res) => {
 });
 
 // Get Username of the User
-app.get("/api/current-username", (req, res) => {
+app.get("/api/current-username", async (req, res) => {
   let user =  req.session.user;
   
   if (user) {

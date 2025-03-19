@@ -55,7 +55,7 @@ const create_review = async (userName, userPic, songName, comment, rating) => {
   try {
     const newReview = new Review({ userName, userPic, songName, comment, rating });
     await newReview.save();
-    console.log("Review created:", newReview);
+    console.log("Review created:", newReview.comment);
   } catch (error) {
     console.error("Error creating review:", error.message);
   }

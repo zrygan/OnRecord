@@ -80,7 +80,7 @@ const create_user = async (
     });
 
     await new_user.save();
-    console.log("User created:", new_user);
+    console.log("User created:", new_user.username);
     return true;
   } catch (error) {
     console.error("Error creating user:", error.message);
