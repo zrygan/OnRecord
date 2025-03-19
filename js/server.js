@@ -23,6 +23,12 @@ hbs.registerHelper("eq", function (a, b, options) {
   }
 });
 
+// Register the 'formatDate' helper
+hbs.registerHelper('formatDate', function(dateString) {
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  return new Date(dateString).toLocaleDateString(undefined, options);
+});
+
 // Example usage of count method
 const countMusic = async () => {
   try {
@@ -448,16 +454,18 @@ app.get("/charts-based", async (req, res) => {
 
 app.get("/profile", async (req, res) => {
   try {
-    const music = await Music.find();
-    const userData = await User.find();
-
     let user = req.session.user;
+    console.log("Session user:", user);
 
     if (!checkUser(user)) {
+      console.log("User not found in the database.");
       return res.status(500).send("User not found in the database.");
+    } else {
+      console.log("Rendering userpage with userData and music...");
+      res.render("userpage", {user});
     }
 
-    res.render("userpage", { userData, music });
+
   } catch (error) {
     console.error("Error fetching user/music data:", error);
     res.status(500).send("Error fetching charts data");

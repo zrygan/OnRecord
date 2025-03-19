@@ -25,6 +25,14 @@ const schema_user = new mongoose.Schema({
     enum: ["normal", "admin", "artist"],
   },
   image: { type: String },
+  bio: { type: String, default: "No bio provided" },
+  customNote: { type: String, default: "No custom note provided" },
+  status: { type: String, enum: ["Online", "Offline"], default: "Online" },
+  countryOrigin: { type: String, default: "Unspecified" },
+  feel: { type: String, enum: ["😀", "😢", "😡", "😱", "😍", "😎", "🤔", "😴", "🤢", "🤯"], default: "😎" },
+  follower: { type: [String], default: [] }, // list of usernames
+  following: { type: [String], default: [] }, // list of usernames
+  favorites: { type: [String], default: [] }, // list of music names
 });
 
 // Define the User model
@@ -41,7 +49,15 @@ const create_user = async (
   password,
   birthday,
   type,
-  image
+  image,
+  bio,
+  customNote,
+  status,
+  countryOrigin,
+  feel,
+  follower,
+  following,
+  favorites
 ) => {
   try {
     const new_user = new User({
@@ -53,6 +69,14 @@ const create_user = async (
       birthday,
       type,
       image,
+      bio,
+      customNote,
+      status,
+      countryOrigin,
+      feel,
+      follower,
+      following,
+      favorites,
     });
 
     await new_user.save();
@@ -158,7 +182,15 @@ fs.readFile("data\\user.json", "utf8", async (err, data) => {
         user.password,
         user.birthday,
         user.type,
-        user.image || defaultImage
+        user.image || defaultImage,
+        user.bio,
+        user.customNote,
+        user.status,
+        user.countryOrigin,
+        user.feel,
+        user.follower,
+        user.following,
+        user.favorites
       );
     }
     console.log("User data inserted successfully");

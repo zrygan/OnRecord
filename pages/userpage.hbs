@@ -27,31 +27,30 @@
 
     <div class="content">
         <div class="marquee"> 
-            <div class="username"> Now Viewing: <span id="name">{{username}}</span>'s Profile!</div>
+            <div class="username"> Now Viewing: <span id="name">{{user.username}}</span>'s Profile!</div>
         </div>
         
         <div class="flex-box">
             <div class="picture-box">
-                <img src="../img/userpage/{{profilePicture}}" id="picture">
+                <img src="{{user.image}}" id="picture">
                 <div class="overlay">
-                    <div class="text">{{customNote}}</div>
+                    <div class="text">{{user.customNote}}</div>
                 </div>
             </div>
             
             <div class="speech-bubble">
                 <div class="text-bio">
-                    <p> "{{bio}}" </p>
+                    <p> "{{user.bio}}" </p>
                 </div>
             </div>
         </div>
         
         <img id="star" src="../svg/userpage/star.svg">
         <p class="status-text">
-            Status: <span id="Online-user">{{status}}</span> <br>
-            Account Created: {{accountCreated}} <br>
-            Country of Origin: {{countryOrigin}}
-            Feeling: {{feel}}
-            </svg> <br>
+            Status: <span id="Online-user">{{user.status}}</span> <br>
+            Account Created: {{formatDate user.date_created}} <br>
+            Country of Origin: {{user.countryOrigin}} <br>
+            Feeling: {{user.feel}} <br>
         </p>
 
         <div class="user-informations">
