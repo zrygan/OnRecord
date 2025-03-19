@@ -17,12 +17,12 @@ const schema_music = new mongoose.Schema({
   release_date: { type: Date, required: true },
   genres: { type: [String], required: true },
   description: { type: String, required: true },
-  image: { type: String, required: true },
+  image: { type: String, required: true, default: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9SgCxgQYReXX660xU9Pj5Te611cPR6OReL7_UXY4wXiTXg715_Jahfm0-NS2OmBvnzEA&usqp=CAU" },
   likes: { type: [String], default: [] },
   listen_count: { type: Number, required: true, default: 0 },
   like_count: { type: Number, required: true, default: 0 },
   dislike_count: { type: Number, required: true, default: 0 },
-	comment_count: { type: Number, required: true, default: 0 }
+  comment_count: { type: Number, required: true, default: 0 }
 });
 
 const Music = mongoose.model("Music", schema_music);
@@ -43,10 +43,10 @@ fs.readFile("data\\music.json", "utf8", async (err, data) => {
     console.log("Music collection emptied");
 
     // Insert the data into the database
-    // insertMany() is not used here because all entries will end up having the same one random number. Each entry has to be inserted individually so the RNG will have a different result this time.
     for (const item of musicData) {
       await Music.create({
         ...item,
+        image: item.image || "../img/albums/default.jpg",
         listen_count: Math.floor(Math.random() * 3000001),
         like_count: item.like_count,
         dislike_count: item.dislike_count,
@@ -74,7 +74,7 @@ const create_music = async (
   listen_count,
   like_count,
   dislike_count,
-	comment_count
+  comment_count
 ) => {
   try {
     const new_music = new Music({
@@ -84,7 +84,7 @@ const create_music = async (
       release_date,
       genres,
       description,
-      image,
+      image: image || "../img/albums/default.jpg",
       likes,
       listen_count,
       like_count,
@@ -144,7 +144,7 @@ const update_music = async (
         release_date,
         genres,
         description,
-        image,
+        image: image || "../img/albums/default.jpg",
         likes
       },
       { new: true }
