@@ -161,7 +161,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       // Add click event to navigate to appropriate page
       resultItem.addEventListener("click", function () {
         if (result.type === "user" || result.type === "artist") {
-          window.location.href = `/user/${result._id}`;
+          window.location.href = `/user/${result.username}`;
         } else if (result.type === "album") {
           window.location.href = `/album/${result._id}`;
         } else if (result.type === "music") {

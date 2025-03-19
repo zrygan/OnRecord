@@ -498,24 +498,6 @@ app.get("/profile", async (req, res) => {
   }
 });
 
-app.get("/user/:username", async (req, res) => {
-  try {
-    const music = await Music.find();
-    const userData = await User.find();
-
-    let user = req.session.user;
-
-    if (!checkUser(user)) {
-      return res.status(500).send("User not found in the database.");
-    }
-
-    res.render("userpage", { userData, music });
-  } catch (error) {
-    console.error("Error fetching user/music data:", error);
-    res.status(500).send("Error fetching charts data");
-  }
-});
-
 // Login endpoint
 app.post("/login", async (req, res) => {
   try {
@@ -790,45 +772,57 @@ app.get("/search", async (req, res) => {
 });
 
 // Route to render user profile page
-app.get("/user/:id", async (req, res) => {
+app.get("/user/:username", async (req, res) => {
   try {
-    let user = req.session.user;
+    console.log("Fetching profile for username:", req.params.username);
+    const profileUsername = req.params.username;
+    const profileUser = await User.findOne({ username: profileUsername });
 
-    if (!user) {
-      return res.status(401).send("User not logged in");
+    if (!profileUser) {
+      console.log("User not found:", profileUsername);
+      return res.status(404).send("User not found");
     }
 
-    const userId = req.params.id;
+    console.log("Profile user found:", profileUser);
 
-    if (!userId) {
-      return res.status(400).send("Invalid user ID");
-    }
+    // Fetch profile user's favorite songs from the database
+    const favoriteSongs = await Music.find({ name: { $in: profileUser.favorites } });
+    console.log("Favorite songs fetched:", favoriteSongs);
 
-    // Validate user ID format
-    if (!mongoose.Types.ObjectId.isValid(userId)) {
-      return res.status(400).send("Invalid user ID format");
-    }
+    // Fetch profile user's followers and following users from the database
+    const followers = await User.find({ username: { $in: profileUser.follower } });
+    const following = await User.find({ username: { $in: profileUser.following } });
+    console.log("Followers fetched:", followers);
+    console.log("Following fetched:", following);
 
-    // Find the user by their ID
-    const profileUser = await User.findById(userId);
-    if (!profileUser) return res.status(404).send("User not found");
+    // Fetch profile user's reviews and include song images
+    const reviews = await Review.find({ userName: profileUser.username });
+    const reviewsWithImages = await Promise.all(
+      reviews.map(async (review) => {
+        const song = await Music.findOne({ name: review.songName });
+        return {
+          ...review.toObject(),
+          songImage: song ? song.image : null,
+        };
+      })
+    );
+    console.log("Reviews with images fetched:", reviewsWithImages);
 
-    // Render the user profile page with user details
+    // Get the original user from the session
+    const originalUser = req.session.user;
+    console.log("Original user from session:", originalUser);
+
     res.render("userpage", {
-      pageTitle: profileUser.username,
-      username: profileUser.username,
-      profilePicture: profileUser.image,
-      bio: profileUser.bio,
-      customNote: profileUser.customNote,
-      status: profileUser.status,
-      accountCreated: profileUser.date_created.toDateString(),
-      countryOrigin: profileUser.countryOrigin,
-      feel: profileUser.feel,
-      user,
+      originalUser,
+      user: profileUser,
+      reviews: reviewsWithImages,
+      favoriteSongs,
+      followers,
+      following
     });
   } catch (error) {
-    console.error("Error fetching user profile:", error.message);
-    res.status(500).send("Internal Server Error");
+    console.error("Error fetching user data:", error);
+    res.status(500).send("Server error");
   }
 });
 
