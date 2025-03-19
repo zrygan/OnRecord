@@ -44,13 +44,14 @@ async function fetchAndDisplaySongs() {
 
                 switch (key) {
                     case "popular":
-                        // Sorting by listen count
+                        // Sorting by descending listen count
                         musicData.sort((a, b) => b.listen_count - a.listen_count);
                         updatePopular(musicData);
                         console.log("Accessed popular charts.");
                         break;
                     case "critical":
-                        musicData.sort((a, b) => b.dislike_count - a.dislike_count);
+                        // Ascending listen count
+                        musicData.sort((a, b) => a.listen_count - b.listen_count);
                         updateCritical(musicData);
                         console.log("Accessed critical charts");
                         break;
@@ -134,13 +135,14 @@ function updateCritical(musicData) {
 
 function updateBased(musicData) {
     // Sorting by (weighted) 60% listen count, 40% like count
+    // Calculate total listens and total likes
     const totalListens = musicData.reduce((sum, song) => sum + song.listen_count, 0) || 1; // Prevent division by zero
-    const totalLikes = musicData.reduce((sum, song) => sum + song.like_count, 0) || 1;
+    const totalLikes = musicData.reduce((sum, song) => sum + song.likes.length, 0);
 
     // Compute weighted scores for each song
     const updatedMusicData = musicData.map(song => {
         const listenWeight = song.listen_count / totalListens;
-        const likeWeight = song.like_count / totalLikes;
+        const likeWeight = totalLikes > 0 ? song.likes.length / totalLikes : 0; // If no likes exist, set likeWeight to 0
 
         return {
             ...song,
@@ -148,6 +150,7 @@ function updateBased(musicData) {
         };
     });
 
+    // Sort in descending order (higher score first)
     updatedMusicData.sort((a, b) => b.score - a.score);
 
     console.log("Sorted music data:", updatedMusicData);
