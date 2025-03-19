@@ -68,8 +68,8 @@ async function unlikeSong(songId, username) {
 
 document.addEventListener("DOMContentLoaded", async () => {
   try {
-    const user = await getCurrentUsername(); // Fetch the current user's username
-    const username = user.username;
+    const username = await getCurrentUsername(); // Fetch the current user's username
+    console.log("Current username:", username);
     if (!username) {
       throw new Error("Username not found");
     }
@@ -221,4 +221,4 @@ document.addEventListener("DOMContentLoaded", async () => {
       searchResults.appendChild(resultItem);
     });
   }
-}); 
+});

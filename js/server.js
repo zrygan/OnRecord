@@ -296,9 +296,8 @@ app.delete("/api/admin/music/:id", async (req, res) => {
 // Get Username of the User
 app.get("/api/current-username", async (req, res) => {
   let user = req.session.user;
-
   if (user) {
-    res.json({ user });
+    res.json({ username: user.username });
   } else {
     res.status(401).json({ error: "User not logged in" });
   }
