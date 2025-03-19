@@ -29,6 +29,15 @@ hbs.registerHelper('formatDate', function(dateString) {
   return new Date(dateString).toLocaleDateString(undefined, options);
 });
 
+// Register the 'stars' helper
+hbs.registerHelper("stars", function (rating) {
+  let stars = "";
+  for (let i = 0; i < rating; i++) {
+    stars += '<img id="star-fill" src="../svg/userpage/star-svgrepo-com.svg" style="width: 17px; height: 17px; position: relative; top: 2px;" />';
+  }
+  return new hbs.SafeString(stars);
+});
+
 // Example usage of count method
 const countMusic = async () => {
   try {
@@ -463,12 +472,25 @@ app.get("/profile", async (req, res) => {
     } else {
       // Fetch user's favorite songs from the database
       const favoriteSongs = await Music.find({ name: { $in: user.favorites } });
+
       // Fetch user's followers and following users from the database
       const followers = await User.find({ username: { $in: user.follower } });
       const following = await User.find({ username: { $in: user.following } });
-      
-      console.log("Rendering userpage with userData, favoriteSongs, followers, and following...");
-      res.render("userpage", { user, favoriteSongs, followers, following });
+
+      // Fetch user's reviews and include song images
+      const reviews = await Review.find({ userName: user.username });
+      const reviewsWithImages = await Promise.all(
+        reviews.map(async (review) => {
+          const song = await Music.findOne({ name: review.songName });
+          return {
+            ...review.toObject(),
+            songImage: song ? song.image : null,
+          };
+        })
+      );
+
+      console.log("Rendering userpage with userData, favoriteSongs, followers, following, and reviews...");
+      res.render("userpage", { user, reviews: reviewsWithImages, favoriteSongs, followers, following });
     }
   } catch (error) {
     console.error("Error fetching user/music data:", error);
