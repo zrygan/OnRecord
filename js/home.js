@@ -212,7 +212,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       resultItem.addEventListener("click", function () {
         // For both "music" and "albumSong" we route to the review page.
         if (result.type === "user" || result.type === "artist") {
-          window.location.href = `/user/${result.id}`;
+          window.location.href = `/user/${result.username}`;
         } else if (result.type === "albumSong" || result.type === "music") {
           window.location.href = `/review/${result.id}`;
         }
