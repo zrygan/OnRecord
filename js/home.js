@@ -1,3 +1,87 @@
+async function getCurrentUsername() {
+  try {
+    const response = await fetch("/api/current-username");
+    if (!response.ok) {
+      throw new Error("Failed to fetch current username");
+    }
+    const data = await response.json();
+    return data.username;
+  } catch (error) {
+    console.error("Error fetching current username:", error);
+    return null;
+  }
+}
+
+async function getSongLikes(songId) {
+  try {
+    const response = await fetch(`/api/songs/${songId}/likes`);
+    if (!response.ok) {
+      throw new Error("Failed to fetch song likes");
+    }
+    const data = await response.json();
+    return data.likes;
+  } catch (error) {
+    console.error("Error fetching song likes:", error);
+    return [];
+  }
+}
+
+async function getSongReviews(songId) {
+  try {
+    const response = await fetch(`/api/songs/${songId}/reviews`);
+    if (!response.ok) {
+      throw new Error("Failed to fetch song reviews");
+    }
+    const data = await response.json();
+    return data.reviews;
+  } catch (error) {
+    console.error("Error fetching song reviews:", error);
+    return [];
+  }
+}
+
+async function likeSong(songId, username) {
+  try {
+    const response = await fetch(`/api/songs/${songId}/like`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username }),
+    });
+    if (!response.ok) {
+      throw new Error("Failed to like song");
+    }
+    const data = await response.json();
+    console.log("Liked song", songId, "new likes:", data.likes);
+    return data.likes;
+  } catch (error) {
+    console.error("Error liking song:", error);
+    return [];
+  }
+}
+
+async function unlikeSong(songId, username) {
+  try {
+    const response = await fetch(`/api/songs/${songId}/unlike`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username }),
+    });
+    if (!response.ok) {
+      throw new Error("Failed to unlike song");
+    }
+    const data = await response.json();
+    console.log("Unliked song", songId, "new likes:", data.likes);
+    return data.likes;
+  } catch (error) {
+    console.error("Error unliking song:", error);
+    return [];
+  }
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
   // PART 1: Song interaction functionality
   try {
@@ -174,86 +258,3 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 });
 
-async function getCurrentUsername() {
-  try {
-    const response = await fetch("/api/current-username");
-    if (!response.ok) {
-      throw new Error("Failed to fetch current username");
-    }
-    const data = await response.json();
-    return data.username;
-  } catch (error) {
-    console.error("Error fetching current username:", error);
-    return null;
-  }
-}
-
-async function getSongLikes(songId) {
-  try {
-    const response = await fetch(`/api/songs/${songId}/likes`);
-    if (!response.ok) {
-      throw new Error("Failed to fetch song likes");
-    }
-    const data = await response.json();
-    return data.likes;
-  } catch (error) {
-    console.error("Error fetching song likes:", error);
-    return [];
-  }
-}
-
-async function getSongReviews(songId) {
-  try {
-    const response = await fetch(`/api/songs/${songId}/reviews`);
-    if (!response.ok) {
-      throw new Error("Failed to fetch song reviews");
-    }
-    const data = await response.json();
-    return data.reviews;
-  } catch (error) {
-    console.error("Error fetching song reviews:", error);
-    return [];
-  }
-}
-
-async function likeSong(songId, username) {
-  try {
-    const response = await fetch(`/api/songs/${songId}/like`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username }),
-    });
-    if (!response.ok) {
-      throw new Error("Failed to like song");
-    }
-    const data = await response.json();
-    console.log("Liked song", songId, "new likes:", data.likes);
-    return data.likes;
-  } catch (error) {
-    console.error("Error liking song:", error);
-    return [];
-  }
-}
-
-async function unlikeSong(songId, username) {
-  try {
-    const response = await fetch(`/api/songs/${songId}/unlike`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username }),
-    });
-    if (!response.ok) {
-      throw new Error("Failed to unlike song");
-    }
-    const data = await response.json();
-    console.log("Unliked song", songId, "new likes:", data.likes);
-    return data.likes;
-  } catch (error) {
-    console.error("Error unliking song:", error);
-    return [];
-  }
-}

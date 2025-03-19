@@ -38,10 +38,11 @@ hbs.registerHelper("stars", function (rating) {
   return new hbs.SafeString(stars);
 });
 
+
 // Example usage of count method
 const countMusic = async () => {
   try {
-    const count = await Music.count({}); // Use count instead of countDocuments
+    const count = await Music.countDocuments({}); // Use count instead of countDocuments
     console.log(`Total music documents: ${count}`);
   } catch (error) {
     console.error("Error counting music documents:", error.message);
@@ -49,6 +50,16 @@ const countMusic = async () => {
 };
 
 countMusic();
+
+// Configure session middleware
+app.use(
+  session({
+    secret: "SUPER-DUPER-SECRET-KEY-NO-ONE-CAN-KNOW", // Replace with your own secret key
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }, // Set to true if using HTTPS
+  })
+);
 
 app.get("/api/metrics", async (req, res) => {
   try {
@@ -344,16 +355,6 @@ app.set("views", viewPath);
 
 // Serve static files from root directory
 app.use(express.static(path.join(__dirname, "../")));
-
-// Configure session middleware
-app.use(
-  session({
-    secret: "SUPER-DUPER-SECRET-KEY-NO-ONE-CAN-KNOW", // Replace with your own secret key
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false }, // Set to true if using HTTPS
-  })
-);
 
 // Root route to serve index page
 app.get("/", async (req, res) => {
