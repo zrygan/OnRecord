@@ -59,7 +59,7 @@ window.add_controlpanel = function () {
       </div>
 
       <label for="image">Image URL:</label>
-      <input type="text" id="image" name="image" placeholder="URL of the Song Cover" required />
+      <input type="text" id="image" name="image" placeholder="URL of the Song Cover"  />
 
       <label for="release_date">Release Date:</label>
       <input type="date" id="release_date" name="release_date" required />
