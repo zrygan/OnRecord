@@ -33,14 +33,9 @@ function updateControlPanel(content) {
 // Add Control Panel
 window.add_controlpanel = function () {
   updateControlPanel(`
-    <h3>Add Music or Album</h3>
+    <h3>Add Music</h3>
     <form id="musicForm" onsubmit="addMusic(); return false;">
-      <label for="type">Type:</label>
-      <select id="type" name="type" required>
-        <option value="song">Song</option>
-        <option value="album">Album</option>
-      </select>
-
+ 
       <label for="name">Name:</label>
       <input type="text" id="name" name="name" placeholder="Name of song or album" required />
 
@@ -53,10 +48,8 @@ window.add_controlpanel = function () {
         required
       />
 
-      <div id="albumField" class="album_field">
-        <label for="album">Album:</label> <br>
-        <input type="text" id="album" name="album" placeholder="Album name" />
-      </div>
+      <label for="album">Album:</label>
+      <input type="text" id="album" name="album" placeholder="Album name" />
 
       <label for="image">Image URL:</label>
       <input type="text" id="image" name="image" placeholder="URL of the Song Cover"  />
@@ -137,7 +130,6 @@ window.editDel_controlpanel = function () {
 async function addMusic() {
   try {
     // Get form values
-    const type = document.getElementById("type").value;
     const name = document.getElementById("name").value;
     const artistsInput = document.getElementById("artists").value;
     const artists = artistsInput.split(",").map((artist) => artist.trim());
@@ -145,14 +137,7 @@ async function addMusic() {
     const genresInput = document.getElementById("genres").value;
     const genres = genresInput.split(",").map((genre) => genre.trim());
     const description = document.getElementById("description").value;
-
-    // Set album depending on the type
-    let album = "";
-    if (type === "song") {
-      album = document.getElementById("album").value;
-    } else {
-      album = name; // If it's an album, the album name is the same as the name
-    }
+    const album = document.getElementById("album").value;
 
     // Default image based on genre (you can customize this)
     const image = `../img/albums/${genres[0].toLowerCase()}.jpg`;
