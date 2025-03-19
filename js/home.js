@@ -1,10 +1,12 @@
 async function getCurrentUsername() {
   try {
+    console.log("Fetching current username...");
     const response = await fetch("/api/current-username");
     if (!response.ok) {
       throw new Error("Failed to fetch current username");
     }
     const data = await response.json();
+    console.log("Fetched username data:", data);
     return data.username;
   } catch (error) {
     console.error("Error fetching current username:", error);
@@ -14,11 +16,13 @@ async function getCurrentUsername() {
 
 async function getSongLikes(songId) {
   try {
+    console.log(`Fetching likes for song ID: ${songId}`);
     const response = await fetch(`/api/songs/${songId}/likes`);
     if (!response.ok) {
       throw new Error("Failed to fetch song likes");
     }
     const data = await response.json();
+    console.log(`Fetched likes for song ID: ${songId}`, data);
     return data.likes;
   } catch (error) {
     console.error("Error fetching song likes:", error);
@@ -26,22 +30,9 @@ async function getSongLikes(songId) {
   }
 }
 
-async function getSongReviews(songId) {
-  try {
-    const response = await fetch(`/api/songs/${songId}/reviews`);
-    if (!response.ok) {
-      throw new Error("Failed to fetch song reviews");
-    }
-    const data = await response.json();
-    return data.reviews;
-  } catch (error) {
-    console.error("Error fetching song reviews:", error);
-    return [];
-  }
-}
-
 async function likeSong(songId, username) {
   try {
+    console.log(`Liking song ID: ${songId} for user: ${username}`);
     const response = await fetch(`/api/songs/${songId}/like`, {
       method: "POST",
       headers: {
@@ -63,6 +54,7 @@ async function likeSong(songId, username) {
 
 async function unlikeSong(songId, username) {
   try {
+    console.log(`Unliking song ID: ${songId} for user: ${username}`);
     const response = await fetch(`/api/songs/${songId}/unlike`, {
       method: "POST",
       headers: {
@@ -85,7 +77,9 @@ async function unlikeSong(songId, username) {
 document.addEventListener("DOMContentLoaded", async () => {
   // PART 1: Song interaction functionality
   try {
-    const username = await getCurrentUsername(); // Fetch the current user's username
+    console.log("DOMContentLoaded event fired");
+    const user = await getCurrentUsername(); // Fetch the current user's username
+    const username = user.username;
     if (!username) {
       throw new Error("Username not found");
     }
@@ -103,20 +97,17 @@ document.addEventListener("DOMContentLoaded", async () => {
       const likes = await getSongLikes(songId);
       console.log("Likes for song", songId, ":", likes);
 
+      const heart = songBox.querySelector(".song-heart");
       if (likes.includes(username)) {
-        const heart = songBox.querySelector(".song-heart");
         heart.src = "../svg/home/heart-select-pink.svg";
         console.log("Set heart to pink for song", songId);
+      } else {
+        heart.src = "../svg/home/heart-select-gray.svg";
+        console.log("Set heart to gray for song", songId);
       }
 
       const heartNumber = songBox.querySelector(".song-heart-number");
       heartNumber.textContent = likes.length;
-
-      const reviews = await getSongReviews(songId);
-      console.log("Reviews for song", songId, ":", reviews);
-
-      const reviewNumber = songBox.querySelector(".song-review-number");
-      reviewNumber.textContent = reviews.length;
 
       songBox
         .querySelector(".song-heart-select")
@@ -257,4 +248,3 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 });
-
