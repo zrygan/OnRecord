@@ -391,7 +391,9 @@ app.get("/home", async (req, res) => {
 
     const musicWithCounts = await Promise.all(
       music.map(async (song) => {
-        const reviewsCount = await Review.countDocuments({ songName: song.name });
+        const reviewsCount = await Review.countDocuments({
+          songName: song.name,
+        });
         return {
           ...song.toObject(),
           hearts: song.likes.length,
@@ -753,8 +755,11 @@ app.get("/search", async (req, res) => {
   try {
     const query = req.query.query;
 
-    // Search for users by username loosely:
-    const users = await User.find({ username: new RegExp(query, "i") });
+    // Search for users by username loosely, but exclude artists
+    const users = await User.find({
+      username: new RegExp(query, "i"),
+      type: { $ne: "artist" },
+    });
 
     // Search for songs by name loosely:
     const songsByName = await Music.find({ name: new RegExp(query, "i") });
@@ -1029,7 +1034,7 @@ app.get("/api/admin/user/:username", async (req, res) => {
       return res.status(403).json({ error: "Unauthorized" });
     }
 
-    const foundUser = await User.findOne({username: req.params.username});
+    const foundUser = await User.findOne({ username: req.params.username });
 
     if (!foundUser) {
       return res.status(404).json({ error: "User not found" });
@@ -1061,7 +1066,7 @@ app.put("/api/admin/user/:username", async (req, res) => {
 
     // Update user
     const updatedUser = await User.findOneAndUpdate(
-      {username: req.params.username},
+      { username: req.params.username },
       {
         firstname,
         surname,
@@ -1095,12 +1100,14 @@ app.delete("/api/admin/user/:username", async (req, res) => {
     }
 
     // Delete user
-    const deletedUser = await User.findOneAndDelete({username: req.params.username})
+    const deletedUser = await User.findOneAndDelete({
+      username: req.params.username,
+    });
 
     if (!deletedUser) {
       return res.status(404).json({ error: "User not found" });
     }
-    await Review.deleteMany({userName: req.params.username});
+    await Review.deleteMany({ userName: req.params.username });
     res.json({ success: true });
   } catch (error) {
     console.error("Error deleting user:", error);
