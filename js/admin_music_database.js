@@ -108,6 +108,9 @@ window.editDel_controlpanel = function () {
 
         <label for="album">Album:</label>
         <input type="text" id="album" name="album" required />
+        
+        <label for="image">Image URL:</label>
+        <input type="text" id="image" name="image" required />
 
         <label for="genre">Genres:</label>
         <input type="text" id="genre" name="genre" required />
@@ -212,10 +215,11 @@ async function populateForm() {
     if (response.ok && data.song) {
       const song = data.song;
 
-      // Update input field with the exact name from database to maintain case
+      // Update input field with the data from database to maintain exact details
       document.getElementById("songName").value = song.name;
       document.getElementById("artist").value = song.artists.join(", ");
       document.getElementById("album").value = song.album;
+      document.getElementById("image").value = song.image; // New image URL field
       document.getElementById("genre").value = song.genres.join(", ");
       document.getElementById("year").value = new Date(
         song.release_date
