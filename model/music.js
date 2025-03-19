@@ -46,7 +46,7 @@ fs.readFile("data\\music.json", "utf8", async (err, data) => {
     for (const item of musicData) {
       await Music.create({
         ...item,
-        image: item.image || "../img/albums/default.jpg",
+        image: item.image || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9SgCxgQYReXX660xU9Pj5Te611cPR6OReL7_UXY4wXiTXg715_Jahfm0-NS2OmBvnzEA&usqp=CAU",
         listen_count: Math.floor(Math.random() * 3000001),
         like_count: item.like_count,
         dislike_count: item.dislike_count,

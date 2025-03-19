@@ -70,6 +70,8 @@ app.use(
   })
 );
 
+app.use(express.json());
+
 app.get("/api/metrics", async (req, res) => {
   try {
     const users = await User.countDocuments();
@@ -161,7 +163,7 @@ app.post("/api/admin/music", async (req, res) => {
       release_date: new Date(release_date),
       genres,
       description,
-      image: image || "../img/albums/default.jpg",
+      image: image || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9SgCxgQYReXX660xU9Pj5Te611cPR6OReL7_UXY4wXiTXg715_Jahfm0-NS2OmBvnzEA&usqp=CAU",
       likes: likes || [],
       listen_count: listen_count || 0,
       like_count: like_count || 0,
