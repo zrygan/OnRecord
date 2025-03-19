@@ -1,125 +1,149 @@
-<!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="../styles/style-userpage.css" />
-    <link rel="stylesheet" href="../styles/colors.css">
-    <link rel="stylesheet" href="../styles/type.css">
+    <link rel="stylesheet" href="../styles/colors.css" />
+    <link rel="stylesheet" href="../styles/type.css" />
     <script src="../script.js"></script>
 
     <link rel="icon" href="../favicon.ico" type="image/x-icon" />
     <title>OnRecord: USERPAGE!</title>
-</head> 
+  </head>
 
-<body>
+  <body>
     <div id="header-box">
-        <p class="head-text"> 
-            <a class="on-record" href="/home">
-                On
-                <br />
-                Record
-            </a>
-            <span> <a href="about.html"> ABOUT </a></span>
-            <span> <a href="review"> FORUMS </a></span> 
-            <span> <a href="charts"> CHARTS</a> </span>
-        </p>
+      <p class="head-text">
+        <a class="on-record" href="/home">
+          On
+          <br />
+          Record
+        </a>
+        <span> <a href="/home"> Home </a></span>
+        <span> <a href="charts"> Charts</a> </span>
+      </p>
     </div>
 
     <div class="content">
-        <div class="marquee"> 
-            <div class="username"> Now Viewing: <span id="name">{{user.username}}</span>'s Profile!</div>
-        </div>
-        
-        <div class="flex-box">
-            <div class="picture-box">
-                <img src="{{user.image}}" id="picture">
-                <div class="overlay">
-                    <div class="text">{{user.customNote}}</div>
-                </div>
-            </div>
-            
-            <div class="speech-bubble">
-                <div class="text-bio">
-                    <p> "{{user.bio}}" </p>
-                </div>
-            </div>
-        </div>
-        
-        <img id="star" src="../svg/userpage/star.svg">
-        <p class="status-text">
-            Status: <span id="Online-user">{{user.status}}</span> <br>
-            Account Created: {{formatDate user.date_created}} <br>
-            Country of Origin: {{user.countryOrigin}} <br>
-            Feeling: {{user.feel}} <br>
-        </p>
+      <div class="marquee">
+        <div class="username">
+          Now Viewing:
+          <span id="name">{{user.username}}</span>'s Profile!</div>
+      </div>
 
-        <div class="user-informations">
-            <div class="tabs">
-                <input type="radio" class="tabs__radio" name="tabbies" id="tab1" checked>
-                <label for="tab1" class="tabs__label"> Reviews </label>
-                    <div class="content-tabs">
-                        {{#each reviews}}
-                            <div class="review">
-                                <h2>{{this.songName}}</h2>
-                                <div class="review-header">
-                                    <img src="{{this.songImage}}" alt="Song Image" class="song-pic">
-                                    <div class="review-details">
-                                        <p>Reviewed by: {{this.userName}}</p>
-                                        <p>Rating: {{stars this.rating}}</p>
-                                        <p>{{this.comment}}</p>
-                                        <p>Reviewed on: {{formatDate this.createdAt}}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        {{/each}}
-                    </div>
-                
-                <input type="radio" class="tabs__radio" name="tabbies" id="tab2">
-                <label for="tab2" class="tabs__label"> Favorites </label>
-                    <div class="content-tabs">
-                        {{#each favoriteSongs}}
-                            <div class="album-box">
-                                <img src="{{this.image}}" class="album-cover">
-                                <div class="overlay-album">
-                                    <div class="text-album">
-                                        <h4>{{this.name}}</h4> by {{this.artists}}
-                                    </div>
-                                </div>
-                            </div>
-                        {{/each}}
-                    </div>
-                
-                <input type="radio" class="tabs__radio" name="tabbies" id="tab3">
-                <label for="tab3" class="tabs__label"> Following </label> 
-                    <div class="content-tabs">
-                        {{#each following}}
-                            <div class="album-box">
-                                <img src="{{this.image}}" class="album-cover">
-                                <div class="overlay-album">
-                                    <div class="text-album">
-                                        <h4>{{this.username}}</h4> Status: <span>{{this.status}}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        {{/each}}
-                    </div>
-
-                <input type="radio" class="tabs__radio" name="tabbies" id="tab4">
-                <label for="tab4" class="tabs__label"> Followers </label> 
-                    <div class="content-tabs">
-                        {{#each followers}}
-                            <div class="album-box">
-                                <img src="{{this.image}}" class="album-cover">
-                                <div class="overlay-album">
-                                    <div class="text-album">
-                                        <h4>{{this.username}}</h4> Status: <span>{{this.status}}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        {{/each}}
-                    </div>
-            </div>               
+      <div class="flex-box">
+        <div class="picture-box">
+          <img src="{{user.image}}" id="picture" />
+          <div class="overlay">
+            <div class="text">{{user.customNote}}</div>
+          </div>
         </div>
+
+        <div class="speech-bubble">
+          <div class="text-bio">
+            <p> "{{user.bio}}" </p>
+          </div>
+        </div>
+      </div>
+
+      <img id="star" src="../svg/userpage/star.svg" />
+      <p class="status-text">
+        Status:
+        <span id="Online-user">{{user.status}}</span>
+        <br />
+        Account Created:
+        {{formatDate user.date_created}}
+        <br />
+        Country of Origin:
+        {{user.countryOrigin}}
+        <br />
+        Feeling:
+        {{user.feel}}
+        <br />
+      </p>
+
+      <div class="user-informations">
+        <div class="tabs">
+          <input
+            type="radio"
+            class="tabs__radio"
+            name="tabbies"
+            id="tab1"
+            checked
+          />
+          <label for="tab1" class="tabs__label"> Reviews </label>
+          <div class="content-tabs">
+            {{#each reviews}}
+              <div class="review">
+                <h2>{{this.songName}}</h2>
+                <div class="review-header">
+                  <img
+                    src="{{this.songImage}}"
+                    alt="Song Image"
+                    class="song-pic"
+                  />
+                  <div class="review-details">
+                    <p>Reviewed by: {{this.userName}}</p>
+                    <p>Rating: {{stars this.rating}}</p>
+                    <p>{{this.comment}}</p>
+                    <p>Reviewed on: {{formatDate this.createdAt}}</p>
+                  </div>
+                </div>
+              </div>
+            {{/each}}
+          </div>
+
+          <input type="radio" class="tabs__radio" name="tabbies" id="tab2" />
+          <label for="tab2" class="tabs__label"> Favorites </label>
+          <div class="content-tabs">
+            {{#each favoriteSongs}}
+              <div class="album-box">
+                <img src="{{this.image}}" class="album-cover" />
+                <div class="overlay-album">
+                  <div class="text-album">
+                    <h4>{{this.name}}</h4>
+                    by
+                    {{this.artists}}
+                  </div>
+                </div>
+              </div>
+            {{/each}}
+          </div>
+
+          <input type="radio" class="tabs__radio" name="tabbies" id="tab3" />
+          <label for="tab3" class="tabs__label"> Following </label>
+          <div class="content-tabs">
+            {{#each following}}
+              <div class="album-box">
+                <img src="{{this.image}}" class="album-cover" />
+                <div class="overlay-album">
+                  <div class="text-album">
+                    <h4>{{this.username}}</h4>
+                    Status:
+                    <span>{{this.status}}</span>
+                  </div>
+                </div>
+              </div>
+            {{/each}}
+          </div>
+
+          <input type="radio" class="tabs__radio" name="tabbies" id="tab4" />
+          <label for="tab4" class="tabs__label"> Followers </label>
+          <div class="content-tabs">
+            {{#each followers}}
+              <div class="album-box">
+                <img src="{{this.image}}" class="album-cover" />
+                <div class="overlay-album">
+                  <div class="text-album">
+                    <h4>{{this.username}}</h4>
+                    Status:
+                    <span>{{this.status}}</span>
+                  </div>
+                </div>
+              </div>
+            {{/each}}
+          </div>
+        </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>
