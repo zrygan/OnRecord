@@ -23,6 +23,15 @@ hbs.registerHelper("eq", function (a, b, options) {
   }
 });
 
+// Register the 'includes' helper
+hbs.registerHelper("includes", function (array, value, options) {
+  if (array && array.includes(value)) {
+    return true;
+  } else {
+    return false;
+  }
+});
+
 // Register the 'formatDate' helper
 hbs.registerHelper("formatDate", function (dateString) {
   const options = { year: "numeric", month: "long", day: "numeric" };
@@ -317,8 +326,8 @@ app.post("/api/songs/:id/like", async (req, res) => {
     if (!song) {
       return res.status(404).json({ error: "Song not found" });
     }
-
-    const username = req.body.username;
+    let user = req.session.user;
+    const username = user.username;
     if (!song.likes.includes(username)) {
       song.likes.push(username);
       await song.save();
@@ -337,7 +346,8 @@ app.post("/api/songs/:id/unlike", async (req, res) => {
     if (!song) {
       return res.status(404).json({ error: "Song not found" });
     }
-    const username = req.body.username;
+    let user = req.session.user;
+    const username = user.username;
     song.likes = song.likes.filter((user) => user !== username);
     await song.save();
     res.json({ likes: song.likes });
@@ -381,11 +391,11 @@ app.get("/home", async (req, res) => {
 
     const musicWithCounts = await Promise.all(
       music.map(async (song) => {
-        const reviews = await Review.countDocuments({ songId: song._id });
+        const reviewsCount = await Review.countDocuments({ songName: song.name });
         return {
           ...song.toObject(),
           hearts: song.likes.length,
-          reviews: reviews,
+          reviews: reviewsCount,
         };
       })
     );
