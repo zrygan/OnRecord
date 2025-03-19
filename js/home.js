@@ -141,7 +141,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
-    results.forEach((result) => {
+    // Limit the number of results to 8
+    const limitedResults = results.slice(0, 8);
+
+    limitedResults.forEach((result) => {
       const resultItem = document.createElement("div");
       resultItem.classList.add("search-result-item");
 
