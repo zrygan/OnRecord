@@ -44,7 +44,6 @@ async function displayUsers() {
 }
 
 // Edit/Delete Control Panel
-// Edit/Delete Control Panel
 function editDel_controlpanel() {
   const controlPanel = document.getElementById("control_panel");
   if (!controlPanel) return;
@@ -53,13 +52,7 @@ function editDel_controlpanel() {
     <h3>Edit or Delete User</h3>
     <form id="searchForm" onsubmit="findUser(); return false;">
       <label for="username">Username:</label>
-      <input
-        type="text"
-        id="username"
-        name="username"
-        placeholder="Enter username to find"
-        required
-      />
+      <input type="text" id="username" name="username" placeholder="Enter username to find" required />
       <button class="submit_button" type="submit">Find User</button>
     </form>
     <div id="user_not_found" style="display:none;"></div>
@@ -67,26 +60,21 @@ function editDel_controlpanel() {
       <h3>Edit User Details</h3>
       <form id="editUserForm" onsubmit="updateUser(); return false;">
         <input type="hidden" id="userId" name="userId" />
-        
         <label for="userFirstname">First Name:</label>
         <input type="text" id="userFirstname" name="userFirstname" required />
-
         <label for="userSurname">Last Name:</label>
         <input type="text" id="userSurname" name="userSurname" required />
-
         <label for="userEmail">Email:</label>
         <input type="email" id="userEmail" name="userEmail" required />
-
         <label for="userType">User Type:</label>
         <select id="userType" name="userType" required>
           <option value="normal">Normal</option>
           <option value="artist">Artist</option>
           <option value="admin">Admin</option>
         </select>
-
         <div class="action-buttons">
-          <button class="update-button" type="submit" onclick="updateUser()">Update User</button>
-          <button class="delete-button" type="button" onclick="confirmDeleteUser()">Delete User</button>
+          <button id="update-button" class="update-button" type="submit">Update User</button>
+          <button id="delete-button" class="delete-button" type="button">Delete User</button>
         </div>
       </form>
     </div>
@@ -138,9 +126,7 @@ async function displayUsers() {
           <td>${new Date(user.date_created).toLocaleDateString()}</td>
           <td>
             <button onclick="loadUserDetails('${user.username}')">Edit</button>
-            <button onclick="confirmDeleteUser('${user.username}', '${
-          user.username
-        }')">Delete</button>
+            <button onclick="confirmDeleteUser('${user.username}')">Delete</button>
           </td>
         `;
         tableBody.appendChild(row);
@@ -152,29 +138,44 @@ async function displayUsers() {
   }
 }
 
-// Find user by username
 async function findUser() {
-  const username = document.getElementById("username").value;
+  const username = document.getElementById("username").value.trim();
   const userDetails = document.getElementById("userDetails");
   const userNotFound = document.getElementById("user_not_found");
-
-  if (!username.trim()) {
+  
+  if (!username) {
     userDetails.style.display = "none";
     userNotFound.style.display = "none";
     return;
   }
-
+  
   try {
-    // Note: This API endpoint needs to be added to your server.js
-    const response = await fetch(
-      `/api/admin/user/${encodeURIComponent(username)}`
-    );
+    const response = await fetch(`/api/admin/user/${encodeURIComponent(username)}`);
     const data = await response.json();
-
+    
     if (response.ok && data.user) {
       populateUserForm(data.user);
       userDetails.style.display = "block";
       userNotFound.style.display = "none";
+      
+      setTimeout(() => {
+        const updateButton = document.getElementById("update-button");
+        const deleteButton = document.getElementById("delete-button");
+        
+        if (updateButton) {
+          updateButton.onclick = function () {
+            updateUser(data.user.username);
+            console.log("Updating: ", data.user.username)
+          };
+        }
+        
+        if (deleteButton) {
+          deleteButton.onclick = function () {
+            confirmDeleteUser(data.user.username);
+          };
+        }
+        
+      }, 100);
     } else {
       userDetails.style.display = "none";
       userNotFound.style.display = "block";
@@ -186,10 +187,10 @@ async function findUser() {
   }
 }
 
-// Load user details by ID (used from the table)
-async function loadUserDetails(userId) {
+// Load user details by username
+async function loadUserDetails(username) {
   try {
-    const response = await fetch(`/api/admin/user/${userId}`);
+    const response = await fetch(`/api/admin/user/${username}`);
     const data = await response.json();
 
     if (response.ok && data.user) {
@@ -212,7 +213,6 @@ async function loadUserDetails(userId) {
 
 // Populate user form with data
 function populateUserForm(user) {
-  document.getElementById("userId").value = user._id;
   document.getElementById("username").value = user.username;
   document.getElementById("userFirstname").value = user.firstname;
   document.getElementById("userSurname").value = user.surname;
@@ -223,8 +223,7 @@ function populateUserForm(user) {
 // Update user
 async function updateUser(username) {
   try {
-    const userId = document.getElementById("userId").value;
-    if (!userId) {
+    if (!username) { // out of sight, out of mind
       alert("No user selected for editing.");
       return;
     }
@@ -240,7 +239,7 @@ async function updateUser(username) {
       firstname,
       surname,
       email,
-      type,
+      type
     };
 
     // Send PUT request to update user
@@ -254,12 +253,14 @@ async function updateUser(username) {
 
     const result = await response.json();
 
+    console.log("Result", result)
+
     if (response.ok) {
       alert("User updated successfully!");
       // Refresh the user list
       displayUsers();
     } else {
-      alert(`Failed to update user: ${result.error}`);
+      alert(`Error: ${result.error}`);
     }
   } catch (error) {
     console.error("Error updating user:", error);

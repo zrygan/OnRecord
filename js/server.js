@@ -1071,10 +1071,12 @@ app.put("/api/admin/user/:username", async (req, res) => {
         firstname,
         surname,
         email,
-        type,
+        type
       },
       { new: true }
     );
+
+    console.log("Updated User: ", updatedUser)
 
     if (!updatedUser) {
       return res.status(404).json({ error: "User not found" });
