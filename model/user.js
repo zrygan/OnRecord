@@ -24,7 +24,7 @@ const schema_user = new mongoose.Schema({
     default: "normal",
     enum: ["normal", "admin", "artist"],
   },
-  image: { type: String },
+  image: { type: String, default: "https://i.pinimg.com/736x/f2/01/1b/f2011bfb4e87a2e5219bd4c2fb02a5e9.jpg" },
   bio: { type: String, default: "No bio provided" },
   customNote: { type: String, default: "No custom note provided" },
   status: { type: String, enum: ["Online", "Offline"], default: "Online" },
