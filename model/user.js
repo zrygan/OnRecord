@@ -92,7 +92,7 @@ const create_user = async (
 const read_user_all = async () => {
   try {
     const users = await User.find();
-    console.log("All users:", users);
+    // console.log("All users:", users); 
     return users;
   } catch (error) {
     console.error("Error reading users:", error.message);
