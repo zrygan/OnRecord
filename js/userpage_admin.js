@@ -232,10 +232,10 @@ function populateUserForm(user) {
 // Update user
 async function updateUser(username) {
   try {
-    if (!username) { // out of sight, out of mind
-      alert("No user selected for editing.");
-      return;
-    }
+    // if (!username) { // out of sight, out of mind
+    //   alert("No user selected for editing.");
+    //   return;
+    // }
 
     // Get updated values from form
     const firstname = document.getElementById("userFirstname").value;

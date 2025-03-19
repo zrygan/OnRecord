@@ -1045,11 +1045,9 @@ app.put("/api/admin/user/:username", async (req, res) => {
       { new: true }
     );
 
-    console.log("Updated User: ", updatedUser)
-
-    if (!updatedUser) {
-      return res.status(404).json({ error: "User not found" });
-    }
+    // if (!updatedUser) {
+    //   return res.status(404).json({ error: "User not found" });
+    // }
 
     res.json({ success: true, user: updatedUser });
   } catch (error) {
