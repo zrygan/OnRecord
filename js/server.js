@@ -38,7 +38,6 @@ hbs.registerHelper("stars", function (rating) {
   return new hbs.SafeString(stars);
 });
 
-
 // Example usage of count method
 const countMusic = async () => {
   try {
@@ -289,7 +288,7 @@ app.get("/api/current-username", async (req, res) => {
   let user =  req.session.user;
   
   if (user) {
-    res.json({ username: user });
+    res.json({ user });
   } else {
     res.status(401).json({ error: "User not logged in" });
   }
@@ -944,7 +943,38 @@ app.put("/edit-review/:id", async (req, res) => {
 });
 
 // Admin API - Get user by username or ID
-app.get("/api/admin/user", async (req, res) => {
+// app.get("/api/admin/user", async (req, res) => {
+//   try {
+//     const user = req.session.user;
+
+//     // Check if user is admin
+//     if (!user || user.type !== "admin") {
+//       return res.status(403).json({ error: "Unauthorized" });
+//     }
+
+//     const { username, id } = req.query;
+
+//     // Find user by either username or ID
+//     let foundUser;
+//     if (username) {
+//       foundUser = await User.findOne({ username });
+//     } else if (id) {
+//       foundUser = await User.findById(id);
+//     }
+
+//     if (!foundUser) {
+//       return res.status(404).json({ error: "User not found" });
+//     }
+
+//     res.json({ user: foundUser });
+//   } catch (error) {
+//     console.error("Error finding user:", error);
+//     res.status(500).json({ error: "Failed to fetch user" });
+//   }
+// });
+
+// Admin API - Get user by username
+app.get("/api/admin/user/:username", async (req, res) => {
   try {
     const user = req.session.user;
 
@@ -953,38 +983,7 @@ app.get("/api/admin/user", async (req, res) => {
       return res.status(403).json({ error: "Unauthorized" });
     }
 
-    const { username, id } = req.query;
-
-    // Find user by either username or ID
-    let foundUser;
-    if (username) {
-      foundUser = await User.findOne({ username });
-    } else if (id) {
-      foundUser = await User.findById(id);
-    }
-
-    if (!foundUser) {
-      return res.status(404).json({ error: "User not found" });
-    }
-
-    res.json({ user: foundUser });
-  } catch (error) {
-    console.error("Error finding user:", error);
-    res.status(500).json({ error: "Failed to fetch user" });
-  }
-});
-
-// Admin API - Get user by ID
-app.get("/api/admin/user/:id", async (req, res) => {
-  try {
-    const user = req.session.user;
-
-    // Check if user is admin
-    if (!user || user.type !== "admin") {
-      return res.status(403).json({ error: "Unauthorized" });
-    }
-
-    const foundUser = await User.findById(req.params.id);
+    const foundUser = await User.findOne({username: req.params.username});
 
     if (!foundUser) {
       return res.status(404).json({ error: "User not found" });
@@ -998,7 +997,7 @@ app.get("/api/admin/user/:id", async (req, res) => {
 });
 
 // Admin API - Update user
-app.put("/api/admin/user/:id", async (req, res) => {
+app.put("/api/admin/user/:username", async (req, res) => {
   try {
     const user = req.session.user;
 
@@ -1015,8 +1014,8 @@ app.put("/api/admin/user/:id", async (req, res) => {
     }
 
     // Update user
-    const updatedUser = await User.findByIdAndUpdate(
-      req.params.id,
+    const updatedUser = await User.findOneAndUpdate(
+      {username: req.params.username},
       {
         firstname,
         surname,
@@ -1038,7 +1037,7 @@ app.put("/api/admin/user/:id", async (req, res) => {
 });
 
 // Admin API - Delete user
-app.delete("/api/admin/user/:id", async (req, res) => {
+app.delete("/api/admin/user/:username", async (req, res) => {
   try {
     const user = req.session.user;
 
@@ -1048,12 +1047,12 @@ app.delete("/api/admin/user/:id", async (req, res) => {
     }
 
     // Delete user
-    const deletedUser = await User.findByIdAndDelete(req.params.id);
+    const deletedUser = await User.findOneAndDelete({username: req.params.username})
 
     if (!deletedUser) {
       return res.status(404).json({ error: "User not found" });
     }
-
+    await Review.deleteMany({userName: req.params.username});
     res.json({ success: true });
   } catch (error) {
     console.error("Error deleting user:", error);

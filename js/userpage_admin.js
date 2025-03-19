@@ -28,8 +28,8 @@ async function displayUsers() {
           <td>${user.email}</td>
           <td>${new Date(user.date_created).toLocaleDateString()}</td>
           <td>
-            <button onclick="loadUserDetails('${user._id}')">Edit</button>
-            <button onclick="confirmDeleteUser('${user._id}', '${
+            <button onclick="loadUserDetails('${user.username}')">Edit</button>
+            <button onclick="confirmDeleteUser('${user.username}', '${
           user.username
         }')">Delete</button>
           </td>
@@ -48,7 +48,7 @@ async function displayUsers() {
 function editDel_controlpanel() {
   const controlPanel = document.getElementById("control_panel");
   if (!controlPanel) return;
-
+  
   controlPanel.innerHTML = `
     <h3>Edit or Delete User</h3>
     <form id="searchForm" onsubmit="findUser(); return false;">
@@ -85,8 +85,8 @@ function editDel_controlpanel() {
         </select>
 
         <div class="action-buttons">
-          <button class="update-button" type="submit">Update User</button>
-          <button class="delete-button" type="button" onclick="deleteUser()">Delete User</button>
+          <button class="update-button" type="submit" onclick="updateUser()">Update User</button>
+          <button class="delete-button" type="button" onclick="confirmDeleteUser()">Delete User</button>
         </div>
       </form>
     </div>
@@ -137,8 +137,8 @@ async function displayUsers() {
           <td>${user.email}</td>
           <td>${new Date(user.date_created).toLocaleDateString()}</td>
           <td>
-            <button onclick="loadUserDetails('${user._id}')">Edit</button>
-            <button onclick="confirmDeleteUser('${user._id}', '${
+            <button onclick="loadUserDetails('${user.username}')">Edit</button>
+            <button onclick="confirmDeleteUser('${user.username}', '${
           user.username
         }')">Delete</button>
           </td>
@@ -167,7 +167,7 @@ async function findUser() {
   try {
     // Note: This API endpoint needs to be added to your server.js
     const response = await fetch(
-      `/api/admin/user?username=${encodeURIComponent(username)}`
+      `/api/admin/user/${encodeURIComponent(username)}`
     );
     const data = await response.json();
 
@@ -221,7 +221,7 @@ function populateUserForm(user) {
 }
 
 // Update user
-async function updateUser() {
+async function updateUser(username) {
   try {
     const userId = document.getElementById("userId").value;
     if (!userId) {
@@ -244,7 +244,7 @@ async function updateUser() {
     };
 
     // Send PUT request to update user
-    const response = await fetch(`/api/admin/user/${userId}`, {
+    const response = await fetch(`/api/admin/user/${username}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -268,38 +268,38 @@ async function updateUser() {
 }
 
 // Confirm before deleting user
-function confirmDeleteUser(userId, username) {
+function confirmDeleteUser(username) {
   if (
     confirm(
       `Are you sure you want to delete user "${username}"? This action cannot be undone.`
     )
   ) {
-    deleteUserById(userId);
+    deleteUser(username);
   }
 }
 
 // Delete user
-function deleteUser() {
-  const userId = document.getElementById("userId").value;
-  if (!userId) {
-    alert("No user selected for deletion.");
-    return;
-  }
+// function deleteUserPrompt(username) {
+//   const userId = document.getElementById("userId").value;
+//   if (!userId) {
+//     alert("No user selected for deletion.");
+//     return;
+//   }
 
-  if (
-    confirm(
-      "Are you sure you want to delete this user? This action cannot be undone."
-    )
-  ) {
-    deleteUserById(userId);
-  }
-}
+//   if (
+//     confirm(
+//       "Are you sure you want to delete this user? This action cannot be undone."
+//     )
+//   ) {
+//     deleteUser(username);
+//   }
+// }
 
 // Perform the actual deletion
-async function deleteUserById(userId) {
+async function deleteUser(username) {
   try {
     // Send DELETE request
-    const response = await fetch(`/api/admin/user/${userId}`, {
+    const response = await fetch(`/api/admin/user/${username}`, {
       method: "DELETE",
     });
 
