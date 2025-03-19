@@ -336,6 +336,11 @@ input[type=radio] {
   line-height: 5px;
 }
 
+.song-pic{
+  width: 200px;
+  height: 200px;
+}
+
 #Online{
   color: rgb(134, 246, 134);
 }
