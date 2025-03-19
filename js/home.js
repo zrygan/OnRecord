@@ -225,31 +225,28 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
-    // Limit the number of results to 8
-    const limitedResults = results.slice(0, 8);
+    searchResults.style.display = "block";
 
-    limitedResults.forEach((result) => {
-      const resultItem = document.createElement("div");
+    results.forEach((result) => {
+      let resultItem = document.createElement("div");
       resultItem.classList.add("search-result-item");
 
       if (result.type === "user") {
         resultItem.innerHTML = `<span style="color: grey;">user: </span><span style="color: var(--darkBlue);">${result.username}</span>`;
-      } else if (result.type === "album") {
-        resultItem.innerHTML = `<span style="color: grey;">album: </span><span style="color: var(--darkBlue);">${result.name}</span>`;
       } else if (result.type === "music") {
         resultItem.innerHTML = `<span style="color: grey;">song: </span><span style="color: var(--darkBlue);">${result.name}</span>`;
+      } else if (result.type === "albumSong") {
+        resultItem.innerHTML = `<span style="color: grey;">song: </span><span style="color: var(--darkBlue);">${result.name} (in ${result.album})</span>`;
       } else if (result.type === "artist") {
         resultItem.innerHTML = `<span style="color: var(--orange);">artist: </span><span style="color: var(--darkBlue);">${result.username}</span>`;
       }
 
-      // Add click event to navigate to appropriate page
       resultItem.addEventListener("click", function () {
+        // For both "music" and "albumSong" we route to the review page.
         if (result.type === "user" || result.type === "artist") {
-          window.location.href = `/user/${result.username}`;
-        } else if (result.type === "album") {
-          window.location.href = `/album/${result._id}`;
-        } else if (result.type === "music") {
-          window.location.href = `/review/${result._id}`;
+          window.location.href = `/user/${result.id}`;
+        } else if (result.type === "albumSong" || result.type === "music") {
+          window.location.href = `/review/${result.id}`;
         }
       });
 
@@ -257,4 +254,3 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 });
-

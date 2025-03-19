@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const fs = require("fs");
+const path = require("path");
 
 mongoose
   .connect("mongodb://localhost:27017/onrecord")
@@ -8,27 +10,49 @@ mongoose
 const schema_album = new mongoose.Schema({
   name: { type: String, required: true },
   artists: { type: [String], required: true },
-  release_date: { type: Date, required: true },
-  genres: { type: [String], required: true },
-  description: { type: String, required: true },
 });
+
+// Create the Album model
+const Album = mongoose.model("album", schema_album);
+
+// Sample Data Insertion
+fs.readFile(
+  path.join(__dirname, "../data/albums.json"),
+  "utf8",
+  async (err, data) => {
+    if (err) {
+      console.error("Error reading albums.json:", err);
+      return;
+    }
+    try {
+      // Parse JSON data
+      const albumsData = JSON.parse(data);
+
+      // Empty the Album collection
+      await Album.deleteMany({});
+      console.log("Album collection emptied");
+
+      // Insert the sample data
+      for (const item of albumsData) {
+        await Album.create({
+          name: item.name,
+          artists: item.artist, // note: sample data uses "artist", schema expects "artists"
+        });
+      }
+      console.log("Albums inserted successfully");
+    } catch (err) {
+      console.error("Error processing album data:", err);
+    }
+  }
+);
 
 // CRUD Functions
 
-const create_album = async (
-  name,
-  artists,
-  release_date,
-  genres,
-  description
-) => {
+const create_album = async (name, artists, release_date, genres) => {
   try {
     const new_album = new Album({
       name,
       artists,
-      release_date,
-      genres,
-      description,
     });
 
     await new_album.save();
@@ -62,23 +86,13 @@ const read_album = async (id, name, artists) => {
   }
 };
 
-const update_album = async (
-  id,
-  name,
-  artists,
-  release_date,
-  genres,
-  description
-) => {
+const update_album = async (id, name, artists, release_date, genres) => {
   try {
     const updatedAlbum = await Album.findByIdAndUpdate(
       id,
       {
         name,
         artists,
-        release_date,
-        genres,
-        description,
       },
       { new: true }
     );
