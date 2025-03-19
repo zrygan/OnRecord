@@ -118,3 +118,4 @@ model/charts.js
 
 # startup files
 *.bat
+package-lock.json
