@@ -603,7 +603,6 @@ app.post("/register", async (req, res) => {
     username: req.body.username,
     password: req.body.password,
     birthday: req.body.birthday,
-    image: "../img/default-user.png", // Add a default image
     type:
       req.body.email && req.body.email.endsWith("@onrecord.com")
         ? "admin"
