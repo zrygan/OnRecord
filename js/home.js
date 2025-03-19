@@ -68,8 +68,8 @@ async function unlikeSong(songId, username) {
 
 document.addEventListener("DOMContentLoaded", async () => {
   try {
-    const user = await getCurrentUsername(); // Fetch the current user's username
-    const username = user.username;
+    const username = await getCurrentUsername(); // Fetch the current user's username
+    console.log("Current username:", username);
     if (!username) {
       throw new Error("Username not found");
     }
@@ -212,7 +212,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       resultItem.addEventListener("click", function () {
         // For both "music" and "albumSong" we route to the review page.
         if (result.type === "user" || result.type === "artist") {
-          window.location.href = `/user/${result.id}`;
+          window.location.href = `/user/${result.username}`;
         } else if (result.type === "albumSong" || result.type === "music") {
           window.location.href = `/review/${result.id}`;
         }
@@ -221,4 +221,4 @@ document.addEventListener("DOMContentLoaded", async () => {
       searchResults.appendChild(resultItem);
     });
   }
-}); 
+});
