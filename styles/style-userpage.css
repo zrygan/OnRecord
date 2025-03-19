@@ -288,6 +288,7 @@ input[type=radio] {
   margin-left: 15px;
   margin-bottom: 20px;
   display:flex;
+  flex-wrap: wrap;
 }
 
 .album-cover{
@@ -334,6 +335,11 @@ input[type=radio] {
   text-align: center;
   margin-top:70px;
   line-height: 5px;
+}
+
+.song-pic{
+  width: 200px;
+  height: 200px;
 }
 
 #Online{
