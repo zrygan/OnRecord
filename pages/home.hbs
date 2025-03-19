@@ -123,7 +123,7 @@
               <div class="song-heart-select">
                 <img
                   class="song-heart"
-                  src="../svg/home/heart-select-gray.svg"
+                  src="{{#if (includes this.likes user.username)}}../svg/home/heart-select-pink.svg{{else}}../svg/home/heart-select-gray.svg{{/if}}"
                 />
               </div>
             </div>

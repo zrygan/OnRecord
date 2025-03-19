@@ -23,9 +23,18 @@ hbs.registerHelper("eq", function (a, b, options) {
   }
 });
 
+// Register the 'includes' helper
+hbs.registerHelper("includes", function (array, value, options) {
+  if (array && array.includes(value)) {
+    return true;
+  } else {
+    return false;
+  }
+});
+
 // Register the 'formatDate' helper
-hbs.registerHelper('formatDate', function(dateString) {
-  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+hbs.registerHelper("formatDate", function (dateString) {
+  const options = { year: "numeric", month: "long", day: "numeric" };
   return new Date(dateString).toLocaleDateString(undefined, options);
 });
 
@@ -33,7 +42,8 @@ hbs.registerHelper('formatDate', function(dateString) {
 hbs.registerHelper("stars", function (rating) {
   let stars = "";
   for (let i = 0; i < rating; i++) {
-    stars += '<img id="star-fill" src="../svg/userpage/star-svgrepo-com.svg" style="width: 17px; height: 17px; position: relative; top: 2px;" />';
+    stars +=
+      '<img id="star-fill" src="../svg/userpage/star-svgrepo-com.svg" style="width: 17px; height: 17px; position: relative; top: 2px;" />';
   }
   return new hbs.SafeString(stars);
 });
@@ -285,8 +295,8 @@ app.delete("/api/admin/music/:id", async (req, res) => {
 
 // Get Username of the User
 app.get("/api/current-username", async (req, res) => {
-  let user =  req.session.user;
-  
+  let user = req.session.user;
+
   if (user) {
     res.json({ user });
   } else {
@@ -316,8 +326,8 @@ app.post("/api/songs/:id/like", async (req, res) => {
     if (!song) {
       return res.status(404).json({ error: "Song not found" });
     }
-
-    const username = req.body.username;
+    let user = req.session.user;
+    const username = user.username;
     if (!song.likes.includes(username)) {
       song.likes.push(username);
       await song.save();
@@ -336,7 +346,8 @@ app.post("/api/songs/:id/unlike", async (req, res) => {
     if (!song) {
       return res.status(404).json({ error: "Song not found" });
     }
-    const username = req.body.username;
+    let user = req.session.user;
+    const username = user.username;
     song.likes = song.likes.filter((user) => user !== username);
     await song.save();
     res.json({ likes: song.likes });
@@ -380,11 +391,11 @@ app.get("/home", async (req, res) => {
 
     const musicWithCounts = await Promise.all(
       music.map(async (song) => {
-        const reviews = await Review.countDocuments({ songId: song._id });
+        const reviewsCount = await Review.countDocuments({ songName: song.name });
         return {
           ...song.toObject(),
           hearts: song.likes.length,
-          reviews: reviews,
+          reviews: reviewsCount,
         };
       })
     );
@@ -489,8 +500,16 @@ app.get("/profile", async (req, res) => {
         })
       );
 
-      console.log("Rendering userpage with userData, favoriteSongs, followers, following, and reviews...");
-      res.render("userpage", { user, reviews: reviewsWithImages, favoriteSongs, followers, following });
+      console.log(
+        "Rendering userpage with userData, favoriteSongs, followers, following, and reviews..."
+      );
+      res.render("userpage", {
+        user,
+        reviews: reviewsWithImages,
+        favoriteSongs,
+        followers,
+        following,
+      });
     }
   } catch (error) {
     console.error("Error fetching user/music data:", error);
@@ -733,33 +752,54 @@ app.post("/submit-review", async (req, res) => {
 app.get("/search", async (req, res) => {
   try {
     const query = req.query.query;
+
+    // Search for users by username loosely:
     const users = await User.find({ username: new RegExp(query, "i") });
-    const albums = await Album.find({ name: new RegExp(query, "i") });
-    const songs = await Music.find({ name: new RegExp(query, "i") });
-    const artists = await User.find({
-      username: new RegExp(query, "i"),
-      type: true,
+
+    // Search for songs by name loosely:
+    const songsByName = await Music.find({ name: new RegExp(query, "i") });
+
+    // Find album names that exactly match the query (case-insensitive)
+    const matchingAlbums = await Music.distinct("album", {
+      album: new RegExp("^" + query + "$", "i"),
     });
 
+    // For each matching album, get all songs in that album:
+    let albumSongResults = [];
+    for (const album of matchingAlbums) {
+      const albumSongs = await Music.find({ album });
+      albumSongs.forEach((song) => {
+        albumSongResults.push({
+          type: "albumSong",
+          id: song._id,
+          name: song.name,
+          album: song.album,
+        });
+      });
+    }
+
+    // Search for artists (users with type "artist")
+    const artists = await User.find({
+      username: new RegExp(query, "i"),
+      type: "artist",
+    });
+
+    // Build the results combining all groups:
     const results = [
       ...users.map((user) => ({
         type: "user",
-        _id: user._id,
+        id: user._id,
         username: user.username,
       })),
-      ...albums.map((album) => ({
-        type: "album",
-        _id: album._id,
-        name: album.name,
-      })),
-      ...songs.map((music) => ({
+      ...songsByName.map((song) => ({
         type: "music",
-        _id: music._id,
-        name: music.name,
+        id: song._id,
+        name: song.name,
       })),
+      ...albumSongResults,
       ...artists.map((artist) => ({
         type: "artist",
-        _id: artist._id,
+        id: artist._id,
         username: artist.username,
       })),
     ];
@@ -786,12 +826,18 @@ app.get("/user/:username", async (req, res) => {
     console.log("Profile user found:", profileUser);
 
     // Fetch profile user's favorite songs from the database
-    const favoriteSongs = await Music.find({ name: { $in: profileUser.favorites } });
+    const favoriteSongs = await Music.find({
+      name: { $in: profileUser.favorites },
+    });
     console.log("Favorite songs fetched:", favoriteSongs);
 
     // Fetch profile user's followers and following users from the database
-    const followers = await User.find({ username: { $in: profileUser.follower } });
-    const following = await User.find({ username: { $in: profileUser.following } });
+    const followers = await User.find({
+      username: { $in: profileUser.follower },
+    });
+    const following = await User.find({
+      username: { $in: profileUser.following },
+    });
     console.log("Followers fetched:", followers);
     console.log("Following fetched:", following);
 
@@ -818,7 +864,7 @@ app.get("/user/:username", async (req, res) => {
       reviews: reviewsWithImages,
       favoriteSongs,
       followers,
-      following
+      following,
     });
   } catch (error) {
     console.error("Error fetching user data:", error);
