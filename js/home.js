@@ -1,12 +1,10 @@
 async function getCurrentUsername() {
   try {
-    console.log("Fetching current username...");
     const response = await fetch("/api/current-username");
     if (!response.ok) {
       throw new Error("Failed to fetch current username");
     }
     const data = await response.json();
-    console.log("Fetched username data:", data);
     return data.username;
   } catch (error) {
     console.error("Error fetching current username:", error);
@@ -16,13 +14,11 @@ async function getCurrentUsername() {
 
 async function getSongLikes(songId) {
   try {
-    console.log(`Fetching likes for song ID: ${songId}`);
     const response = await fetch(`/api/songs/${songId}/likes`);
     if (!response.ok) {
       throw new Error("Failed to fetch song likes");
     }
     const data = await response.json();
-    console.log(`Fetched likes for song ID: ${songId}`, data);
     return data.likes;
   } catch (error) {
     console.error("Error fetching song likes:", error);
@@ -32,7 +28,6 @@ async function getSongLikes(songId) {
 
 async function likeSong(songId, username) {
   try {
-    console.log(`Liking song ID: ${songId} for user: ${username}`);
     const response = await fetch(`/api/songs/${songId}/like`, {
       method: "POST",
       headers: {
@@ -44,7 +39,6 @@ async function likeSong(songId, username) {
       throw new Error("Failed to like song");
     }
     const data = await response.json();
-    console.log("Liked song", songId, "new likes:", data.likes);
     return data.likes;
   } catch (error) {
     console.error("Error liking song:", error);
@@ -54,7 +48,6 @@ async function likeSong(songId, username) {
 
 async function unlikeSong(songId, username) {
   try {
-    console.log(`Unliking song ID: ${songId} for user: ${username}`);
     const response = await fetch(`/api/songs/${songId}/unlike`, {
       method: "POST",
       headers: {
@@ -66,7 +59,6 @@ async function unlikeSong(songId, username) {
       throw new Error("Failed to unlike song");
     }
     const data = await response.json();
-    console.log("Unliked song", songId, "new likes:", data.likes);
     return data.likes;
   } catch (error) {
     console.error("Error unliking song:", error);
@@ -75,15 +67,12 @@ async function unlikeSong(songId, username) {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-  // PART 1: Song interaction functionality
   try {
-    console.log("DOMContentLoaded event fired");
     const user = await getCurrentUsername(); // Fetch the current user's username
     const username = user.username;
     if (!username) {
       throw new Error("Username not found");
     }
-    console.log("Current username:", username);
 
     const songBoxes = document.querySelectorAll(".song-box");
     const promises = Array.from(songBoxes).map(async (songBox) => {
@@ -92,18 +81,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.error("Song ID not found for song box:", songBox);
         return;
       }
-      console.log("Processing song with ID:", songId);
 
       const likes = await getSongLikes(songId);
-      console.log("Likes for song", songId, ":", likes);
 
       const heart = songBox.querySelector(".song-heart");
       if (likes.includes(username)) {
         heart.src = "../svg/home/heart-select-pink.svg";
-        console.log("Set heart to pink for song", songId);
       } else {
         heart.src = "../svg/home/heart-select-gray.svg";
-        console.log("Set heart to gray for song", songId);
       }
 
       const heartNumber = songBox.querySelector(".song-heart-number");
@@ -115,12 +100,10 @@ document.addEventListener("DOMContentLoaded", async () => {
           const heart = event.currentTarget.querySelector(".song-heart");
           if (heart.src.includes("heart-select-gray.svg")) {
             heart.src = "../svg/home/heart-select-pink.svg";
-            console.log("Liking song", songId);
             const newLikes = await likeSong(songId, username);
             heartNumber.textContent = newLikes.length;
           } else {
             heart.src = "../svg/home/heart-select-gray.svg";
-            console.log("Unliking song", songId);
             const newLikes = await unlikeSong(songId, username);
             heartNumber.textContent = newLikes.length;
           }
@@ -128,7 +111,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     await Promise.all(promises);
-    console.log("Finished processing all songs");
   } catch (error) {
     console.error("Error processing songs:", error);
   }
@@ -143,12 +125,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
-  console.log("Setting up search functionality");
-
   // Show search results container when user starts typing
   searchInput.addEventListener("input", async function () {
     const query = searchInput.value.trim();
-    console.log("Search query:", query);
 
     // Clear results and hide container if query is empty
     if (query.length === 0) {
@@ -158,7 +137,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     try {
-      console.log("Fetching search results for:", query);
       const response = await fetch(
         `/search?query=${encodeURIComponent(query)}`
       );
@@ -166,7 +144,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data = await response.json();
-      console.log("Search results received:", data);
       displaySearchResults(data);
 
       // Make sure results are visible whenever we have results
@@ -244,4 +221,4 @@ document.addEventListener("DOMContentLoaded", async () => {
       searchResults.appendChild(resultItem);
     });
   }
-});
+}); 
