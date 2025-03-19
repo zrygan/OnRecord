@@ -153,29 +153,13 @@ async function findUser() {
     const response = await fetch(`/api/admin/user/${encodeURIComponent(username)}`);
     const data = await response.json();
     
+    // console.log("API Response: ", data)
+
     if (response.ok && data.user) {
       populateUserForm(data.user);
       userDetails.style.display = "block";
       userNotFound.style.display = "none";
       
-      setTimeout(() => {
-        const updateButton = document.getElementById("update-button");
-        const deleteButton = document.getElementById("delete-button");
-        
-        if (updateButton) {
-          updateButton.onclick = function () {
-            updateUser(data.user.username);
-            console.log("Updating: ", data.user.username)
-          };
-        }
-        
-        if (deleteButton) {
-          deleteButton.onclick = function () {
-            confirmDeleteUser(data.user.username);
-          };
-        }
-        
-      }, 100);
     } else {
       userDetails.style.display = "none";
       userNotFound.style.display = "block";
@@ -211,13 +195,38 @@ async function loadUserDetails(username) {
   }
 }
 
-// Populate user form with data
+// Update user
 function populateUserForm(user) {
+  // Fill the form with user details
   document.getElementById("username").value = user.username;
   document.getElementById("userFirstname").value = user.firstname;
   document.getElementById("userSurname").value = user.surname;
   document.getElementById("userEmail").value = user.email;
   document.getElementById("userType").value = user.type;
+
+  // Ensure buttons exist and are reassigned correctly each time
+  const updateButton = document.getElementById("update-button");
+  const deleteButton = document.getElementById("delete-button");
+
+  if (updateButton) {
+    updateButton.replaceWith(updateButton.cloneNode(true)); // Remove previous event listeners
+    document.getElementById("update-button").onclick = function () {
+      console.log("Updating: ", user.username);
+      updateUser(user.username);
+    };
+  }
+
+  if (deleteButton) {
+    deleteButton.replaceWith(deleteButton.cloneNode(true)); // Remove previous event listeners
+    document.getElementById("delete-button").onclick = function () {
+      console.log("Deleting: ", user.username);
+      confirmDeleteUser(user.username);
+    };
+  }
+
+  // Make sure the user details section is visible
+  document.getElementById("userDetails").style.display = "block";
+  document.getElementById("user_not_found").style.display = "none";
 }
 
 // Update user
