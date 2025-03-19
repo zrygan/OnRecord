@@ -73,12 +73,12 @@
                 <input type="radio" class="tabs__radio" name="tabbies" id="tab2">
                 <label for="tab2" class="tabs__label"> Favorites </label>
                     <div class="content-tabs">
-                        {{#each favorites}}
+                        {{#each favoriteSongs}}
                             <div class="album-box">
-                                <img src="../img/userpage/{{this.albumCover}}" class="album-cover">
+                                <img src="{{this.image}}" class="album-cover">
                                 <div class="overlay-album">
                                     <div class="text-album">
-                                        <h4>{{this.song}}</h4> by {{this.artist}}
+                                        <h4>{{this.name}}</h4> by {{this.artists}}
                                     </div>
                                 </div>
                             </div>
@@ -90,10 +90,10 @@
                     <div class="content-tabs">
                         {{#each following}}
                             <div class="album-box">
-                                <img src="../img/review/{{this.profilePicture}}" class="album-cover">
+                                <img src="{{this.image}}" class="album-cover">
                                 <div class="overlay-album">
                                     <div class="text-album">
-                                        <h4>{{this.name}}</h4> Status: <span>{{this.status}}</span>
+                                        <h4>{{this.username}}</h4> Status: <span>{{this.status}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -105,10 +105,10 @@
                     <div class="content-tabs">
                         {{#each followers}}
                             <div class="album-box">
-                                <img src="../img/review/{{this.profilePicture}}" class="album-cover">
+                                <img src="{{this.image}}" class="album-cover">
                                 <div class="overlay-album">
                                     <div class="text-album">
-                                        <h4>{{this.name}}</h4> Status: <span>{{this.status}}</span>
+                                        <h4>{{this.username}}</h4> Status: <span>{{this.status}}</span>
                                     </div>
                                 </div>
                             </div>

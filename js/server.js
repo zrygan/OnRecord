@@ -461,14 +461,18 @@ app.get("/profile", async (req, res) => {
       console.log("User not found in the database.");
       return res.status(500).send("User not found in the database.");
     } else {
-      console.log("Rendering userpage with userData and music...");
-      res.render("userpage", {user});
+      // Fetch user's favorite songs from the database
+      const favoriteSongs = await Music.find({ name: { $in: user.favorites } });
+      // Fetch user's followers and following users from the database
+      const followers = await User.find({ username: { $in: user.follower } });
+      const following = await User.find({ username: { $in: user.following } });
+      
+      console.log("Rendering userpage with userData, favoriteSongs, followers, and following...");
+      res.render("userpage", { user, favoriteSongs, followers, following });
     }
-
-
   } catch (error) {
     console.error("Error fetching user/music data:", error);
-    res.status(500).send("Error fetching charts data");
+    res.status(500).send("Error fetching user/music data");
   }
 });
 

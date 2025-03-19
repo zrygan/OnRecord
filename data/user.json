@@ -18,7 +18,10 @@
     "birthday": "1990-01-01T00:00:00.000Z",
     "date_created": "2025-03-11T00:00:00.000Z",
     "type": "normal",
-    "image": "/img/pfp/B082c01b099e8a0e8bd6a50c2b06e135_29.webp"
+    "image": "/img/pfp/B082c01b099e8a0e8bd6a50c2b06e135_29.webp",
+    "follower": "jane_smith456",
+    "following": "jane_smith456",
+    "favorites": ["Helena", "Happiness", "Buddy Holly"]
   },
   {
     "surname": "Smith",
