@@ -1,0 +1,5 @@
+express
+mongoose
+mongodb
+dotenv
+cors
