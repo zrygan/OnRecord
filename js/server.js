@@ -1021,7 +1021,7 @@ app.put("/api/admin/user/:username", async (req, res) => {
   try {
     const user = req.session.user;
 
-    // Check if user is admin
+    // Check if user is logged in and is an admin
     if (!user || user.type !== "admin") {
       return res.status(403).json({ error: "Unauthorized" });
     }
@@ -1040,16 +1040,38 @@ app.put("/api/admin/user/:username", async (req, res) => {
         firstname,
         surname,
         email,
-        type
+        type,
       },
       { new: true }
     );
 
-    // if (!updatedUser) {
-    //   return res.status(404).json({ error: "User not found" });
-    // }
+    if (!updatedUser) {
+      return res.status(404).json({ error: "User not found" });
+    }
 
-    res.json({ success: true, user: updatedUser });
+    // Check if the admin is updating their own account
+    if (user.username === req.params.username) {
+      // Destroy session and redirect to login page
+      req.session.destroy((err) => {
+        if (err) {
+          console.error("Error destroying session:", err);
+          return res.status(500).json({ error: "Failed to log out user" });
+        }
+        res.clearCookie("connect.sid"); // Clear session cookie
+        return res.json({
+          success: true,
+          message: "User updated and logged out. Redirecting to login page.",
+          redirect: "/", // Include redirect URL in the response
+        });
+      });
+    } else {
+      // If the admin is updating someone else's account, just return success
+      res.json({
+        success: true,
+        message: "User updated successfully.",
+        user: updatedUser,
+      });
+    }
   } catch (error) {
     console.error("Error updating user:", error);
     res.status(500).json({ error: "Failed to update user" });
@@ -1061,7 +1083,7 @@ app.delete("/api/admin/user/:username", async (req, res) => {
   try {
     const user = req.session.user;
 
-    // Check if user is admin
+    // Check if user is logged in and is an admin
     if (!user || user.type !== "admin") {
       return res.status(403).json({ error: "Unauthorized" });
     }
@@ -1074,8 +1096,31 @@ app.delete("/api/admin/user/:username", async (req, res) => {
     if (!deletedUser) {
       return res.status(404).json({ error: "User not found" });
     }
+
     await Review.deleteMany({ userName: req.params.username });
-    res.json({ success: true });
+
+    // Check if the admin is deleting their own account
+    if (user.username === req.params.username) {
+      // Destroy session and redirect to login page
+      req.session.destroy((err) => {
+        if (err) {
+          console.error("Error destroying session:", err);
+          return res.status(500).json({ error: "Failed to log out user" });
+        }
+        res.clearCookie("connect.sid"); // Clear session cookie
+        return res.json({
+          success: true,
+          message: "User deleted and logged out. Redirecting to login page.",
+          redirect: "/", // Include redirect URL in the response
+        });
+      });
+    } else {
+      // If the admin is deleting someone else's account, just return success
+      res.json({
+        success: true,
+        message: "User deleted successfully.",
+      });
+    }
   } catch (error) {
     console.error("Error deleting user:", error);
     res.status(500).json({ error: "Failed to delete user" });

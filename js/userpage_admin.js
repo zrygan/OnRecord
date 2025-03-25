@@ -266,8 +266,13 @@ async function updateUser(username) {
 
     if (response.ok) {
       alert("User updated successfully!");
-      // Refresh the user list
-      displayUsers();
+      if (result.redirect) {
+        // Redirect to login page if the response includes a redirect URL
+        window.location.href = result.redirect;
+      } else {
+        // Refresh the user list if no redirect is needed
+        displayUsers();
+      }
     } else {
       alert(`Error: ${result.error}`);
     }
@@ -305,29 +310,26 @@ function confirmDeleteUser(username) {
 //   }
 // }
 
-// Perform the actual deletion
+// Delete user
 async function deleteUser(username) {
   try {
-    // Send DELETE request
     const response = await fetch(`/api/admin/user/${username}`, {
       method: "DELETE",
     });
 
+    const result = await response.json();
+
     if (response.ok) {
-      alert("User deleted successfully!");
-
-      // Clear the form if we just deleted the currently displayed user
-      const currentUserId = document.getElementById("userId").value;
-      if (currentUserId === userId) {
-        document.getElementById("username").value = "";
-        document.getElementById("userDetails").style.display = "none";
+      alert(result.message);
+      if (result.redirect) {
+        // Redirect to login page if the response includes a redirect URL
+        window.location.href = result.redirect;
+      } else {
+        // Refresh the user list if no redirect is needed
+        displayUsers();
       }
-
-      // Refresh the user list
-      displayUsers();
     } else {
-      const result = await response.json();
-      alert(`Failed to delete user: ${result.error}`);
+      alert(`Error: ${result.error}`);
     }
   } catch (error) {
     console.error("Error deleting user:", error);
