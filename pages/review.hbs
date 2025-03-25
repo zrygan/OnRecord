@@ -31,46 +31,38 @@
           <span>R</span><span>e</span><span>c</span><span>o</span><span
           >r</span><span>d</span>
         </a>
-        <!-- Genre Button REMOVED FOR NOW -->
-        <div class="genre-button">
-          <button class="genre"></button>
-        </div>
         <!-- Search Bar -->
         <div class="search-bar">
-          <!-- Text Box -->
           <input
             type="search"
             class="text-box"
             id="search-input"
             placeholder="Search..."
           />
-        <div id="search-results" class="search-results"></div>
+          <div id="search-results" class="search-results"></div>
         </div>
         <!-- Charts Button -->
         <div class="charts-button">
           <a class="charts" href="/charts">
-            <span class="charts-text" href="charts">Charts</span>
+            <span class="charts-text">Charts</span>
           </a>
         </div>
         <!-- User Button -->
-        <div class="user-button">
-          <a class="user-button" href="/profile">
-            <img class="user-pic" src="{{user.image}}" alt="User Image" />
-          </a>
-        </div>
-
-        <!-- Logout Button -->
-        <div class="logout-button">
-          <a class="logout" href="/logout">
-            <span class="logout-text">Logout</span>
-          </a>
-        </div>
-
-        <!-- Admin Button (conditional button) -->
-        {{#if (eq user.type "admin")}}
-          <div class="admin-button">
-            <a class="admin" href="/admin">
-              <span class="admin-text">Admin</span>
+        {{#if user}}
+          <div class="user-button">
+            <a class="user-button" href="/profile">
+              <img class="user-pic" src="{{user.image}}" alt="User Image" />
+            </a>
+          </div>
+          <div class="logout-button">
+            <a class="logout" href="/logout">
+              <span class="logout-text">Logout</span>
+            </a>
+          </div>
+        {{else}}
+          <div class="logout-button">
+            <a class="logout" href="/">
+              <span class="logout-text">Login</span>
             </a>
           </div>
         {{/if}}
@@ -103,7 +95,8 @@
     <!-- Comment Section -->
     <div class="comment-box">
       <h3>Leave a Comment</h3>
-      <form action="/submit-review" method="POST">
+      {{#if user}}
+        <form action="/submit-review" method="POST">
           <div class="rate">
             <input type="radio" id="star5" name="rate" value="5" />
             <label for="star5" title="text">5</label>
@@ -116,12 +109,15 @@
             <input type="radio" id="star1" name="rate" value="1" />
             <label for="star1" title="text">1</label>
           </div>
-        <textarea name="comment" rows="4" cols="50" placeholder="Write your comment here..."></textarea><br>
-        <button type="submit">Submit</button>
-        <input type="hidden" name="userName" value="{{user.username}}">
-        <input type="hidden" name="userPic" value="{{user.image}}">
-        <input type="hidden" name="songName" value="{{songTitle}}">
-      </form>
+          <textarea name="comment" rows="4" cols="50" placeholder="Write your comment here..."></textarea><br>
+          <button type="submit">Submit</button>
+          <input type="hidden" name="userName" value="{{user.username}}">
+          <input type="hidden" name="userPic" value="{{user.image}}">
+          <input type="hidden" name="songName" value="{{songTitle}}">
+        </form>
+      {{else}}
+        <p>You must <a href="/login">log in</a> to leave a comment.</p>
+      {{/if}}
     </div>
 
     <!-- User reviews -->
@@ -136,16 +132,16 @@
                         <p>{{this.comment}}</p>
                         <p>Rating: {{this.rating}}/5</p>
                     </div>
-                    {{#if (eq this.userName ../user.username)}}
-                      <div class="review-actions">
+                    {{#if user}}
+                      {{#if (eq this.userName ../user.username)}}
+                        <div class="review-actions">
                           <button class="edit-button" data-review-id="{{this._id}}">Edit</button>
                           <button class="delete-button" data-review-id="{{this._id}}">Delete</button>
-                      </div>
-                    {{else}}
-                      {{#if (eq ../user.type "admin")}}
-                          <div class="review-actions">
-                            <button class="delete-button" data-review-id="{{this._id}}">Delete</button>
-                          </div>
+                        </div>
+                      {{else if (eq ../user.type "admin")}}
+                        <div class="review-actions">
+                          <button class="delete-button" data-review-id="{{this._id}}">Delete</button>
+                        </div>
                       {{/if}}
                     {{/if}}
                 </div>
@@ -154,7 +150,6 @@
             <p>No reviews yet. Be the first to leave one!</p>
         {{/if}}
     </div>
-
   </div>
   <script src="../js/review.js"></script>
   <script src="../js/home.js"></script>

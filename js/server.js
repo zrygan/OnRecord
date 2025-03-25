@@ -384,9 +384,11 @@ app.get("/", async (req, res) => {
 app.get("/home", async (req, res) => {
   try {
     const music = await Music.find();
-    let user = req.session.user;
+    let user = req.session.user || null; // Set user to null if no logged-in user
 
-    user = await checkUser(user);
+    if (user) {
+      user = await checkUser(user); // Check if the user exists in the database
+    }
 
     const randomSongs = await Music.aggregate([{ $sample: { size: 15 } }]);
 
@@ -657,11 +659,7 @@ app.listen(3000, () => {
 
 app.get("/review/:id", async (req, res) => {
   try {
-    let user = req.session.user;
-
-    if (!user) {
-      return res.status(401).send("User not logged in");
-    }
+    let user = req.session.user || null; // Allow null for not logged-in users
 
     const songID = req.params.id;
 
@@ -691,14 +689,13 @@ app.get("/review/:id", async (req, res) => {
           ).toFixed(1)
         : "No ratings yet",
       reviews: reviews,
-      user,
+      user, // Pass user to the view (null if not logged in)
     });
   } catch (error) {
     console.error("Error fetching song and reviews:", error.message);
     res.status(500).send("Internal Server Error");
   }
 });
-
 async function checkUser(user) {
   // TODO: make this thing not return any routes after logout mechanic is implemented
   try {
