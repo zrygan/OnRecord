@@ -34,38 +34,43 @@
         </div>
         <!-- Search Bar -->
         <div class="search-bar">
+          <!-- Text Box -->
           <input
             type="search"
             class="text-box"
             id="search-input"
             placeholder="Search..."
           />
-        </div>
         <div id="search-results" class="search-results"></div>
+        </div>
         <!-- Charts Button -->
         <div class="charts-button">
-          <a class="charts" href="/charts">
-            <span class="charts-text">Charts</span>
+          <a class="charts" href="charts">
+            <span class="charts-text" href="charts">Charts</span>
           </a>
         </div>
         <!-- User Button -->
         <div class="user-button">
-          <a class="user-button" href="/profile">
+          <a class="user-button" href="profile">
             <img class="user-pic" src="{{user.image}}" alt="User Image" />
           </a>
         </div>
+
         <!-- Logout Button -->
         <div class="logout-button">
           <a class="logout" href="/logout">
             <span class="logout-text">Logout</span>
           </a>
         </div>
-        <!-- Admin Button -->
-        <div class="admin-button">
-          <a class="admin" href="/admin">
-            <span class="admin-text">Admin</span>
-          </a>
-        </div>
+
+        <!-- Admin Button (conditional button) -->
+        {{#if (eq user.type "admin")}}
+          <div class="admin-button">
+            <a class="admin" href="/admin">
+              <span class="admin-text">Admin</span>
+            </a>
+          </div>
+        {{/if}}
       </div>
     </div>
 
