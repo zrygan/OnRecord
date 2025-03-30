@@ -3,3 +3,4 @@ mongoose
 mongodb
 dotenv
 cors
+bcrypt
