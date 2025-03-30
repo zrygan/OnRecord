@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 const fs = require("fs");
 
-mongoose
-  .connect("mongodb://localhost:27017/onrecord")
-  .then(() => console.log("Connected to MongoDB"))
-  .catch(() => console.error("Could not connect to MongoDB"));
+// mongoose
+//   .connect("mongodb://localhost:27017/onrecord")
+//   .then(() => console.log("Connected to MongoDB"))
+//   .catch(() => console.error("Could not connect to MongoDB"));
 
 const schema_user = new mongoose.Schema({
   surname: { type: String, required: true },

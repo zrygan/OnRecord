@@ -1,14 +1,14 @@
 const fs = require("fs");
 const mongoose = require("mongoose");
 
-mongoose
-  .connect("mongodb://localhost:27017/onrecord", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    serverSelectionTimeoutMS: 30000, // Increase timeout to 30 seconds
-  })
-  .then(() => console.log("Connected to MongoDB"))
-  .catch(() => console.error("Could not connect to MongoDB"));
+// mongoose
+//   .connect("mongodb://localhost:27017/onrecord", {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//     serverSelectionTimeoutMS: 30000, // Increase timeout to 30 seconds
+//   })
+//   .then(() => console.log("Connected to MongoDB"))
+//   .catch(() => console.error("Could not connect to MongoDB"));
 
 const reviewSchema = new mongoose.Schema({
   userName: { type: String, required: true },
