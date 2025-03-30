@@ -14,6 +14,8 @@ const { Music } = require("../model/music");
 const { Review } = require("../model/review");
 const session = require("express-session");
 
+const connectionURL = "mongodb+srv://admin:admin@onrecord.yempabo.mongodb.net/"
+
 // Register the 'eq' helper
 hbs.registerHelper("eq", function (a, b, options) {
   if (a === b) {
@@ -71,6 +73,10 @@ app.use(
 );
 
 app.use(express.json());
+
+mongoose.connect(connectionURL)
+.then(() => console.log("Connected to MongoDB Atlas"))
+.catch(err => console.error("Error connecting:", err));
 
 app.get("/api/metrics", async (req, res) => {
   try {

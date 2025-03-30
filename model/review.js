@@ -1,14 +1,14 @@
 const fs = require("fs");
 const mongoose = require("mongoose");
 
-mongoose
-  .connect("mongodb://localhost:27017/onrecord", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    serverSelectionTimeoutMS: 30000, // Increase timeout to 30 seconds
-  })
-  .then(() => console.log("Connected to MongoDB"))
-  .catch(() => console.error("Could not connect to MongoDB"));
+// mongoose
+//   .connect("mongodb://localhost:27017/onrecord", {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//     serverSelectionTimeoutMS: 30000, // Increase timeout to 30 seconds
+//   })
+//   .then(() => console.log("Connected to MongoDB"))
+//   .catch(() => console.error("Could not connect to MongoDB"));
 
 const reviewSchema = new mongoose.Schema({
   userName: { type: String, required: true },
@@ -21,34 +21,34 @@ const reviewSchema = new mongoose.Schema({
 
 const Review = mongoose.model("Review", reviewSchema);
 
-fs.readFile("data\\review.json", "utf8", async (err, data) => {
-  if (err) {
-    console.error("Error reading file:", err);
-    return;
-  }
+// fs.readFile("data\review.json", "utf8", async (err, data) => {
+//   if (err) {
+//     console.error("Error reading file:", err);
+//     return;
+//   }
 
-  try {
-    // Parse JSON data
-    const reviews = JSON.parse(data);
+//   try {
+//     // Parse JSON data
+//     const reviews = JSON.parse(data);
 
-    await Review.deleteMany({});
-    console.log("Review collection emptied");
+//     await Review.deleteMany({});
+//     console.log("Review collection emptied");
 
-    for (const review of reviews) {
-      await create_review(
-        review.userName,
-        review.userPic,
-        review.songName,
-        review.comment,
-        review.rating,
-        review.createdAt,
-      );
-    }
-    console.log("Review data inserted successfully");
-  } catch (err) {
-    console.error("Error processing data:", err);
-  }
-});
+//     for (const review of reviews) {
+//       await create_review(
+//         review.userName,
+//         review.userPic,
+//         review.songName,
+//         review.comment,
+//         review.rating,
+//         review.createdAt,
+//       );
+//     }
+//     console.log("Review data inserted successfully");
+//   } catch (err) {
+//     console.error("Error processing data:", err);
+//   }
+// });
 
 // Create a Review
 const create_review = async (userName, userPic, songName, comment, rating) => {

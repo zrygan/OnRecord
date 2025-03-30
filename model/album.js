@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 const fs = require("fs");
 const path = require("path");
 
-mongoose
-  .connect("mongodb://localhost:27017/onrecord")
-  .then(() => console.log("Connected to MongoDB"))
-  .catch(() => console.error("Could not connect to MongoDB"));
+// mongoose
+//   .connect("mongodb://localhost:27017/onrecord")
+//   .then(() => console.log("Connected to MongoDB"))
+//   .catch(() => console.error("Could not connect to MongoDB"));
 
 const schema_album = new mongoose.Schema({
   name: { type: String, required: true },

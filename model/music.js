@@ -1,14 +1,14 @@
 const fs = require("fs");
 const mongoose = require("mongoose");
 
-mongoose
-  .connect("mongodb://localhost:27017/onrecord", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    serverSelectionTimeoutMS: 30000, // Increase timeout to 30 seconds
-  })
-  .then(() => console.log("Connected to MongoDB"))
-  .catch(() => console.error("Could not connect to MongoDB"));
+// mongoose
+//   .connect("mongodb://localhost:27017/onrecord", {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//     serverSelectionTimeoutMS: 30000, // Increase timeout to 30 seconds
+//   })
+//   .then(() => console.log("Connected to MongoDB"))
+//   .catch(() => console.error("Could not connect to MongoDB"));
 
 const schema_music = new mongoose.Schema({
   name: { type: String, required: true },
@@ -28,37 +28,37 @@ const schema_music = new mongoose.Schema({
 const Music = mongoose.model("Music", schema_music);
 
 // Read JSON file
-fs.readFile("data\\music.json", "utf8", async (err, data) => {
-  if (err) {
-    console.error("Error reading file:", err);
-    return;
-  }
+// fs.readFile("data\music.json", "utf8", async (err, data) => {
+//   if (err) {
+//     console.error("Error reading file:", err);
+//     return;
+//   }
 
-  try {
-    // Parse JSON data
-    let musicData = JSON.parse(data);
+//   try {
+//     // Parse JSON data
+//     let musicData = JSON.parse(data);
 
-    // Empty the Music collection
-    await Music.deleteMany({});
-    console.log("Music collection emptied");
+//     // Empty the Music collection
+//     await Music.deleteMany({});
+//     console.log("Music collection emptied");
 
-    // Insert the data into the database
-    for (const item of musicData) {
-      await Music.create({
-        ...item,
-        image: item.image || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9SgCxgQYReXX660xU9Pj5Te611cPR6OReL7_UXY4wXiTXg715_Jahfm0-NS2OmBvnzEA&usqp=CAU",
-        listen_count: Math.floor(Math.random() * 3000001),
-        like_count: item.like_count,
-        dislike_count: item.dislike_count,
-        comment_count: item.comment_count
-      });
-    }
+//     // Insert the data into the database
+//     for (const item of musicData) {
+//       await Music.create({
+//         ...item,
+//         image: item.image || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9SgCxgQYReXX660xU9Pj5Te611cPR6OReL7_UXY4wXiTXg715_Jahfm0-NS2OmBvnzEA&usqp=CAU",
+//         listen_count: Math.floor(Math.random() * 3000001),
+//         like_count: item.like_count,
+//         dislike_count: item.dislike_count,
+//         comment_count: item.comment_count
+//       });
+//     }
     
-    console.log("Music Data inserted successfully");
-  } catch (err) {
-    console.error("Error processing data:", err);
-  }
-});
+//     console.log("Music Data inserted successfully");
+//   } catch (err) {
+//     console.error("Error processing data:", err);
+//   }
+// });
 
 // CRUD Functions
 
