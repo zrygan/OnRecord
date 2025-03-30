@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const fs = require("fs");
+const bcrypt = require("bcrypt");
 
 // mongoose
 //   .connect("mongodb://localhost:27017/onrecord")
@@ -24,16 +24,52 @@ const schema_user = new mongoose.Schema({
     default: "normal",
     enum: ["normal", "admin", "artist"],
   },
-  image: { type: String, default: "https://i.pinimg.com/736x/f2/01/1b/f2011bfb4e87a2e5219bd4c2fb02a5e9.jpg" },
+  image: {
+    type: String,
+    default:
+      "https://i.pinimg.com/736x/f2/01/1b/f2011bfb4e87a2e5219bd4c2fb02a5e9.jpg",
+  },
   bio: { type: String, default: "No bio provided" },
   customNote: { type: String, default: "No custom note provided" },
   status: { type: String, enum: ["Online", "Offline"], default: "Online" },
   countryOrigin: { type: String, default: "Unspecified" },
-  feel: { type: String, enum: ["😀", "😢", "😡", "😱", "😍", "😎", "🤔", "😴", "🤢", "🤯"], default: "😎" },
+  feel: {
+    type: String,
+    enum: ["😀", "😢", "😡", "😱", "😍", "😎", "🤔", "😴", "🤢", "🤯"],
+    default: "😎",
+  },
   follower: { type: [String], default: [] }, // list of usernames
   following: { type: [String], default: [] }, // list of usernames
   favorites: { type: [String], default: [] }, // list of music names
 });
+
+// Password hashing
+schema_user.pre("save", async function (next) {
+  if (!this.isModified("password")) return next();
+
+  try {
+    // generate the SALT
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Method to compare password for login
+schema_user.methods.comparePassword = async function (candidatePassword) {
+  try {
+    console.log("Comparing password...");
+    // More robust error handling for bcrypt comparison
+    const result = await bcrypt.compare(candidatePassword, this.password);
+    console.log(`Bcrypt comparison result: ${result}`);
+    return result;
+  } catch (error) {
+    console.error("Error in comparePassword:", error);
+    throw error;
+  }
+};
 
 // Define the User model
 const User = mongoose.model("user", schema_user);
@@ -92,7 +128,7 @@ const create_user = async (
 const read_user_all = async () => {
   try {
     const users = await User.find();
-    // console.log("All users:", users); 
+    // console.log("All users:", users);
     return users;
   } catch (error) {
     console.error("Error reading users:", error.message);

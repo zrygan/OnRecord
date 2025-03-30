@@ -14,7 +14,7 @@ const { Music } = require("../model/music");
 const { Review } = require("../model/review");
 const session = require("express-session");
 
-const connectionURL = "mongodb+srv://admin:admin@onrecord.yempabo.mongodb.net/"
+const connectionURL = "mongodb+srv://admin:admin@onrecord.yempabo.mongodb.net/";
 
 // Register the 'eq' helper
 hbs.registerHelper("eq", function (a, b, options) {
@@ -74,9 +74,10 @@ app.use(
 
 app.use(express.json());
 
-mongoose.connect(connectionURL)
-.then(() => console.log("Connected to MongoDB Atlas"))
-.catch(err => console.error("Error connecting:", err));
+mongoose
+  .connect(connectionURL)
+  .then(() => console.log("Connected to MongoDB Atlas"))
+  .catch((err) => console.error("Error connecting:", err));
 
 app.get("/api/metrics", async (req, res) => {
   try {
@@ -169,7 +170,9 @@ app.post("/api/admin/music", async (req, res) => {
       release_date: new Date(release_date),
       genres,
       description,
-      image: image || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9SgCxgQYReXX660xU9Pj5Te611cPR6OReL7_UXY4wXiTXg715_Jahfm0-NS2OmBvnzEA&usqp=CAU",
+      image:
+        image ||
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9SgCxgQYReXX660xU9Pj5Te611cPR6OReL7_UXY4wXiTXg715_Jahfm0-NS2OmBvnzEA&usqp=CAU",
       likes: likes || [],
       listen_count: listen_count || 0,
       like_count: like_count || 0,
@@ -532,41 +535,54 @@ app.get("/profile", async (req, res) => {
 app.post("/login", async (req, res) => {
   try {
     const { username, password } = req.body;
+    console.log(`Login attempt for username: ${username}`);
 
     // First check if User exists with that username
-    const userExists = await User.findOne({ username });
+    const user = await User.findOne({ username });
 
-    if (userExists) {
-      // If User exists, check password separately
-      const passwordMatch = await User.findOne({ username, password });
-
-      if (passwordMatch) {
-        // Set default image if none exists
-        if (!passwordMatch.image) {
-          passwordMatch.image = "../img/default-user.png"; // Ensure this default image exists
-        }
-
-        req.session.user = passwordMatch; // Store user information in session
-        res.status(200).json({
-          success: true,
-          User: {
-            username: passwordMatch.username,
-            type: passwordMatch.type,
-          },
-        });
-      } else {
-        // User exists but password doesn't match
-        res.status(401).json({ error: `Incorrect password for ${username}.` });
-      }
-    } else {
-      // User doesn't exist
-      res.status(401).json({
+    if (!user) {
+      console.log(`User not found: ${username}`);
+      return res.status(401).json({
         error: `The account ${username} doesn't exist, please register first.`,
       });
     }
+
+    console.log(`User found: ${username}, attempting password comparison`);
+
+    try {
+      // Use bcrypt directly for comparison as a test
+      const passwordMatch = await user.comparePassword(password);
+      console.log(`Password match result: ${passwordMatch}`);
+
+      if (passwordMatch) {
+        console.log(`Login successful for: ${username}`);
+
+        // Set default image if none exists
+        if (!user.image) {
+          user.image = "../img/default-user.png";
+        }
+
+        req.session.user = user; // Store user information in session
+        return res.status(200).json({
+          success: true,
+          User: {
+            username: user.username,
+            type: user.type,
+          },
+        });
+      } else {
+        console.log(`Incorrect password for: ${username}`);
+        return res
+          .status(401)
+          .json({ error: `Incorrect password for ${username}.` });
+      }
+    } catch (err) {
+      console.error("Password comparison error:", err);
+      return res.status(500).json({ error: "Error verifying password" });
+    }
   } catch (error) {
     console.error("Login error:", error);
-    res.status(500).json({ error: "Server error, please try again" });
+    return res.status(500).json({ error: "Server error, please try again" });
   }
 });
 

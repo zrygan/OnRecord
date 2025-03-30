@@ -69,7 +69,6 @@ async function unlikeSong(songId, username) {
 document.addEventListener("DOMContentLoaded", async () => {
   try {
     const username = await getCurrentUsername(); // Fetch the current user's username
-    console.log("Current username:", username);
     if (!username) {
       throw new Error("Username not found");
     }

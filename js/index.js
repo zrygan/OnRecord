@@ -198,8 +198,7 @@ login_form.addEventListener("submit", async function (event) {
 
     const data = await response.json();
     if (response.ok) {
-      console.log("Login successful:", data);
-      window.location.href = "/home"; // Use absolute path
+      window.location.href = "/home";
     } else {
       err_login.textContent = data.error || "Login failed";
       document.getElementById("password").value = "";
