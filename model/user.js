@@ -157,47 +157,47 @@ const delete_user = async (id) => {
 };
 
 // Read JSON file
-fs.readFile("data\\user.json", "utf8", async (err, data) => {
-  if (err) {
-    console.error("Error reading file:", err);
-    return;
-  }
+// fs.readFile("data\user.json", "utf8", async (err, data) => {
+//   if (err) {
+//     console.error("Error reading file:", err);
+//     return;
+//   }
 
-  try {
-    // Parse JSON data
-    const users = JSON.parse(data);
-    const defaultImage = "https://i.pinimg.com/736x/f2/01/1b/f2011bfb4e87a2e5219bd4c2fb02a5e9.jpg"; // If no image is provided, use this default image
+//   try {
+//     // Parse JSON data
+//     const users = JSON.parse(data);
+//     const defaultImage = "https://i.pinimg.com/736x/f2/01/1b/f2011bfb4e87a2e5219bd4c2fb02a5e9.jpg"; // If no image is provided, use this default image
 
-    // Empty the User collection
-    await User.deleteMany({});
-    console.log("User collection emptied");
+//     // Empty the User collection
+//     await User.deleteMany({});
+//     console.log("User collection emptied");
 
-    // Insert the data into the database
-    for (const user of users) {
-      await create_user(
-        user.surname,
-        user.firstname,
-        user.email,
-        user.username,
-        user.password,
-        user.birthday,
-        user.type,
-        user.image || defaultImage,
-        user.bio,
-        user.customNote,
-        user.status,
-        user.countryOrigin,
-        user.feel,
-        user.follower,
-        user.following,
-        user.favorites
-      );
-    }
-    console.log("User data inserted successfully");
-  } catch (err) {
-    console.error("Error processing data:", err);
-  }
-});
+//     // Insert the data into the database
+//     for (const user of users) {
+//       await create_user(
+//         user.surname,
+//         user.firstname,
+//         user.email,
+//         user.username,
+//         user.password,
+//         user.birthday,
+//         user.type,
+//         user.image || defaultImage,
+//         user.bio,
+//         user.customNote,
+//         user.status,
+//         user.countryOrigin,
+//         user.feel,
+//         user.follower,
+//         user.following,
+//         user.favorites
+//       );
+//     }
+//     console.log("User data inserted successfully");
+//   } catch (err) {
+//     console.error("Error processing data:", err);
+//   }
+// });
 
 // Export the functions
 module.exports = {

@@ -21,34 +21,34 @@ const reviewSchema = new mongoose.Schema({
 
 const Review = mongoose.model("Review", reviewSchema);
 
-fs.readFile("data\\review.json", "utf8", async (err, data) => {
-  if (err) {
-    console.error("Error reading file:", err);
-    return;
-  }
+// fs.readFile("data\review.json", "utf8", async (err, data) => {
+//   if (err) {
+//     console.error("Error reading file:", err);
+//     return;
+//   }
 
-  try {
-    // Parse JSON data
-    const reviews = JSON.parse(data);
+//   try {
+//     // Parse JSON data
+//     const reviews = JSON.parse(data);
 
-    await Review.deleteMany({});
-    console.log("Review collection emptied");
+//     await Review.deleteMany({});
+//     console.log("Review collection emptied");
 
-    for (const review of reviews) {
-      await create_review(
-        review.userName,
-        review.userPic,
-        review.songName,
-        review.comment,
-        review.rating,
-        review.createdAt,
-      );
-    }
-    console.log("Review data inserted successfully");
-  } catch (err) {
-    console.error("Error processing data:", err);
-  }
-});
+//     for (const review of reviews) {
+//       await create_review(
+//         review.userName,
+//         review.userPic,
+//         review.songName,
+//         review.comment,
+//         review.rating,
+//         review.createdAt,
+//       );
+//     }
+//     console.log("Review data inserted successfully");
+//   } catch (err) {
+//     console.error("Error processing data:", err);
+//   }
+// });
 
 // Create a Review
 const create_review = async (userName, userPic, songName, comment, rating) => {
