@@ -683,7 +683,7 @@ app.get("/review/:id", async (req, res) => {
   try {
     let user = req.session.user || null; // Allow null for not logged-in users
 
-    const songID = req.params.id;
+    const songID = req.params.id;    
 
     if (!songID) {
       return res.status(400).send("Invalid song ID");
@@ -693,11 +693,12 @@ app.get("/review/:id", async (req, res) => {
     const song = await Music.findById(songID);
     if (!song) return res.status(404).send("Song not found");
 
-    // Fetch all reviews for this song
-    const reviews = await Review.find({ songName: song.name });
+    // Fetch all reviews for this song\
+    const reviews = await Review.find({ song: songID }).populate('user');
 
     // Render the review page with song details and reviews
     res.render("review", {
+      songId: song._id,
       pageTitle: song.name,
       songTitle: song.name,
       artist: song.artists.join(", "),
@@ -742,28 +743,42 @@ async function checkUser(user) {
   }
 }
 
-app.post("/submit-review", async (req, res) => {
+app.post("/submit-review", async (req, res) => { 
   try {
-    const { userName, userPic, songName, comment, rate } = req.body;
+    const { song, comment, rating } = req.body;
+    const user = req.session.user?._id; // Get user ID from session
 
-    if (!userName || !songName || !comment || !rate) {
+    if (!user) {
+      return res.status(401).json({ error: "Not authenticated" });
+    }
+
+    if (!song || !comment || !rating) {
       return res.status(400).json({ error: "All fields are required." });
     }
 
+    // Validate song exists
+    const songExists = await Music.exists({ _id: song });
+    if (!songExists) {
+      return res.status(404).json({ error: "Song not found" });
+    }
+
     const newReview = new Review({
-      userName,
-      userPic,
-      songName,
+      user,          // ObjectId reference to User
+      song,          // ObjectId reference to Music
       comment,
-      rating: parseInt(rate, 10),
+      rating: parseInt(rating, 10),
     });
 
-    console.log(req.body);
-
     await newReview.save();
-    res
-      .status(201)
-      .json({ message: "Review submitted successfully!", review: newReview });
+    
+    // Optionally populate user info in response
+    const populatedReview = await Review.findById(newReview._id)
+      .populate('user', 'username');
+    
+    res.status(201).json({ 
+      message: "Review submitted successfully!", 
+      review: populatedReview 
+    });
   } catch (error) {
     console.error("Error submitting review:", error.message);
     res.status(500).json({ error: "Internal server error" });
