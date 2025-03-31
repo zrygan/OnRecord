@@ -98,22 +98,20 @@
       {{#if user}}
         <form action="/submit-review" method="POST">
           <div class="rate">
-            <input type="radio" id="star5" name="rate" value="5" />
+            <input type="radio" id="star5" name="rating" value="5" />
             <label for="star5" title="text">5</label>
-            <input type="radio" id="star4" name="rate" value="4" />
+            <input type="radio" id="star4" name="rating" value="4" />
             <label for="star4" title="text">4</label>
-            <input type="radio" id="star3" name="rate" value="3" />
+            <input type="radio" id="star3" name="rating" value="3" />
             <label for="star3" title="text">3</label>
-            <input type="radio" id="star2" name="rate" value="2" />
+            <input type="radio" id="star2" name="rating" value="2" />
             <label for="star2" title="text">2</label>
-            <input type="radio" id="star1" name="rate" value="1" />
+            <input type="radio" id="star1" name="rating" value="1" />
             <label for="star1" title="text">1</label>
           </div>
           <textarea name="comment" rows="4" cols="50" placeholder="Write your comment here..."></textarea><br>
           <button type="submit">Submit</button>
-          <input type="hidden" name="userName" value="{{user.username}}">
-          <input type="hidden" name="userPic" value="{{user.image}}">
-          <input type="hidden" name="songName" value="{{songTitle}}">
+          <input type="hidden" name="song" value="{{songId}}"> 
         </form>
       {{else}}
         <p>You must <a href="/login">log in</a> to leave a comment.</p>
@@ -126,14 +124,14 @@
         {{#if reviews.length}}
             {{#each reviews}}
                 <div class="user-review">
-                    <img src="{{this.userPic}}" alt="User {{this.userName}}">
+                    <img src="{{this.user.image}}" alt="User {{this.user.username}}"> 
                     <div class="user-review-details">
-                        <h4>{{this.userName}}</h4>
+                        <h4>{{this.user.username}}</h4>
                         <p>{{this.comment}}</p>
                         <p>Rating: {{this.rating}}/5</p>
                     </div>
                     {{#if user}}
-                      {{#if (eq this.userName ../user.username)}}
+                      {{#if (eq this.user.username ../user.username)}}
                         <div class="review-actions">
                           <button class="edit-button" data-review-id="{{this._id}}">Edit</button>
                           <button class="delete-button" data-review-id="{{this._id}}">Delete</button>
