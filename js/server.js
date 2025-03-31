@@ -503,16 +503,11 @@ app.get("/profile", async (req, res) => {
       const following = await User.find({ username: { $in: user.following } });
 
       // Fetch user's reviews and include song images
-      const reviews = await Review.find({ userName: user.username });
-      const reviewsWithImages = await Promise.all(
-        reviews.map(async (review) => {
-          const song = await Music.findOne({ name: review.songName });
-          return {
-            ...review.toObject(),
-            songImage: song ? song.image : null,
-          };
-        })
-      );
+      const reviews = await Review.find({ user: user._id }).populate('song');
+      const reviewsWithImages = reviews.map((review) => ({
+        ...review.toObject(),
+        songImage: review.song?.image || null
+      }));
 
       console.log(
         "Rendering userpage with userData, favoriteSongs, followers, following, and reviews..."
