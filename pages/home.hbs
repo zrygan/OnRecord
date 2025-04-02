@@ -69,6 +69,14 @@
             </a>
           </div>
         {{/if}}
+        <!-- Admin Button (conditional button) -->
+        {{#if (eq user.type "admin")}}
+          <div class="admin-button">
+            <a class="admin" href="/admin">
+              <span class="admin-text">Admin</span>
+            </a>
+          </div>
+        {{/if}}
       </div>
   </div>
     <!-- Main Content -->
