@@ -119,3 +119,6 @@ model/charts.js
 # startup files
 *.bat
 package-lock.json
+.lsp/.cache/db.transit.json
+.clj-kondo/.cache/v1/lock
+js/sampleData.js

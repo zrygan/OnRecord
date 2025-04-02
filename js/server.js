@@ -431,7 +431,7 @@ app.get("/charts", async (req, res) => {
     res.render("charts", { user });
   } catch (error) {
     console.error(error);
-    res.status(500).send("Error fetching charts data");
+    res.status(404).render("404");
   }
 });
 
@@ -448,7 +448,7 @@ app.get("/charts-popular", async (req, res) => {
     res.render("charts-popular", { user, music });
   } catch (error) {
     console.error("Error fetching charts data:", error);
-    res.status(500).send("Error fetching charts data");
+    res.status(404).render("404");
   }
 });
 
@@ -465,7 +465,7 @@ app.get("/charts-critical", async (req, res) => {
     res.render("charts-critical", { user, music });
   } catch (error) {
     console.error("Error fetching charts data:", error);
-    res.status(500).send("Error fetching charts data");
+    res.status(404).render("404");
   }
 });
 
@@ -482,7 +482,7 @@ app.get("/charts-based", async (req, res) => {
     res.render("charts-based", { user, music });
   } catch (error) {
     console.error("Error fetching charts data:", error);
-    res.status(500).send("Error fetching charts data");
+    res.status(404).render("404");
   }
 });
 
@@ -522,7 +522,7 @@ app.get("/profile", async (req, res) => {
     }
   } catch (error) {
     console.error("Error fetching user/music data:", error);
-    res.status(500).send("Error fetching user/music data");
+    res.status(404).render("404");
   }
 });
 
@@ -711,7 +711,7 @@ app.get("/review/:id", async (req, res) => {
     });
   } catch (error) {
     console.error("Error fetching song and reviews:", error.message);
-    res.status(500).send("Internal Server Error");
+    res.status(404).render("404");
   }
 });
 async function checkUser(user) {
