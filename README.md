@@ -55,3 +55,5 @@ node js/server.js
 ```
 
 2. Enter `localhost:3000` in your web browser while the app is running.
+
+3. To access the app online, you may access this link: https://onrecord-7bis.onrender.com
