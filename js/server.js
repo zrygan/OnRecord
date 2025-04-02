@@ -491,7 +491,7 @@ app.get("/profile", async (req, res) => {
     let user = req.session.user;
     console.log("Session user:", user);
 
-    if (!checkUser(user)) {
+    if (!checkUser(user) || user === null) {
       console.log("User not found in the database.");
       res.status(404).render("404");
     } else {
@@ -502,15 +502,9 @@ app.get("/profile", async (req, res) => {
         songImage: review.song?.image || null
       }));
 
-      console.log(
-        "Rendering userpage with userData, favoriteSongs, followers, following, and reviews..."
-      );
       res.render("userpage", {
         user,
         reviews: reviewsWithImages,
-        favoriteSongs,
-        followers,
-        following,
       });
     }
   } catch (error) {
