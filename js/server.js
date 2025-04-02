@@ -493,15 +493,8 @@ app.get("/profile", async (req, res) => {
 
     if (!checkUser(user)) {
       console.log("User not found in the database.");
-      return res.status(500).send("User not found in the database.");
+      res.status(404).render("404");
     } else {
-      // Fetch user's favorite songs from the database
-      const favoriteSongs = await Music.find({ name: { $in: user.favorites } });
-
-      // Fetch user's followers and following users from the database
-      const followers = await User.find({ username: { $in: user.follower } });
-      const following = await User.find({ username: { $in: user.following } });
-
       // Fetch user's reviews and include song images
       const reviews = await Review.find({ user: user._id }).populate('song');
       const reviewsWithImages = reviews.map((review) => ({
